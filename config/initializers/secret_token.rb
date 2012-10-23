@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Detox::Application.config.secret_token = '0189fe4fc18d857368fbbe14bf530c2d0aab4718cbc976dcd6e48668b63f21b37f7bfac03fa77291b694d5fd89451ac4c90ed5aa56f1cbc7d7ec30b1c63ed3f6'
+Detox::Application.config.secret_token = '80ad5327b969f574f146042e5e03e3e45d1ed767bc48af8fd8c912a48b18c5bae0c5448f495b852949ec65e326264abbdb9f9cb54391f95548534a8f91d06216'
