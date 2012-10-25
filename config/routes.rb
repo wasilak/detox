@@ -1,4 +1,10 @@
 Detox::Application.routes.draw do
+  resources :tags
+
+  resources :expenses
+
+  resources :users
+
   get "home/index"
 
   # The priority is based upon order of creation:
