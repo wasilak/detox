@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Userid:</b>
-  <%= @expense.userId %>
-</p>
-
-<p>
   <b>Description:</b>
   <%= @expense.description %>
 </p>
@@ -22,7 +17,7 @@
 
 tags:<br />
 <% @tags.each do |tag| %>
-	<%= tag.name %> 
+	<%= tag.tag.name %>
 <% end %>
 <br />
 <br />

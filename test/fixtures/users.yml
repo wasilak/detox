@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  username: MyString
-  password: MyString
-  name: MyString
+  username: admin
+  password: 21232f297a57a5a743894a0e4a801fc3
+  name: Administrator
   userType: 1
 
 two:
-  username: MyString
-  password: MyString
-  name: MyString
-  userType: 1
+  username: aga
+  password: fea30f2213e57de1a3c985f0cad303b7
+  name: Aga
+  userType: 0

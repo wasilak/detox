@@ -11,14 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.select(:userId,
-      [["select...",""]] +
-      User.find(:all).collect {
-        |d| [d.name, d.id]
-      }
-      ) %>
-  </div>
+  <%= f.hidden_field :userId, {:value => session[:user][:id]} %>
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_field :description %>

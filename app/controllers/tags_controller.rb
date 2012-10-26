@@ -40,6 +40,7 @@ class TagsController < ApplicationController
   # POST /tags
   # POST /tags.json
   def create
+    logger.debug "nowy tag: #{params[:tag]}"
     @tag = Tag.new(params[:tag])
 
     respond_to do |format|

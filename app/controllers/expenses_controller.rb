@@ -4,6 +4,7 @@ class ExpensesController < ApplicationController
   def index
     @expenses = Expense.find(
       :all,
+      :conditions =>  ['userId = ?',"#{session[:user][:id]}"],
       :order  =>  ['date desc']
       )
 
@@ -42,7 +43,8 @@ class ExpensesController < ApplicationController
   # GET /expenses/1/edit
   def edit
     @expense = Expense.find(params[:id])
-    @tags = @expense.getTags
+    @expenseTags = @expense.getTags
+    @tags = Tag.all
   end
 
   # POST /expenses
@@ -86,6 +88,27 @@ class ExpensesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to expenses_url }
       format.json { head :no_content }
+    end
+  end
+
+  def addTag
+    @expense = Expense.find(params[:id])
+
+    # @tag = Tag.find(params[:tag])
+
+    @association = {
+      :expense_id =>  params[:id],
+      :tag_id =>  params[:tag],
+    }
+
+    @expenseTagAssociation = ExpensesTagsAssociation.new(@association)
+
+    respond_to do |format|
+      if @expenseTagAssociation.save
+        format.html { redirect_to @expense, notice: 'Tag was successfully added.' }
+      else
+        format.html { redirect_to @expense, notice: 'There was an error while adding tag.' }
+      end
     end
   end
 end

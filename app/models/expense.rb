@@ -1,6 +1,6 @@
 class Expense < ActiveRecord::Base
 	belongs_to :user
-	has_many :tag
+	has_many :expenses_tags_association
 
 	validates :amount, :presence => true
 	validates :date, :presence => true
@@ -10,6 +10,6 @@ class Expense < ActiveRecord::Base
   	attr_accessible :amount, :date, :description, :userId
 
   	def getTags
-  		tag.find(:all)
+  		expenses_tags_association.find(:all)
   	end
 end

@@ -13,7 +13,7 @@
 <%
 sum = 0;
 id = 0;
-@expenses.each do |expense| 
+@expenses.each do |expense|
   sum += expense.amount
   id += 1
   %>
@@ -23,9 +23,11 @@ id = 0;
     <td><%= expense.amount %></td>
     <td><%= expense.date %></td>
     <td>
-      <% expense.getTags.each do |tag| %>
-        <%= tag.name %>
+      <% tags = []
+      expense.getTags.each do |tag| %>
+        <% tags.push(link_to tag.tag.name, tag.tag, {:target => '_blank'}) %>
       <% end %>
+      <%= tags.to_sentence.html_safe %>
     </td>
     <td><%= link_to 'Edit', edit_expense_path(expense) %> <%= link_to 'Destroy', expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>

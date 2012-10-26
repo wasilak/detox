@@ -1,3 +1,4 @@
 class Tag < ActiveRecord::Base
-  attr_accessible :expense_id, :name
+	has_and_belongs_to_many :expenses_tags_association
+  	attr_accessible :name
 end

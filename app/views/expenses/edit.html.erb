@@ -2,5 +2,28 @@
 
 <%= render 'form' %>
 
+<br />
+<br />
+tags:<br />
+<% @expenseTags.each do |tag| %>
+	<%= tag.tag.name %>
+<% end %>
+<br />
+<br />
+
+<%= form_tag addTag_url(@expense), :method => 'POST' do %>
+
+<% options = options_for_select(
+	[["select...",""]] +
+  	@tags.collect {
+    	|t| [t.name, t.id]
+  	}
+  	) %>
+<%= select_tag(:tag, options) %>
+
+<%= submit_tag 'Add tag', :name => nil %>
+<% end %>
+<br />
+<br />
 <%= link_to 'Show', @expense %> |
 <%= link_to 'Back', expenses_path %>
