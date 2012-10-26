@@ -1,9 +1,9 @@
 Detox::Application.routes.draw do
+  resources :users
+
   resources :tags
 
   resources :expenses
-
-  resources :users
 
   get "home/index"
 
