@@ -2,24 +2,39 @@
 
 <table>
   <tr>
-    <th>Userid</th>
+    <th>No.</th>
     <th>Description</th>
     <th>Amount</th>
     <th>Date</th>
-    <th></th>
-    <th></th>
+    <th>Tags</th>
     <th></th>
   </tr>
 
-<% @expenses.each do |expense| %>
+<%
+sum = 0;
+id = 0;
+@expenses.each do |expense| 
+  sum += expense.amount
+  id += 1
+  %>
   <tr>
-    <td><%= expense.userId %></td>
-    <td><%= expense.description %></td>
+    <td><%= id %></td>
+    <td><%= link_to expense.description, expense %></td>
     <td><%= expense.amount %></td>
     <td><%= expense.date %></td>
-    <td><%= link_to 'Show', expense %></td>
-    <td><%= link_to 'Edit', edit_expense_path(expense) %></td>
-    <td><%= link_to 'Destroy', expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+      <% expense.getTags.each do |tag| %>
+        <%= tag.name %>
+      <% end %>
+    </td>
+    <td><%= link_to 'Edit', edit_expense_path(expense) %> <%= link_to 'Destroy', expense, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+<% if sum > 0 %>
+  <tr>
+    <td></td>
+    <td>sum</td>
+    <td><%= sum %></td>
   </tr>
 <% end %>
 </table>

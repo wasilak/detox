@@ -2,7 +2,10 @@ class ExpensesController < ApplicationController
   # GET /expenses
   # GET /expenses.json
   def index
-    @expenses = Expense.all
+    @expenses = Expense.find(
+      :all,
+      :order  =>  ['date desc']
+      )
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,6 +18,8 @@ class ExpensesController < ApplicationController
   def show
     @expense = Expense.find(params[:id])
 
+    @tags = @expense.getTags
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @expense }
@@ -26,6 +31,8 @@ class ExpensesController < ApplicationController
   def new
     @expense = Expense.new
 
+    # @user = User.find()
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @expense }
@@ -35,6 +42,7 @@ class ExpensesController < ApplicationController
   # GET /expenses/1/edit
   def edit
     @expense = Expense.find(params[:id])
+    @tags = @expense.getTags
   end
 
   # POST /expenses

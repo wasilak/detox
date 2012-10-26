@@ -4,10 +4,10 @@ one:
   username: MyString
   password: MyString
   name: MyString
-  type: 1
+  userType: 1
 
 two:
   username: MyString
   password: MyString
   name: MyString
-  type: 1
+  userType: 1

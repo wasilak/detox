@@ -1,7 +1,7 @@
 Detox::Application.routes.draw do
-  resources :users
-
   resources :tags
+
+  resources :users
 
   resources :expenses
 
