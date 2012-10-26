@@ -7,6 +7,10 @@ Detox::Application.routes.draw do
 
   get "home/index"
 
+  match 'home/login' => 'home#login', :as => :login
+  match 'home/checkLogin' => 'home#checkLogin', :as => :checkLogin
+  match 'home/logout' => 'home#logout', :as => :logout
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

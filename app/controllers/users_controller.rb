@@ -40,6 +40,8 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    params[:user][:password] = Digest::MD5.hexdigest(params[:user][:password])
+
     @user = User.new(params[:user])
 
     respond_to do |format|
@@ -57,6 +59,8 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     @user = User.find(params[:id])
+
+    params[:user][:password] = Digest::MD5.hexdigest(params[:user][:password])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
