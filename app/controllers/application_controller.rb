@@ -3,8 +3,10 @@ class ApplicationController < ActionController::Base
 
   before_filter :login_required
 
+  private
+
   def login_required
-    if session[:username]
+    if session[:userId]
       @loggedIn = true
       return true
     end

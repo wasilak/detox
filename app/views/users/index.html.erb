@@ -4,21 +4,19 @@
   <tr>
     <th>No.</th>
     <th>Username</th>
-    <th>Password</th>
     <th>Name</th>
     <th>Usertype</th>
     <th></th>
   </tr>
 
-<% 
+<%
 n = 0
-@users.each do |user| 
+@users.each do |user|
   n += 1
   %>
   <tr>
     <td><%= n %></td>
     <td><%= link_to user.username, user %></td>
-    <td><%= user.password %></td>
     <td><%= user.name %></td>
     <td><%= user.userType %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %> <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -16,10 +16,10 @@ class User < ActiveRecord::Base
   			:conditions	=>	["username = ? and password = ?", "#{username}", "#{passwordHashed}"]
   			)
 
-      Rails.logger.debug("user to check: #{username} : #{password} (#{passwordHashed})")
+      # Rails.logger.debug("user to check: #{username} : #{password} (#{passwordHashed})")
 
       if user.count == 1
-        return true
+        return user[0]
       else
         return false
       end

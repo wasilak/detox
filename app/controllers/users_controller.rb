@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_filter :checkAdmin
+
   # GET /users
   # GET /users.json
   def index
@@ -82,6 +85,17 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
+    end
+  end
+
+  private
+
+  def checkAdmin
+    if session[:user][:userType] == 1
+      return true
+    else
+      redirect_to :controller => 'home', :action => 'index'
+      return false
     end
   end
 end
