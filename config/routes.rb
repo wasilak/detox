@@ -1,4 +1,8 @@
 Detox::Application.routes.draw do
+
+  match '/tags' => 'tags#index', :via => :post
+  match '/expenses' => 'expenses#index', :via => :post
+
   resources :tags
 
   resources :users
