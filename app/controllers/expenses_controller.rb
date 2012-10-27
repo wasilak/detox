@@ -94,8 +94,6 @@ class ExpensesController < ApplicationController
   def addTag
     @expense = Expense.find(params[:id])
 
-    # @tag = Tag.find(params[:tag])
-
     @association = {
       :expense_id =>  params[:id],
       :tag_id =>  params[:tag],
@@ -105,9 +103,25 @@ class ExpensesController < ApplicationController
 
     respond_to do |format|
       if @expenseTagAssociation.save
-        format.html { redirect_to @expense, notice: 'Tag was successfully added.' }
+        format.html { redirect_to edit_expense_path(@expense), notice: 'Tag was successfully added.' }
       else
-        format.html { redirect_to @expense, notice: 'There was an error while adding tag.' }
+        format.html { redirect_to edit_expense_path(@expense), notice: 'There was an error while adding tag.' }
+      end
+    end
+  end
+
+  def delTag
+    # @expense = Expense.find(params[:id])
+
+    @expenseTagAssociation = ExpensesTagsAssociation.find(params[:tag][:id])
+
+    respond_to do |format|
+      if @expenseTagAssociation.destroy
+        format.html { redirect_to edit_expense_path(@expenseTagAssociation[:expense_id]),
+          notice: 'Tag was successfully deleted.' }
+      else
+        format.html { redirect_to edit_expense_path(@expenseTagAssociation[:expense_id]),
+          notice: 'There was an error while adding tag.' }
       end
     end
   end

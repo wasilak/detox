@@ -12,6 +12,7 @@ Detox::Application.routes.draw do
   match 'home/logout' => 'home#logout', :as => :logout
 
   match 'expenses/:id/addTag' => 'expenses#addTag', :as => :addTag
+  match 'expenses/:id/delTag' => 'expenses#delTag', :as => :delTag
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

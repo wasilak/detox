@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap.min.js
+//= require bootstrap-datepicker.js
+//= require bootstrap-datepicker-activation.js
 //= require_tree .
