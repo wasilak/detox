@@ -1,25 +1,27 @@
-<h1>Listing tags</h1>
+<h3>List of tags</h3>
 
-<table>
-  <tr>
-    <th>No.</th>
-    <th>Name</th>
-    <th></th>
-  </tr>
-
-<% 
+<table class="table table-striped table-hover table-condensed">
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+<%
 n = 0
-@tags.each do |tag| 
+@tags.each do |tag|
   n += 1
   %>
   <tr>
     <td><%= n %></td>
     <td><%= link_to tag.name, tag %></td>
-    <td><%= link_to 'Edit', edit_tag_path(tag) %> <%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+      <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_tag_path(tag), :title => 'edit' %>
+      <%= link_to '<i class="icon-trash"></i>'.html_safe, tag, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'delete' %>
+    </td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Tag', new_tag_path %>
+<%= link_to '<i class="icon-pencil"></i> new tag'.html_safe, new_tag_path, :title => 'new' %>

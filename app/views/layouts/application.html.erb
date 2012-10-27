@@ -7,33 +7,39 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="row">
-		<div class="grid_2">
-			<% if @loggedIn %>
-				Welcome, <%= session[:user][:name] %>
-			<% end %>
-			<ul>
-			<li><%= link_to 'Home', '/' %></li>
-			<% if @loggedIn %>
-				<li><%= link_to 'Expenses', expenses_path %></li>
-				<li><%= link_to 'Tags', tags_path %></li>
-				<% if session && session[:user][:userType] == 1 %>
-					<li><%= link_to 'Users', users_path %></li>
+	<div class="container">
+		<div class="row">
+		    <div class="span2">
+				<% if @loggedIn %>
+					<h4>Detox</h4>
+					<!-- <p>Welcome, <%= session[:user][:name] %></p> -->
 				<% end %>
-				<li><%= link_to 'Log out', logout_url %></li>
-			<% end %>
-			</ul>
-		</div>
-		<div class="grid_10">
-			<div class="row">
-				<div class="grid_10">
-					<% flash.each do |severity, message| %>
-						<%= content_tag(:div, message, :class => "flash #{severity} highlight") %>
+				<ul class="unstyled">
+				<li> <i class="icon-home"></i> <%= link_to 'Home', '/' %></li>
+				<% if @loggedIn %>
+					<li> <i class="icon-shopping-cart"></i> <%= link_to 'Expenses', expenses_path %></li>
+					<li> <i class="icon-tags"></i> <%= link_to 'Tags', tags_path %></li>
+					<% if session && session[:user][:userType] == 1 %>
+						<li> <i class="icon-user"></i> <%= link_to 'Users', users_path %></li>
 					<% end %>
+					<li> <i class="icon-off"></i> <%= link_to 'Log out', logout_url %></li>
+				<% end %>
+				</ul>
+		    </div>
+		    <div class="span10">
+				<div class="row">
+					<div class="span10">
+						<% flash.each do |severity, message| %>
+							<div class="alert">
+								<button type="button" class="close" data-dismiss="alert">×</button>
+								<%= content_tag(:div, message, :class => "flash #{severity} highlight") %>
+							</div>
+						<% end %>
+					</div>
 				</div>
-			</div>
-			<%= yield %>
-		</div>
+				<%= yield %>
+		    </div>
+	    </div>
 	</div>
 </body>
 </html>

@@ -13,16 +13,17 @@
 
   <%= f.hidden_field :userId, {:value => session[:user][:id]} %>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    <%= f.label :description %>
+    <%= f.text_field :description, :placeholder => "expense description", :class => 'input-xxlarge' %>
+  </div>
+  <div class="field input-append">
+    <%= f.label :amount %>
+    <%= f.text_field :amount, :placeholder => "expense amount" %>
+    <span class="add-on">zł</span>
   </div>
   <div class="field">
-    <%= f.label :amount %><br />
-    <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :date %><br />
-    <%= f.date_select :date %>
+    <%= f.label :date %>
+    <%= f.text_field :date, :placeholder => "expense date", :class => 'input-small' %>
   </div>
   <div class="actions">
     <%= f.submit %>
