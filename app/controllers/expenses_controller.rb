@@ -63,7 +63,7 @@ class ExpensesController < ApplicationController
     end
 
     # sprawdzenie czy wartosc nie jest 0
-    if params[:expense][:amount] = 0
+    if params[:expense][:amount] == 0
       params[:expense][:amount] = nil
     end
 
@@ -71,7 +71,7 @@ class ExpensesController < ApplicationController
 
     respond_to do |format|
       if @expense.save
-        format.html { redirect_to @expense, notice: 'Expense was successfully created.' }
+        format.html { redirect_to expenses_url, notice: 'Expense was successfully created.' }
         format.json { render json: @expense, status: :created, location: @expense }
       else
         format.html { render action: "new" }
@@ -94,7 +94,7 @@ class ExpensesController < ApplicationController
     end
 
     # sprawdzenie czy wartosc nie jest 0
-    if params[:expense][:amount] = 0
+    if params[:expense][:amount] == 0
       params[:expense][:amount] = nil
     end
 
