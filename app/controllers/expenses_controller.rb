@@ -50,6 +50,9 @@ class ExpensesController < ApplicationController
   # POST /expenses
   # POST /expenses.json
   def create
+    # zamiana przecinkow na krpoki :)
+    params[:expense][:amount] = params[:expense][:amount].sub!(/,/, ".")
+
     @expense = Expense.new(params[:expense])
 
     respond_to do |format|
@@ -66,6 +69,9 @@ class ExpensesController < ApplicationController
   # PUT /expenses/1
   # PUT /expenses/1.json
   def update
+    # zamiana przecinkow na krpoki :)
+    params[:expense][:amount] = params[:expense][:amount].sub!(/,/, ".")
+
     @expense = Expense.find(params[:id])
 
     respond_to do |format|
