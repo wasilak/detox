@@ -57,6 +57,16 @@ class ExpensesController < ApplicationController
       params[:expense][:amount] = params[:expense][:amount].sub!(/,/, ".")
     end
 
+    # sprawdzenie czy sa liczby i ew kropki
+    if params[:expense][:amount] =~ /\w./
+      params[:expense][:amount] = params[:expense][:amount].sub!(/\w./, "")
+    end
+
+    # sprawdzenie czy wartosc nie jest 0
+    if params[:expense][:amount] = 0
+      params[:expense][:amount] = nil
+    end
+
     @expense = Expense.new(params[:expense])
 
     respond_to do |format|
@@ -76,6 +86,16 @@ class ExpensesController < ApplicationController
     # zamiana przecinkow na kropki :)
     if params[:expense][:amount] =~ /,/
       params[:expense][:amount] = params[:expense][:amount].sub!(/,/, ".")
+    end
+
+    # sprawdzenie czy sa liczby i ew kropki
+    if params[:expense][:amount] =~ /\w./
+      params[:expense][:amount] = params[:expense][:amount].sub!(/\w./, "")
+    end
+
+    # sprawdzenie czy wartosc nie jest 0
+    if params[:expense][:amount] = 0
+      params[:expense][:amount] = nil
     end
 
     @expense = Expense.find(params[:id])
