@@ -31,7 +31,7 @@
 						<% flash.each do |severity, message| %>
 							<div class="alert">
 								<button type="button" class="close" data-dismiss="alert">×</button>
-								<%= content_tag(:div, message, :class => "flash #{severity} highlight") %>
+								<%= content_tag(:div, message) %>
 							</div>
 						<% end %>
 					</div>

@@ -32,7 +32,9 @@ class ExpensesController < ApplicationController
   def new
     @expense = Expense.new
 
-    # @user = User.find()
+    # domyslnie dzisiejsza data
+    time = Time.new
+    @expense.date = "#{time.year}-#{time.month}-#{time.day}"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -50,8 +52,10 @@ class ExpensesController < ApplicationController
   # POST /expenses
   # POST /expenses.json
   def create
-    # zamiana przecinkow na krpoki :)
-    params[:expense][:amount] = params[:expense][:amount].sub!(/,/, ".")
+    # zamiana przecinkow na kropki :)
+    if params[:expense][:amount] =~ /,/
+      params[:expense][:amount] = params[:expense][:amount].sub!(/,/, ".")
+    end
 
     @expense = Expense.new(params[:expense])
 
@@ -69,10 +73,15 @@ class ExpensesController < ApplicationController
   # PUT /expenses/1
   # PUT /expenses/1.json
   def update
-    # zamiana przecinkow na krpoki :)
-    params[:expense][:amount] = params[:expense][:amount].sub!(/,/, ".")
+    # zamiana przecinkow na kropki :)
+    if params[:expense][:amount] =~ /,/
+      params[:expense][:amount] = params[:expense][:amount].sub!(/,/, ".")
+    end
 
     @expense = Expense.find(params[:id])
+
+    @expenseTags = @expense.getTags
+    @tags = Tag.all
 
     respond_to do |format|
       if @expense.update_attributes(params[:expense])
