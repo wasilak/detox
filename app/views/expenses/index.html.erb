@@ -28,7 +28,9 @@ id = 0;
     <td>
       <% tags = []
       expense.getTags.each do |tag| %>
-        <% tags.push(link_to tag.tag.name, tag.tag, {:target => '_blank'}) %>
+        <% if tag.nil? %>
+          <% tags.push(link_to tag.tag.name, tag.tag, {:target => '_blank'}) %>
+        <% end %>
       <% end %>
       <%= tags.to_sentence.html_safe %>
     </td>
