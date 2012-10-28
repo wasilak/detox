@@ -25,12 +25,14 @@
 				<% end %>
 				</ul>
 		    </div>
-		    <div class="span10">
-				<div class="row">
-					<%= render_breadcrumbs %>
+		    <% if @loggedIn %>
+			    <div class="span10">
+					<div class="row">
+						you are here: <em><%= render_breadcrumbs %></em>
+					</div>
 				</div>
-			</div>
-			<hr />
+				<hr />
+			<% end %>
 		    <div class="span10">
 				<div class="row">
 					<div class="span10">
