@@ -52,20 +52,7 @@ class ExpensesController < ApplicationController
   # POST /expenses
   # POST /expenses.json
   def create
-    # zamiana przecinkow na kropki :)
-    if params[:expense][:amount] =~ /,/
-      params[:expense][:amount] = params[:expense][:amount].sub!(/,/, ".")
-    end
-
-    # sprawdzenie czy sa liczby i ew kropki
-    if params[:expense][:amount] =~ /\w./
-      params[:expense][:amount] = params[:expense][:amount].sub!(/\w./, "")
-    end
-
-    # sprawdzenie czy wartosc nie jest 0
-    if params[:expense][:amount] == 0
-      params[:expense][:amount] = nil
-    end
+    params[:expense][:amount] = correct_value(params[:expense][:amount])
 
     @expense = Expense.new(params[:expense])
 
@@ -83,20 +70,7 @@ class ExpensesController < ApplicationController
   # PUT /expenses/1
   # PUT /expenses/1.json
   def update
-    # zamiana przecinkow na kropki :)
-    if params[:expense][:amount] =~ /,/
-      params[:expense][:amount] = params[:expense][:amount].sub!(/,/, ".")
-    end
-
-    # sprawdzenie czy sa liczby i ew kropki
-    if params[:expense][:amount] =~ /\w./
-      params[:expense][:amount] = params[:expense][:amount].sub!(/\w./, "")
-    end
-
-    # sprawdzenie czy wartosc nie jest 0
-    if params[:expense][:amount] == 0
-      params[:expense][:amount] = nil
-    end
+    params[:expense][:amount] = correct_value(params[:expense][:amount])
 
     @expense = Expense.find(params[:id])
 
@@ -159,5 +133,26 @@ class ExpensesController < ApplicationController
           notice: 'There was an error while adding tag.' }
       end
     end
+  end
+
+  private
+
+  def correct_value(number)
+    # zamiana przecinkow na kropki :)
+    if number =~ /,/
+      number = number.gsub(/,/, ".")
+    end
+
+    # sprawdzenie czy sa liczby i ew kropki
+    if number =~ /[a-zA-Z]/
+      number = number.gsub(/[a-zA-Z]/, "")
+    end
+
+    # sprawdzenie czy wartosc nie jest 0
+    if number.to_f == 0
+      number = nil
+    end
+
+    number
   end
 end
