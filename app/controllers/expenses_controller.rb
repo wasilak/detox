@@ -143,16 +143,6 @@ class ExpensesController < ApplicationController
       number = number.gsub(/,/, ".")
     end
 
-    # sprawdzenie czy sa liczby i ew kropki
-    if number =~ /[a-zA-Z]/
-      number = number.gsub(/[a-zA-Z]/, "")
-    end
-
-    # sprawdzenie czy wartosc nie jest 0
-    if number.to_f == 0
-      number = nil
-    end
-
     number
   end
 end

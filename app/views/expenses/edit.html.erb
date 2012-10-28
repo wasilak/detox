@@ -1,18 +1,6 @@
 <% title "Expenses" %>
 <h3>Editing expense</h3>
 
-<% if @expense.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@expense.errors.count, "error") %> prohibited this tag from being saved:</h2>
-
-      <ul>
-      <% @expense.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
 <div class="row">
 	<div class="span6">
 		<%= render 'form' %>
