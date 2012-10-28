@@ -1,54 +1,75 @@
+<script type="text/javascript">
+  jQuery('#tabs a').click(function (e) {
+    e.preventDefault();
+    jQuery(this).tab('show');
+  })
+</script>
+
 <% title "Expenses" %>
 
-<table class="table table-striped table-hover table-condensed">
-    <thead>
+<div id="tabs">
+  <ul class="nav nav-tabs">
+    <li><a href="#tabular" data-toggle="tab">table</a></li>
+    <li><a href="#charts" data-toggle="tab">charts</a></li>
+  </ul>
+</div>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="tabular">
+    <table class="table table-striped table-hover table-condensed">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Tags</th>
+          <th></th>
+        </tr>
+      </thead>
+
+    <%
+    sum = 0;
+    id = 0;
+    @expenses.each do |expense|
+      sum += expense.amount
+      id += 1
+      %>
       <tr>
-        <th>No.</th>
-        <th>Description</th>
-        <th>Amount</th>
-        <th>Date</th>
-        <th>Tags</th>
-        <th></th>
+        <td><%= id %></td>
+        <td><%= link_to expense.description, expense %></td>
+        <td><%= "%.2f" % expense.amount %> zł</td>
+        <td><%= expense.date %></td>
+        <td>
+          <% tags = []
+          expense.getTags.each do |tag| %>
+            <% if !tag.tag.nil? %>
+              <% tags.push(link_to tag.tag.name, tag.tag, {:target => '_blank'}) %>
+            <% end %>
+          <% end %>
+          <%= tags.to_sentence.html_safe %>
+        </td>
+        <td>
+          <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_expense_path(expense), :title => 'edit' %>
+          <%= link_to '<i class="icon-trash"></i>'.html_safe, expense, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'delete' %>
+        </td>
       </tr>
-    </thead>
+    <% end %>
+    <% if sum > 0 %>
+      <tr class="info">
+        <td></td>
+        <td>sum</td>
+        <td><%= "%.2f" % sum %> zł</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
+    </table>
 
-<%
-sum = 0;
-id = 0;
-@expenses.each do |expense|
-  sum += expense.amount
-  id += 1
-  %>
-  <tr>
-    <td><%= id %></td>
-    <td><%= link_to expense.description, expense %></td>
-    <td><%= "%.2f" % expense.amount %> zł</td>
-    <td><%= expense.date %></td>
-    <td>
-      <% tags = []
-      expense.getTags.each do |tag| %>
-        <% if !tag.tag.nil? %>
-          <% tags.push(link_to tag.tag.name, tag.tag, {:target => '_blank'}) %>
-        <% end %>
-      <% end %>
-      <%= tags.to_sentence.html_safe %>
-    </td>
-    <td>
-      <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_expense_path(expense), :title => 'edit' %>
-      <%= link_to '<i class="icon-trash"></i>'.html_safe, expense, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'delete' %>
-    </td>
-  </tr>
-<% end %>
-<% if sum > 0 %>
-  <tr class="info">
-    <td></td>
-    <td>sum</td>
-    <td><%= "%.2f" % sum %> zł</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-<% end %>
-</table>
-
-<%= link_to '<i class="icon-pencil"></i> new expense'.html_safe, new_expense_path, :title => 'new' %>
+    <%= link_to '<i class="icon-pencil"></i> new expense'.html_safe, new_expense_path, :title => 'new' %>
+  </div>
+  <div class="tab-pane" id="charts">
+    charts will be here :)
+  </div>
+</div>
