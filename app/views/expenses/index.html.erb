@@ -5,6 +5,48 @@
   })
 </script>
 
+<script type="text/javascript">
+  jQuery(function () {
+      var chart;
+      jQuery(document).ready(function() {
+          chart = new Highcharts.Chart({
+              chart: {
+                  renderTo: 'pieChart',
+                  plotBackgroundColor: null,
+                  plotBorderWidth: null,
+                  plotShadow: true
+              },
+              title: {
+                  text: 'expenses categories'
+              },
+              tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                percentageDecimals: 1
+              },
+              plotOptions: {
+                  pie: {
+                      allowPointSelect: true,
+                      cursor: 'pointer',
+                      dataLabels: {
+                          enabled: true,
+                          color: '#000000',
+                          connectorColor: '#000000',
+                          formatter: function() {
+                              return '<b>'+ this.point.name +'</b>: '+ this.y.toFixed(2) +' zł';
+                          }
+                      }
+                  }
+              },
+              series: [{
+                  type: 'pie',
+                  name: 'share',
+                  data: <%= @chart_data.to_json.html_safe %>
+              }]
+          });
+      });
+
+});
+</script>
 <% title "Expenses" %>
 
 <div id="tabs">
@@ -71,5 +113,6 @@
   </div>
   <div class="tab-pane" id="charts">
     charts will be here :)
+    <div id="pieChart"></div>
   </div>
 </div>

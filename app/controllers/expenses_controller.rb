@@ -11,6 +11,23 @@ class ExpensesController < ApplicationController
       :order  =>  ['date desc']
       )
 
+    @used_tags = {}
+    @expenses.each do |expense|
+      expense.getTags.each do |tag|
+        if !tag.tag.nil?
+          if @used_tags[tag.tag.name].nil?
+            @used_tags[tag.tag.name] = 0
+          end
+          @used_tags[tag.tag.name] += expense.amount
+        end
+      end
+    end
+
+    @chart_data = []
+    @used_tags.each do |tag, sum|
+      @chart_data.push([tag, sum])
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @expenses }
