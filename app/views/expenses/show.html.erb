@@ -8,7 +8,7 @@
 
 <p>
   <b>Amount:</b>
-  <%= @expense.amount %>
+  <%= "%.2f" % @expense.amount %> zł
 </p>
 
 <p>
@@ -20,7 +20,9 @@
 <div class="well well-small">
 	<% tags = []
       @expense.getTags.each do |tag| %>
-        <% tags.push(link_to tag.tag.name, tag.tag, {:target => '_blank'}) %>
+        <% if !tag.tag.nil? %>
+          <% tags.push(link_to tag.tag.name, tag.tag, {:target => '_blank'}) %>
+        <% end %>
       <% end %>
       <%= tags.to_sentence.html_safe %>
 </div>

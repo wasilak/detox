@@ -36,7 +36,9 @@
 					<%= form_tag delTag_url(@expense), :method => 'POST', :class => 'form-inline' do %>
 					<%= hidden_field :tag, 'id', :value => tag.id %>
 					<td>
-						<%= tag.tag.name %>
+						<% if !tag.tag.nil? %>
+							<%= tag.tag.name %>
+						<% end %>
 					</td>
 					<td>
 						<%= submit_tag 'delete', :name => nil, :class => 'btn btn-link' %>

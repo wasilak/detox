@@ -23,12 +23,12 @@ id = 0;
   <tr>
     <td><%= id %></td>
     <td><%= link_to expense.description, expense %></td>
-    <td><%= expense.amount %></td>
+    <td><%= "%.2f" % expense.amount %> zł</td>
     <td><%= expense.date %></td>
     <td>
       <% tags = []
       expense.getTags.each do |tag| %>
-        <% if tag.nil? %>
+        <% if !tag.tag.nil? %>
           <% tags.push(link_to tag.tag.name, tag.tag, {:target => '_blank'}) %>
         <% end %>
       <% end %>
@@ -44,7 +44,7 @@ id = 0;
   <tr class="info">
     <td></td>
     <td>sum</td>
-    <td><%= sum %></td>
+    <td><%= "%.2f" % sum %> zł</td>
     <td></td>
     <td></td>
     <td></td>

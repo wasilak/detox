@@ -1,6 +1,6 @@
 class ExpensesTagsAssociation < ActiveRecord::Base
 	belongs_to :tag
-	belongs_to :expense
+	has_one :expense
   	attr_accessible :expense_id, :tag_id
 
   	validates :tag_id, :presence => true
