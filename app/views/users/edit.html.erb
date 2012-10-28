@@ -1,3 +1,20 @@
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	jQuery("#user_type_id").chosen();
+
+	jQuery('#pass').append(
+		'<input type="checkbox" id="enable_password">'
+		);
+	jQuery('#enable_password').change(function(){
+		if (jQuery('#enable_password').attr('checked') == 'checked') {
+			jQuery('#user_password').removeAttr('disabled')
+		} else {
+			jQuery('#user_password').attr('disabled', 'disabled')
+		}
+	});
+});
+
+</script>
 <% title "Users" %>
 
 <%= render 'form' %>

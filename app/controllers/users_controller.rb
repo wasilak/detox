@@ -71,7 +71,9 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    params[:user][:password] = Digest::MD5.hexdigest(params[:user][:password])
+    if !params[:user][:password].nil?
+      params[:user][:password] = Digest::MD5.hexdigest(params[:user][:password])
+    end
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

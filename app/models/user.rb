@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
 	belongs_to :type
 
 	validates :username, :presence => true, :uniqueness => true
-	validates :password, :presence => true
+	# validates :password, :presence => true
 	validates :name, :presence => true
 	validates :type_id, :presence => true
 
