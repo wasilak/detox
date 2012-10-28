@@ -18,7 +18,11 @@ n = 0
     <td><%= link_to tag.name, tag %></td>
     <td>
       <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_tag_path(tag), :title => 'edit' %>
-      <%= link_to '<i class="icon-trash"></i>'.html_safe, tag, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'delete' %>
+      <% if tag.countExpenses == 0 %>
+        <%= link_to '<i class="icon-trash"></i>'.html_safe, tag, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'delete' %>
+      <% else %>
+        <i class="icon-lock" title="cannot be deleted (used <%= tag.countExpenses %> times)"></i>
+      <% end %>
     </td>
   </tr>
 <% end %>

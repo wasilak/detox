@@ -83,7 +83,10 @@ class TagsController < ApplicationController
   # DELETE /tags/1.json
   def destroy
     @tag = Tag.find(params[:id])
-    @tag.destroy
+
+    if @tag.countExpenses == 0
+      @tag.destroy
+    end
 
     respond_to do |format|
       format.html { redirect_to tags_url }
