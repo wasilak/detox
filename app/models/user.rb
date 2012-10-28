@@ -1,12 +1,13 @@
 class User < ActiveRecord::Base
-	has_many :expense
+  has_many :expense
+	belongs_to :type
 
 	validates :username, :presence => true, :uniqueness => true
 	validates :password, :presence => true
 	validates :name, :presence => true
-	validates :userType, :presence => true
+	validates :type_id, :presence => true
 
-  	attr_accessible :name, :password, :userType, :username
+  	attr_accessible :name, :password, :type_id, :username
 
   	def self.checkLogin(username, password)
       passwordHashed = Digest::MD5.hexdigest(password)
