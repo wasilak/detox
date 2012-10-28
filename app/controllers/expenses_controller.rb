@@ -1,4 +1,7 @@
 class ExpensesController < ApplicationController
+
+  add_breadcrumb "expenses", :expenses_url
+
   # GET /expenses
   # GET /expenses.json
   def index
@@ -19,6 +22,8 @@ class ExpensesController < ApplicationController
   def show
     @expense = Expense.find(params[:id])
 
+    add_breadcrumb @expense.description, :expense_url
+
     @tags = @expense.getTags
 
     respond_to do |format|
@@ -31,6 +36,8 @@ class ExpensesController < ApplicationController
   # GET /expenses/new.json
   def new
     @expense = Expense.new
+
+    add_breadcrumb 'new', ''
 
     # domyslnie dzisiejsza data
     time = Time.new
@@ -45,6 +52,10 @@ class ExpensesController < ApplicationController
   # GET /expenses/1/edit
   def edit
     @expense = Expense.find(params[:id])
+
+    add_breadcrumb @expense.description, :expense_url
+    add_breadcrumb 'edit', ''
+
     @expenseTags = @expense.getTags
     @tags = Tag.all
   end

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  add_breadcrumb "users", :users_url
+
   before_filter :checkAdmin
 
   # GET /users
@@ -18,6 +20,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
+    add_breadcrumb @user.username, :user_url
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -29,6 +33,8 @@ class UsersController < ApplicationController
   def new
     @user = User.new
 
+    add_breadcrumb 'new', ''
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -38,6 +44,8 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+
+    add_breadcrumb 'edit', ''
   end
 
   # POST /users

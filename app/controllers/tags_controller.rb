@@ -1,4 +1,7 @@
 class TagsController < ApplicationController
+
+  add_breadcrumb "tags", :tags_url
+
   # GET /tags
   # GET /tags.json
   def index
@@ -15,6 +18,8 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find(params[:id])
 
+    add_breadcrumb @tag.name, :tag_url
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @tag }
@@ -26,6 +31,8 @@ class TagsController < ApplicationController
   def new
     @tag = Tag.new
 
+    add_breadcrumb 'new', ''
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @tag }
@@ -35,6 +42,8 @@ class TagsController < ApplicationController
   # GET /tags/1/edit
   def edit
     @tag = Tag.find(params[:id])
+
+    add_breadcrumb 'edit', ''
   end
 
   # POST /tags

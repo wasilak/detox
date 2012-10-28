@@ -40,3 +40,5 @@ gem 'jquery-rails'
 gem 'execjs'
 gem 'therubyracer'
 
+gem 'breadcrumbs_on_rails'
+
