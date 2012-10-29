@@ -49,8 +49,12 @@ class TagsController < ApplicationController
   # POST /tags
   # POST /tags.json
   def create
-    logger.debug "nowy tag: #{params[:tag]}"
+    # logger.debug "nowy tag: #{params[:tag]}"
     @tag = Tag.new(params[:tag])
+
+    if params[:tag][:description] == ''
+      params[:tag][:description] = nil
+    end
 
     respond_to do |format|
       if @tag.save
@@ -66,6 +70,10 @@ class TagsController < ApplicationController
   # PUT /tags/1
   # PUT /tags/1.json
   def update
+    if params[:tag][:description] == ''
+      params[:tag][:description] = nil
+    end
+
     @tag = Tag.find(params[:id])
 
     respond_to do |format|

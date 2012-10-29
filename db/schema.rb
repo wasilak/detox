@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028204543) do
+ActiveRecord::Schema.define(:version => 20121029201253) do
 
   create_table "expenses", :force => true do |t|
     t.integer  "userId"
@@ -29,10 +29,13 @@ ActiveRecord::Schema.define(:version => 20121028204543) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "expenses_tags_associations", ["expense_id", "tag_id"], :name => "index_expenses_tags_associations_on_expense_id_and_tag_id", :unique => true
+
   create_table "tags", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.text     "description"
   end
 
   create_table "types", :force => true do |t|
@@ -45,9 +48,9 @@ ActiveRecord::Schema.define(:version => 20121028204543) do
     t.string   "username"
     t.string   "password"
     t.string   "name"
-    t.integer  "type_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "type_id",    :default => 1, :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
 end

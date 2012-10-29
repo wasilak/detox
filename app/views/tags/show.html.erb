@@ -1,9 +1,15 @@
 <% title "Tags" %>
 
 <p>
-  <b>Name:</b>
+  <b>tag:</b>
   <%= @tag.name %>
 </p>
+<% if !@tag.description.nil? %>
+	<p>
+	  <b>description:</b>
+	  <%= @tag.description %>
+	</p>
+<% end %>
 
 <p><%= link_to '<i class="icon-chevron-left"></i> all tags'.html_safe, tags_path, :title => 'all tags' %>
 <%= link_to '<i class="icon-edit"></i> edit'.html_safe, edit_tag_path(@tag), :title => 'edit' %></p>
