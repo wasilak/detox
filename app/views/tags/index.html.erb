@@ -6,6 +6,9 @@
       <th>no.</th>
       <th>name</th>
       <th>description</th>
+      <% if session[:user][:type_id] == 2 %>
+        <th>username</th>
+      <% end %>
       <th></th>
     </tr>
   </thead>
@@ -18,6 +21,9 @@ n = 0
     <td><%= n %></td>
     <td><%= link_to tag.name, tag %></td>
     <td><%= tag.description %></td>
+    <% if session[:user][:type_id] == 2 %>
+        <td><%= tag.user.username %></td>
+      <% end %>
     <td>
       <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_tag_path(tag), :title => 'edit' %>
       <% if tag.countExpenses == 0 %>

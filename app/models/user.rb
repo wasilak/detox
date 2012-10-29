@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :expense
+  has_many :tag
 	belongs_to :type
 
 	validates :username, :presence => true, :uniqueness => true
@@ -26,4 +27,7 @@ class User < ActiveRecord::Base
       end
   	end
 
+    def getTags
+      tag.find(:all)
+    end
 end

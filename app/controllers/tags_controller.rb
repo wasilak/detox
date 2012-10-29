@@ -5,7 +5,14 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
-    @tags = Tag.all
+    if session[:user][:type_id] == 2
+      @tags = Tag.find(:all)
+    else
+      @tags = Tag.find(
+        :all,
+        :conditions => ['user_id = ?', session[:user][:id]]
+        )
+    end
 
     respond_to do |format|
       format.html # index.html.erb

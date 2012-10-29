@@ -74,7 +74,10 @@ class ExpensesController < ApplicationController
     add_breadcrumb 'edit', ''
 
     @expenseTags = @expense.getTags
-    @tags = Tag.all
+    @tags = Tag.find(
+      :all,
+      :conditions => ['user_id = ?', session[:user][:id]]
+      )
   end
 
   # POST /expenses
