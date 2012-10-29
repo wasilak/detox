@@ -1,0 +1,9 @@
+.field_with_errors #expense_amount
+{
+	float: left;
+}
+
+td.amount, th.amount
+{
+	text-align: right;
+}

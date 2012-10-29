@@ -61,11 +61,11 @@
     <table class="table table-striped table-hover table-condensed">
       <thead>
         <tr>
-          <th>No.</th>
-          <th>Description</th>
-          <th>Amount</th>
-          <th>Date</th>
-          <th>Tags</th>
+          <th>no.</th>
+          <th>description</th>
+          <th class="amount">amount</th>
+          <th>date</th>
+          <th>tags</th>
           <th></th>
         </tr>
       </thead>
@@ -80,7 +80,7 @@
       <tr>
         <td><%= id %></td>
         <td><%= link_to expense.description, expense %></td>
-        <td><%= "%.2f" % expense.amount %> zł</td>
+        <td class="amount"><%= "%.2f" % expense.amount %> zł</td>
         <td><%= expense.date %></td>
         <td>
           <% tags = []
@@ -101,7 +101,7 @@
       <tr class="info">
         <td></td>
         <td>sum</td>
-        <td><%= "%.2f" % sum %> zł</td>
+        <td class="amount"><%= "%.2f" % sum %> zł</td>
         <td></td>
         <td></td>
         <td></td>
