@@ -34,4 +34,11 @@ Detox::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Rack::Bug
+  config.middleware.use Rack::Bug,
+  :ip_masks   => [IPAddr.new("127.0.0.1"), IPAddr.new("::1"), IPAddr.new("10.0.2.0/24")],
+  :secret_key => "epT5uCIchlsHCeR9dloOeAPG66PtHd9K8l0q9avitiaA/KUrY7DE52hD4yWY+8z1"
+  # :password   => "dupa"
+
 end
