@@ -5,11 +5,11 @@ one:
   username: admin
   password: 21232f297a57a5a743894a0e4a801fc3
   name: Administrator
-  userType: 1
+  userType: 2
 
 two:
   id: 2
   username: aga
   password: fea30f2213e57de1a3c985f0cad303b7
   name: Aga
-  userType: 0
+  userType: 1
