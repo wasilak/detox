@@ -6,11 +6,15 @@ class TagsController < ApplicationController
   # GET /tags.json
   def index
     if session[:user][:type_id] == 2
-      @tags = Tag.find(:all)
+      @tags = Tag.find(
+        :all,
+        :include => [:expenses_tags_association, :user]
+        )
     else
       @tags = Tag.find(
         :all,
-        :conditions => ['user_id = ?', session[:user][:id]]
+        :conditions => ['user_id = ?', session[:user][:id]],
+        :include => [:expenses_tags_association, :user]
         )
     end
 

@@ -8,12 +8,13 @@ class ExpensesController < ApplicationController
     @expenses = Expense.find(
       :all,
       :conditions =>  ['userId = ?',"#{session[:user][:id]}"],
-      :order  =>  ['date desc']
+      :order  =>  ['date desc'],
+      :include => { :expenses_tags_association => :tag }
       )
 
     @used_tags = {}
     @expenses.each do |expense|
-      expense.getTags.each do |tag|
+      expense.expenses_tags_association.each do |tag|
         if !tag.tag.nil?
           if @used_tags[tag.tag.name].nil?
             @used_tags[tag.tag.name] = 0

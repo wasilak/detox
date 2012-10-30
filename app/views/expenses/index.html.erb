@@ -48,7 +48,6 @@
 });
 </script>
 <% title "Expenses" %>
-
 <div id="tabs">
   <ul class="nav nav-tabs">
     <li><a href="#tabular" data-toggle="tab">table</a></li>
@@ -84,11 +83,9 @@
         <td><%= expense.date %></td>
         <td>
           <% tags = []
-          expense.getTags.each do |tag| %>
-            <% if !tag.tag.nil? %>
-              <% tags.push(link_to tag.tag.name, tag.tag, {:target => '_blank'}) %>
+            expense.expenses_tags_association.each do |tag_id| %>
+              <% tags.push(link_to tag_id.tag.name, tag_id.tag, {:target => '_blank'}) %>
             <% end %>
-          <% end %>
           <%= tags.to_sentence.html_safe %>
         </td>
         <td>
