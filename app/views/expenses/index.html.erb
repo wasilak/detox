@@ -48,9 +48,9 @@
 });
 </script>
 <% title "Expenses" %>
-<%= link_to '<i class="icon-pencil"></i> new expense'.html_safe, new_expense_path, :title => 'new', :class => 'btn btn-small' %>
-<br />
-<br />
+<div class="buttonNew">
+  <%= link_to '<i class="icon-pencil"></i> new expense'.html_safe, new_expense_path, :title => 'new', :class => 'btn btn-small' %>
+</div>
 <div id="tabs">
   <ul class="nav nav-tabs">
     <li><a href="#tabular" data-toggle="tab">table</a></li>

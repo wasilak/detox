@@ -7,3 +7,8 @@ td.amount, th.amount
 {
 	text-align: right;
 }
+
+.buttonNew
+{
+	float:right;
+}
