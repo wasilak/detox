@@ -48,6 +48,9 @@
 });
 </script>
 <% title "Expenses" %>
+<%= link_to '<i class="icon-pencil"></i> new expense'.html_safe, new_expense_path, :title => 'new', :class => 'btn btn-small' %>
+<br />
+<br />
 <div id="tabs">
   <ul class="nav nav-tabs">
     <li><a href="#tabular" data-toggle="tab">table</a></li>
@@ -105,8 +108,6 @@
       </tr>
     <% end %>
     </table>
-
-    <%= link_to '<i class="icon-pencil"></i> new expense'.html_safe, new_expense_path, :title => 'new' %>
   </div>
   <div class="tab-pane" id="charts">
     charts will be here :)

@@ -1,4 +1,5 @@
 <% title "Tags" %>
+<%= link_to '<i class="icon-pencil"></i> new tag'.html_safe, new_tag_path, :title => 'new', :class => 'btn btn-small' %>
 
 <table class="table table-striped table-hover table-condensed">
   <thead>
@@ -37,4 +38,3 @@ n = 0
 <% end %>
 </table>
 
-<%= link_to '<i class="icon-pencil"></i> new tag'.html_safe, new_tag_path, :title => 'new' %>
