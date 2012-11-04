@@ -11,6 +11,11 @@ class ExpensesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:expenses)
   end
 
+  test "title should contain controller name" do
+    get :index
+    assert_select "title", "Detox : #{@controller.controller_name.capitalize}", "Title should contain controller name: #{@controller.controller_name.capitalize}"
+  end
+
   test "should get new" do
     get :new
     assert_response :success

@@ -10,6 +10,11 @@ class UsersControllerTest < ActionController::TestCase
     @user.type_id = 1
   end
 
+  test "title should contain controller name" do
+    get :index
+    assert_select "title", "Detox : #{@controller.controller_name.capitalize}", "Title should contain controller name: #{@controller.controller_name.capitalize}"
+  end
+
   test "should get index" do
     get :index
     assert_response :success

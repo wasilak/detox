@@ -9,6 +9,8 @@ Detox::Application.routes.draw do
 
   resources :expenses
 
+  resources :budgets
+
   get "home/index"
 
   match 'home/login' => 'home#login', :as => :login
