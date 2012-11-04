@@ -10,4 +10,15 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  #
+  setup do
+  	self.request.host = "localhost"
+  	self.request.port = '3000'
+
+  	old_controller = @controller
+  	@controller = HomeController.new
+  	post :checkLogin, {:username => 'admin', :password =>'admin'}
+  	@controller = old_controller
+
+  end
 end

@@ -21,7 +21,8 @@ class ExpensesControllerTest < ActionController::TestCase
       post :create, expense: { amount: @expense.amount, date: @expense.date, description: @expense.description, userId: @expense.userId }
     end
 
-    assert_redirected_to expense_path(assigns(:expense))
+    # assert_redirected_to expense_path(assigns(:expense))
+    assert_redirected_to expenses_path
   end
 
   test "should show expense" do

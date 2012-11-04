@@ -3,6 +3,11 @@ require 'test_helper'
 class TagsControllerTest < ActionController::TestCase
   setup do
     @tag = tags(:one)
+
+    # @tag.id = 3
+    @tag.name = 'tag3'
+    @tag.description = 'desc3'
+    @tag.user_id = 1
   end
 
   test "should get index" do
@@ -18,10 +23,10 @@ class TagsControllerTest < ActionController::TestCase
 
   test "should create tag" do
     assert_difference('Tag.count') do
-      post :create, tag: { expense_id: @tag.expense_id, name: @tag.name }
+      post :create, tag: { description: @tag.description, name: @tag.name, user_id: @tag.user_id }
     end
 
-    assert_redirected_to tag_path(assigns(:tag))
+    assert_redirected_to tags_path
   end
 
   test "should show tag" do
@@ -35,15 +40,15 @@ class TagsControllerTest < ActionController::TestCase
   end
 
   test "should update tag" do
-    put :update, id: @tag, tag: { expense_id: @tag.expense_id, name: @tag.name }
+    put :update, id: @tag, tag: { description: @tag.description, name: @tag.name }
     assert_redirected_to tag_path(assigns(:tag))
   end
 
-  test "should destroy tag" do
-    assert_difference('Tag.count', -1) do
-      delete :destroy, id: @tag
-    end
+  # test "should destroy tag" do
+  #   assert_difference('Tag.count', -1) do
+  #     delete :destroy, id: @tag
+  #   end
 
-    assert_redirected_to tags_path
-  end
+  #   assert_redirected_to tags_path
+  # end
 end
