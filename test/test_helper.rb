@@ -12,13 +12,15 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   #
   setup do
-  	self.request.host = "localhost"
-  	self.request.port = '3000'
+    if self.respond_to?('request')
+    	self.request.host = "localhost"
+    	self.request.port = '3000'
 
-  	old_controller = @controller
-  	@controller = HomeController.new
-  	post :checkLogin, {:username => 'admin', :password =>'admin'}
-  	@controller = old_controller
-
+    	old_controller = @controller
+    	@controller = HomeController.new
+    	post :checkLogin, {:username => 'admin', :password =>'admin'}
+    	@controller = old_controller
+    end
   end
 end
+

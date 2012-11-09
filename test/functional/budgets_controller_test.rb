@@ -9,7 +9,8 @@ class BudgetsControllerTest < ActionController::TestCase
 
   test "title should contain controller name" do
   	get :index
-  	assert_select "title", "Detox : #{@controller.controller_name.capitalize}", "Title should contain controller name: #{@controller.controller_name.capitalize}"
+  	assert_select "title",
+        "Detox : #{@controller.controller_name.capitalize}",
+        "Title should contain controller name: #{@controller.controller_name.capitalize}"
   end
-
 end
