@@ -8,12 +8,12 @@ class BudgetTest < ActiveSupport::TestCase
 
     test "should not save without amount" do
         budget = Budget.new
-        assert !budget.save, "Should not save without amount."
+        assert !budget.save, "Saved budget without amount."
     end
 
     test "amount should be greater then zero" do
         budget = Budget.new
         budget[:amount] = -8
-        assert !budget.save, "Amount should be greater then zero."
+        assert !budget.save, "Saved amount lesser then zero."
     end
 end
