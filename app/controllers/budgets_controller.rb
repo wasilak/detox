@@ -6,4 +6,54 @@ class BudgetsController < ApplicationController
     @budgets = Budget.getAllBudgets
   end
 
+  def new
+    @budget = Budget.new
+  end
+
+  def create
+    params[:budget][:amount] = correct_value(params[:budget][:amount])
+
+    @budget = Budget.new(params[:budget])
+
+    respond_to do |format|
+      if @budget.save
+        format.html { redirect_to budgets_url, notice: 'budget was successfully created.' }
+        format.json { render json: @budget, status: :created, location: @budget }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @budget.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def edit
+    @budget = Budget.find(params[:id])
+  end
+
+  def update
+    params[:budget][:amount] = correct_value(params[:budget][:amount])
+
+    @budget = Budget.find(params[:id])
+
+    respond_to do |format|
+      if @budget.update_attributes(params[:budget])
+        format.html { redirect_to budgets_path, notice: 'budget was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @budget.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @budget = Budget.find(params[:id])
+    @budget.destroy
+
+    respond_to do |format|
+      format.html { redirect_to budgets_url }
+      format.json { head :no_content }
+    end
+  end
+
 end

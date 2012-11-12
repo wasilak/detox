@@ -1,4 +1,31 @@
 <% title "Budgets" %>
-budgets
 
-<%= debug @budgets %>
+<div class="buttonNew">
+  <%= link_to '<i class="icon-pencil"></i> new budget'.html_safe, new_budget_path, :title => 'new', :class => 'btn btn-small' %>
+</div>
+<table class="table table-striped table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>description</th>
+            <th>amount</th>
+            <th>start date</th>
+            <th>end date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <% n=0
+    @budgets.each do |b| %>
+    <% n +=1 %>
+        <tr>
+            <td><%= n %></td>
+            <td><%= b.description %></td>
+            <td><%= "%.2f" % b.amount %> zł</td>
+            <td><%= b.dateStart %></td>
+            <td><%= b.dateEnd %></td>
+            <td><%= link_to '<i class="icon-edit"></i>'.html_safe, edit_budget_path(b), :title => 'edit' %>
+                <%= link_to '<i class="icon-trash"></i>'.html_safe, b, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'delete' %>
+            </td>
+        </tr>
+    <% end %>
+</table>

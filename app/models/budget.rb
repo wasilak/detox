@@ -3,9 +3,9 @@ class Budget < ActiveRecord::Base
     # has_many :expenses_tags_association
 
     validates :amount, :presence => true, :numericality => { :greater_than => 0}
-    # validates :date, :presence => true
-    # validates :description, :presence => true
-    # validates :userId, :presence => true
+    validates :dateStart, :presence => true
+    validates :dateEnd, :presence => true
+    validates :description, :presence => true
 
     attr_accessible :amount, :dateStart, :dateEnd, :description, :userId
 

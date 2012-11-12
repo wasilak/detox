@@ -13,4 +13,11 @@ class BudgetsControllerTest < ActionController::TestCase
         "Detox : #{@controller.controller_name.capitalize}",
         "Title should contain controller name: #{@controller.controller_name.capitalize}"
   end
+
+  test "new budget form" do
+    get :new
+    assert_select "title",
+        "Detox : #{@controller.controller_name.capitalize} : new",
+        "Title should contain 'new'"
+  end
 end

@@ -166,15 +166,4 @@ class ExpensesController < ApplicationController
       end
     end
   end
-
-  private
-
-  def correct_value(number)
-    # zamiana przecinkow na kropki :)
-    if number =~ /,/
-      number = number.gsub(/,/, ".")
-    end
-
-    number
-  end
 end

@@ -3,12 +3,7 @@ require 'test_helper'
 class BudgetTest < ActiveSupport::TestCase
     test "get all budgets" do
         @budgets = Budget.getAllBudgets
-        assert_kind_of Array, @budgets
-    end
-
-    test "should not save without amount" do
-        budget = Budget.new
-        assert !budget.save, "Saved budget without amount."
+        assert_kind_of Array, @budgets, "No budgets queried."
     end
 
     test "amount should be greater then zero" do

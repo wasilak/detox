@@ -18,4 +18,13 @@ class ApplicationController < ActionController::Base
     return false
   end
 
+  def correct_value(number)
+    # zamiana przecinkow na kropki :)
+    if number =~ /,/
+      number = number.gsub(/,/, ".")
+    end
+
+    number
+  end
+
 end
