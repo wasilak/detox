@@ -51,6 +51,24 @@
 <div class="buttonNew">
   <%= link_to '<i class="icon-pencil"></i> new expense'.html_safe, new_expense_path, :title => 'new', :class => 'btn btn-small' %>
 </div>
+<% if @budgets.count > 0 %>
+  <%= form_tag setSessionBudget_path, :method => 'POST', :class => 'form-inline' do %>
+            <td>
+              <% options = options_for_select(
+                [["all expenses","all"]] +
+                  @budgets.collect {
+                    |budget| ["#{budget.description} (#{budget.dateStart} - #{budget.dateEnd})", budget.id]
+                  },
+                  session[:budget][0][:id]
+                  ) %>
+              <%= select_tag(:budget, options) %>
+            </td>
+            <td>
+              <%= submit_tag 'select', :name => nil, :class => 'btn btn-link' %>
+            </td>
+  <% end %>
+<% end %>
+
 <div id="tabs">
   <ul class="nav nav-tabs">
     <li><a href="#tabular" data-toggle="tab">table</a></li>

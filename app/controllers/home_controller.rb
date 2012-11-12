@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   skip_before_filter :login_required, :only => [:login, :checkLogin]
 
   def index
+    @presentBudget = session[:budget][0]
   end
 
   def login
@@ -17,8 +18,9 @@ class HomeController < ApplicationController
   	if (false != check)
   		session[:userId] = check.id
       flash[:success]='Log in successfull :)!'
+      session[:user] = check
+      session[:budget] = Budget.getBudget(Time.new,session[:user][:id])
       redirect_to :controller => "home", :action => "index"
-      session['user'] = check
   	 else
   		flash[:warning]='Log in name or password incorrect!'
 	    redirect_to :controller => "home", :action => "login"

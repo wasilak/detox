@@ -5,12 +5,13 @@ class ExpensesController < ApplicationController
   # GET /expenses
   # GET /expenses.json
   def index
-    @expenses = Expense.find(
-      :all,
-      :conditions =>  ['userId = ?',"#{session[:user][:id]}"],
-      :order  =>  ['date desc'],
-      :include => { :expenses_tags_association => :tag }
-      )
+    @expenses = Expense.getExpenses(
+      session[:user][:id],
+      session[:budget][0][:dateStart],
+      session[:budget][0][:dateEnd]
+    )
+
+    @budgets = Budget.getAllUserBudgets(session[:user][:id])
 
     @used_tags = {}
     @expenses.each do |expense|
@@ -164,6 +165,19 @@ class ExpensesController < ApplicationController
         format.html { redirect_to edit_expense_path(@expenseTagAssociation[:expense_id]),
           notice: 'There was an error while adding tag.' }
       end
+    end
+  end
+
+  def setSessionBudget()
+
+    if params[:budget] == 'all'
+     session[:budget] = Expense.getAll(session[:user][:id])
+    else
+      session[:budget] = Budget.getBudgetById(params[:budget])
+    end
+    respond_to do |format|
+        format.html { redirect_to expenses_url, notice: 'budget successfully changed.' }
+        format.json { render json: @expense, status: :created, location: @expense }
     end
   end
 end

@@ -17,6 +17,7 @@ class BudgetsController < ApplicationController
 
     respond_to do |format|
       if @budget.save
+        session[:budget] = Budget.getBudget(Time.new,session[:user][:id])
         format.html { redirect_to budgets_url, notice: 'budget was successfully created.' }
         format.json { render json: @budget, status: :created, location: @budget }
       else
@@ -37,6 +38,7 @@ class BudgetsController < ApplicationController
 
     respond_to do |format|
       if @budget.update_attributes(params[:budget])
+        session[:budget] = Budget.getBudget(Time.new,session[:user][:id])
         format.html { redirect_to budgets_path, notice: 'budget was successfully updated.' }
         format.json { head :no_content }
       else

@@ -20,6 +20,8 @@ Detox::Application.routes.draw do
   match 'expenses/:id/addTag' => 'expenses#addTag', :as => :addTag
   match 'expenses/:id/delTag' => 'expenses#delTag', :as => :delTag
 
+  match 'expenses/setSessionBudget' => 'expenses#setSessionBudget', :as => :setSessionBudget
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,3 +1,7 @@
 <% title "Home" %>
 <p>Home page.</p>
-
+<% unless @presentBudget.nil? %>
+    <p>present budget: <%= @presentBudget[:description] %> (<%= @presentBudget[:dateStart] %> to <%= @presentBudget[:dateEnd] %>)</p>
+<% else %>
+    <p>no budget set :(</p>
+<% end %>
