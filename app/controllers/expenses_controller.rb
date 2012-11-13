@@ -7,8 +7,8 @@ class ExpensesController < ApplicationController
   def index
     @expenses = Expense.getExpenses(
       session[:user][:id],
-      session[:budget][0][:dateStart],
-      session[:budget][0][:dateEnd]
+      session[:budget][:dateStart],
+      session[:budget][:dateEnd]
     )
 
     @budgets = Budget.getAllUserBudgets(session[:user][:id])
@@ -168,16 +168,13 @@ class ExpensesController < ApplicationController
     end
   end
 
-  def setSessionBudget()
+  def setBudget
+    setSessionBudget
 
-    if params[:budget] == 'all'
-     session[:budget] = Expense.getAll(session[:user][:id])
-    else
-      session[:budget] = Budget.getBudgetById(params[:budget])
-    end
     respond_to do |format|
         format.html { redirect_to expenses_url, notice: 'budget successfully changed.' }
         format.json { render json: @expense, status: :created, location: @expense }
     end
   end
+
 end

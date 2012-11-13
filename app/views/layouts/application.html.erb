@@ -32,14 +32,14 @@
 					you are here: <em><%= render_breadcrumbs %></em>
 				</div>
 				<div class="span3" id="moneyLeft">
-					<% if @remainingBudget > 0 %>
+					<% if @remainingBudget and @remainingBudget > 0 %>
 					 	<span class="label <% if @remainingBudgetPercentage < 10 %>
 					 		label-important
 					 		<% else %>
 					 		label-info
 					 		<% end %>
 					 		">
-					 		remaining budget: <%= @remainingBudget %> zł
+					 		remaining budget: <%= @remainingBudget.round(2) %> zł
 					 	</span>
 				 	<% end %>
 				</div>

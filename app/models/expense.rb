@@ -26,16 +26,16 @@ class Expense < ActiveRecord::Base
     end
 
     def self.getAll userId
-      output = []
-      output[0] = {}
+      # output = []
+      output = {}
 
-      output[0][:dateStart] = self.where(:userId => userId).minimum(:date)
-      output[0][:dateEnd] = self.where(:userId => userId).maximum(:date)
+      output[:dateStart] = self.where(:userId => userId).minimum(:date)
+      output[:dateEnd] = self.where(:userId => userId).maximum(:date)
 
-      output[0][:description] = 'all expenses'
-      output[0][:id] = 0
+      output[:description] = 'all expenses'
+      output[:id] = 0
 
-      output[0][:userId] = userId
+      output[:userId] = userId
 
       return output
     end

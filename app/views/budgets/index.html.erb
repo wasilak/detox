@@ -20,7 +20,7 @@
         <tr>
             <td><%= n %></td>
             <td><%= b.description %></td>
-            <td><%= "%.2f" % b.amount %> zł</td>
+            <td class="amount"><%= "%.2f" % b.amount %> zł</td>
             <td><%= b.dateStart %></td>
             <td><%= b.dateEnd %></td>
             <td><%= link_to '<i class="icon-edit"></i>'.html_safe, edit_budget_path(b), :title => 'edit' %>

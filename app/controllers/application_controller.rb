@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :login_required
+  before_filter :checkBudget
   before_filter :remainingBudget
 
   private
@@ -28,13 +29,19 @@ class ApplicationController < ActionController::Base
     number
   end
 
+  def checkBudget
+    unless session[:budget]
+      setSessionBudget 1
+    end
+  end
+
   def remainingBudget
-    if session[:user]
-      if session[:budget][0][:id] != 0
+    if session[:user] and session[:budget]
+      if session[:budget][:id] != 0
         expenses = Expense.getExpenses(
           session[:user][:id],
-          session[:budget][0][:dateStart],
-          session[:budget][0][:dateEnd]
+          session[:budget][:dateStart],
+          session[:budget][:dateEnd]
           )
 
         expensesSum = 0
@@ -42,12 +49,21 @@ class ApplicationController < ActionController::Base
           expensesSum += expense[:amount]
         end
 
-        budgetAmount = Budget.find(session[:budget][0][:id])
+        budgetAmount = Budget.find(session[:budget][:id])
         @remainingBudget = budgetAmount[:amount] - expensesSum
         @remainingBudgetPercentage = (100*@remainingBudget)/budgetAmount[:amount]
       else
         @remainingBudget = 0
       end
+    end
+  end
+
+  def setSessionBudget all = 0
+
+    if params[:budget] == 'all' or all == 1
+     session[:budget] = Expense.getAll(session[:user][:id])
+    else
+      session[:budget] = Budget.getBudgetById(params[:budget]).first
     end
   end
 
