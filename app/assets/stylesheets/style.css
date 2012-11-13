@@ -21,3 +21,8 @@ td.amount, th.amount
 {
 	float:right;
 }
+
+#moneyLeft
+{
+    text-align: right;
+}

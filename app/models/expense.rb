@@ -13,7 +13,7 @@ class Expense < ActiveRecord::Base
   		expenses_tags_association.find(:all)
   	end
 
-    def self.getExpenses(userId, dateStart, dateEnd)
+    def self.getExpenses userId, dateStart, dateEnd
         self.find(
           :all,
           :conditions =>  ['userId = ? and date >= ? and date <= ?',
@@ -25,7 +25,7 @@ class Expense < ActiveRecord::Base
         )
     end
 
-    def self.getAll(userId)
+    def self.getAll userId
       output = []
       output[0] = {}
 
@@ -33,10 +33,15 @@ class Expense < ActiveRecord::Base
       output[0][:dateEnd] = self.where(:userId => userId).maximum(:date)
 
       output[0][:description] = 'all expenses'
+      output[0][:id] = 0
 
       output[0][:userId] = userId
 
       return output
+    end
+
+    def self.getAllSum userId
+      self.where(:userId).sum(:amount)
     end
 
 end

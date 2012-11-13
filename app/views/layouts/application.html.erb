@@ -28,10 +28,20 @@
 				</ul>
 		    </div>
 		    <% if @loggedIn %>
-			    <div class="span10">
-					<div class="row">
-						you are here: <em><%= render_breadcrumbs %></em>
-					</div>
+		    	<div class="span7">
+					you are here: <em><%= render_breadcrumbs %></em>
+				</div>
+				<div class="span3" id="moneyLeft">
+					<% if @remainingBudget > 0 %>
+					 	<span class="label <% if @remainingBudgetPercentage < 10 %>
+					 		label-important
+					 		<% else %>
+					 		label-info
+					 		<% end %>
+					 		">
+					 		remaining budget: <%= @remainingBudget %> zł
+					 	</span>
+				 	<% end %>
 				</div>
 				<hr />
 			<% end %>
