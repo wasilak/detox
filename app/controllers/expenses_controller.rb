@@ -58,6 +58,12 @@ class ExpensesController < ApplicationController
 
     add_breadcrumb 'new', ''
 
+    @tags = Tag.find(
+        :all,
+        :conditions => ['user_id = ?', session[:user][:id]],
+        :include => [:expenses_tags_association, :user]
+        )
+
     # domyslnie dzisiejsza data
     time = Time.new
     @expense.date = "#{time.year}-#{time.month}-#{time.day}"
@@ -77,9 +83,10 @@ class ExpensesController < ApplicationController
 
     @expenseTags = @expense.getTags
     @tags = Tag.find(
-      :all,
-      :conditions => ['user_id = ?', session[:user][:id]]
-      )
+        :all,
+        :conditions => ['user_id = ?', session[:user][:id]],
+        :include => [:expenses_tags_association, :user]
+        )
   end
 
   # POST /expenses
@@ -91,7 +98,7 @@ class ExpensesController < ApplicationController
 
     respond_to do |format|
       if @expense.save
-        format.html { redirect_to expenses_url, notice: 'Expense was successfully created.' }
+        format.html { redirect_to edit_expense_path(@expense), notice: 'Expense was successfully created.' }
         format.json { render json: @expense, status: :created, location: @expense }
       else
         format.html { render action: "new" }
@@ -108,7 +115,12 @@ class ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
 
     @expenseTags = @expense.getTags
-    @tags = Tag.all
+
+    @tags = Tag.find(
+        :all,
+        :conditions => ['user_id = ?', session[:user][:id]],
+        :include => [:expenses_tags_association, :user]
+        )
 
     respond_to do |format|
       if @expense.update_attributes(params[:expense])
