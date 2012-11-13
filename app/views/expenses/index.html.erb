@@ -105,7 +105,7 @@ if @budgets.count > 0 %>
       %>
       <tr>
         <td><%= id %></td>
-        <td><%= link_to expense.description, expense %></td>
+        <td><%= link_to expense.description, edit_expense_path(expense) %></td>
         <td class="amount"><%= "%.2f" % expense.amount %> zł</td>
         <td><%= expense.date %></td>
         <td>

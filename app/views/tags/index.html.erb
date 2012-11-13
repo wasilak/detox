@@ -22,7 +22,7 @@ n = 0
   %>
   <tr>
     <td><%= n %></td>
-    <td><%= link_to tag.name, tag %></td>
+    <td><%= link_to tag.name, edit_tag_path(tag) %></td>
     <td><%= tag.description %></td>
     <% if session[:user][:type_id] == 2 %>
         <td><%= tag.user.username %></td>

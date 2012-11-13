@@ -19,7 +19,7 @@
     <% n +=1 %>
         <tr>
             <td><%= n %></td>
-            <td><%= b.description %></td>
+            <td><%= link_to b.description, edit_budget_path(b) %></td>
             <td class="amount"><%= "%.2f" % b.amount %> zł</td>
             <td><%= b.dateStart %></td>
             <td><%= b.dateEnd %></td>
