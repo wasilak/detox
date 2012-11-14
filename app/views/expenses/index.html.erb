@@ -3,6 +3,12 @@
     e.preventDefault();
     jQuery(this).tab('show');
   })
+
+  jQuery(document).ready(function(){
+    jQuery('#budget').change(function(){
+      jQuery('#formBudget').submit();
+    })
+  })
 </script>
 
 <script type="text/javascript">
@@ -58,20 +64,15 @@ else
   defaultBudget = ''
 end
 if @budgets.count > 0 %>
-  <%= form_tag setBudget_path, :method => 'POST', :class => 'form-inline' do %>
-            <td>
-              <% options = options_for_select(
-                [["all expenses","all"]] +
-                  @budgets.collect {
-                    |budget| ["#{budget.description} (#{budget.dateStart} - #{budget.dateEnd})", budget.id]
-                  },
-                  defaultBudget
-                  ) %>
-              <%= select_tag :budget, options, :class => 'input-xxlarge' %>
-            </td>
-            <td>
-              <%= submit_tag 'select', :name => nil, :class => 'btn btn-link' %>
-            </td>
+  <%= form_tag setBudget_path, :method => 'POST', :class => 'form-inline', :id => 'formBudget' do %>
+    <% options = options_for_select(
+      [["all expenses","all"]] +
+        @budgets.collect {
+          |budget| ["#{budget.description} (#{budget.dateStart} - #{budget.dateEnd})", budget.id]
+        },
+        defaultBudget
+        ) %>
+    <%= select_tag :budget, options, :class => 'input-xxlarge' %>
   <% end %>
 <% end %>
 
