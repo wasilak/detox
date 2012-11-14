@@ -88,6 +88,7 @@ if @budgets.count > 0 %>
       <thead>
         <tr>
           <th>no.</th>
+          <th></th>
           <th>description</th>
           <th class="amount">amount</th>
           <th>date</th>
@@ -103,16 +104,25 @@ if @budgets.count > 0 %>
       sum += expense.amount
       id += 1
       %>
+      <%
+      tags = []
+      budgetIncluded = false
+      expense.expenses_tags_association.each do |tag_id|
+        if tag_id.tag.budget
+          budgetIncluded = true
+        end
+        tags.push(link_to tag_id.tag.name, tag_id.tag, {:target => '_blank'}) %>
+      <% end %>
       <tr>
         <td><%= id %></td>
+        <td>
+          <% if budgetIncluded %>
+            <i class="icon-asterisk" title="included in budget"></i></td>
+          <% end %>
         <td><%= link_to expense.description, edit_expense_path(expense) %></td>
         <td class="amount"><%= "%.2f" % expense.amount %> zł</td>
         <td><%= expense.date %></td>
         <td>
-          <% tags = []
-            expense.expenses_tags_association.each do |tag_id| %>
-              <% tags.push(link_to tag_id.tag.name, tag_id.tag, {:target => '_blank'}) %>
-            <% end %>
           <%= tags.to_sentence.html_safe %>
         </td>
         <td>
@@ -123,6 +133,7 @@ if @budgets.count > 0 %>
     <% end %>
     <% if sum > 0 %>
       <tr class="info">
+        <td></td>
         <td></td>
         <td>sum</td>
         <td class="amount"><%= "%.2f" % sum %> zł</td>

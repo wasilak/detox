@@ -7,6 +7,7 @@
     <thead>
         <tr>
             <th>id</th>
+            <th></th>
             <th>description</th>
             <th>amount</th>
             <th>start date</th>
@@ -19,6 +20,11 @@
     <% n +=1 %>
         <tr>
             <td><%= n %></td>
+            <td>
+                <% if session[:budget][:id] == b.id %>
+                    <i class="icon-asterisk" title="active budget"></i>
+                <% end %>
+            </td>
             <td><%= link_to b.description, edit_budget_path(b) %></td>
             <td class="amount"><%= "%.2f" % b.amount %> zł</td>
             <td><%= b.dateStart %></td>

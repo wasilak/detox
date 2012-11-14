@@ -7,6 +7,7 @@
   <thead>
     <tr>
       <th>no.</th>
+      <th></th>
       <th>name</th>
       <th>description</th>
       <% if session[:user][:type_id] == 2 %>
@@ -22,6 +23,11 @@ n = 0
   %>
   <tr>
     <td><%= n %></td>
+    <td>
+    <% if tag.budget %>
+      <i class="icon-asterisk" title="included in budget"></i>
+    <% end %>
+    </td>
     <td><%= link_to tag.name, edit_tag_path(tag) %></td>
     <td><%= tag.description %></td>
     <% if session[:user][:type_id] == 2 %>

@@ -25,6 +25,18 @@ class Expense < ActiveRecord::Base
         )
     end
 
+    def self.getExpensesBudget userId, dateStart, dateEnd
+        self.find(
+          :all,
+          :conditions =>  ['userId = ? and date >= ? and date <= ? and budget = 1',
+            "#{userId}",
+            "#{dateStart}",
+            "#{dateEnd}"],
+          :order  =>  ['date desc'],
+          :joins => { :expenses_tags_association => :tag }
+        )
+    end
+
     def self.getAll userId
       # output = []
       output = {}

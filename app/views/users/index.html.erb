@@ -24,7 +24,7 @@ n = 0
     <td><%= n %></td>
     <td><%= link_to user.username, user %></td>
     <td><%= user.name %></td>
-    <td><%= user.type.typeName %></td>
+    <td><b><%= user.type.typeName %></b></td>
     <td>
       <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_user_path(user), :title => 'edit' %>
       <%= link_to '<i class="icon-trash"></i>'.html_safe, user, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'delete' %>

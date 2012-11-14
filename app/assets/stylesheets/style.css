@@ -25,4 +25,5 @@ td.amount, th.amount
 #moneyLeft
 {
     text-align: right;
+    margin-bottom: 20px;
 }

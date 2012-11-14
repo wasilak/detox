@@ -29,22 +29,18 @@
 				</ul>
 		    </div>
 		    <% if @loggedIn %>
-		    	<div class="span7">
-					you are here: <em><%= render_breadcrumbs %></em>
-				</div>
-				<div class="span3" id="moneyLeft">
-					<% if @remainingBudget and @remainingBudget > 0 %>
+				<div class="span10" id="moneyLeft">
+					<% if @remainingBudget and session[:budget][:id] != 0 %>
 					 	<span class="label <% if @remainingBudgetPercentage < 10 %>
 					 		label-important
 					 		<% else %>
 					 		label-info
 					 		<% end %>
 					 		">
-					 		remaining budget: <%= @remainingBudget.round(2) %> zł
+					 		remaining in <b>"<%= session[:budget][:description] %>"</b> budget: <%= @remainingBudget.round(2) %> zł
 					 	</span>
 				 	<% end %>
 				</div>
-				<hr />
 			<% end %>
 		    <div class="span10">
 				<div class="row">
@@ -59,6 +55,10 @@
 				</div>
 				<%= yield %>
 		    </div>
+		    <div class="span10 offset2">
+		    <hr />
+				you are here: <em><%= render_breadcrumbs %></em>
+			</div>
 	    </div>
 	</div>
 </body>
