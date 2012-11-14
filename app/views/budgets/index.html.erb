@@ -1,17 +1,17 @@
 <% title "Budgets" %>
 
 <div class="buttonNew">
-  <%= link_to '<i class="icon-pencil"></i> new budget'.html_safe, new_budget_path, :title => 'new', :class => 'btn btn-small' %>
+  <%= link_to '<i class="icon-pencil"></i> '.html_safe+(I18n.t 'new budget'), new_budget_path, :title => 'new', :class => 'btn btn-small' %>
 </div>
 <table class="table table-striped table-hover table-condensed">
     <thead>
         <tr>
-            <th>id</th>
+            <th><%= I18n.t 'id' %></th>
             <th></th>
-            <th>description</th>
-            <th>amount</th>
-            <th>start date</th>
-            <th>end date</th>
+            <th><%= I18n.t 'description' %></th>
+            <th><%= I18n.t 'amount' %></th>
+            <th><%= I18n.t 'start' %></th>
+            <th><%= I18n.t 'end' %></th>
             <th></th>
         </tr>
     </thead>
@@ -22,11 +22,11 @@
             <td><%= n %></td>
             <td>
                 <% if session[:budget][:id] == b.id %>
-                    <i class="icon-asterisk" title="active budget"></i>
+                    <i class="icon-asterisk" title="<%= I18n.t 'active budget' %>"></i>
                 <% end %>
             </td>
             <td><%= link_to b.description, edit_budget_path(b) %></td>
-            <td class="amount"><%= "%.2f" % b.amount %> zł</td>
+            <td class="amount"><%= number_to_currency b.amount %></td>
             <td><%= b.dateStart %></td>
             <td><%= b.dateEnd %></td>
             <td><%= link_to '<i class="icon-edit"></i>'.html_safe, edit_budget_path(b), :title => 'edit' %>

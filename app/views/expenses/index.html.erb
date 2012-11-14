@@ -121,7 +121,7 @@ if @budgets.count > 0 %>
             <i class="icon-asterisk" title="included in budget"></i></td>
           <% end %>
         <td><%= link_to expense.description, edit_expense_path(expense) %></td>
-        <td class="amount"><%= "%.2f" % expense.amount %> zł</td>
+        <td class="amount"><%= number_to_currency expense.amount %></td>
         <td><%= expense.date %></td>
         <td>
           <%= tags.to_sentence.html_safe %>
@@ -137,7 +137,7 @@ if @budgets.count > 0 %>
         <td></td>
         <td></td>
         <td>sum</td>
-        <td class="amount"><%= "%.2f" % sum %> zł</td>
+        <td class="amount"><%= number_to_currency sum %></td>
         <td></td>
         <td></td>
         <td></td>

@@ -16,15 +16,15 @@
 					<!-- <p>Welcome, <%= session[:user][:name] %></p> -->
 				<% end %>
 				<ul class="unstyled">
-				<li> <i class="icon-home"></i> <%= link_to 'home', '/' %></li>
+				<li> <i class="icon-home"></i> <%= link_to (I18n.t 'home'), '/' %></li>
 				<% if @loggedIn %>
-					<li> <i class="icon-shopping-cart"></i> <%= link_to 'expenses', expenses_path %></li>
-					<li> <i class="icon-list-alt"></i> <%= link_to 'budgets', budgets_path %></li>
-					<li> <i class="icon-tags"></i> <%= link_to 'tags', tags_path %></li>
+					<li> <i class="icon-shopping-cart"></i> <%= link_to (I18n.t 'expenses'), expenses_path %></li>
+					<li> <i class="icon-list-alt"></i> <%= link_to (I18n.t 'budgets'), budgets_path %></li>
+					<li> <i class="icon-tags"></i> <%= link_to (I18n.t 'tags'), tags_path %></li>
 					<% if session && session[:user][:type_id] == 2 %>
-						<li> <i class="icon-user"></i> <%= link_to 'users', users_path %></li>
+						<li> <i class="icon-user"></i> <%= link_to  (I18n.t'users'), users_path %></li>
 					<% end %>
-					<li> <i class="icon-off"></i> <%= link_to 'log out', logout_url %></li>
+					<li> <i class="icon-off"></i> <%= link_to  (I18n.t'log out'), logout_url %></li>
 				<% end %>
 				</ul>
 		    </div>
@@ -37,7 +37,7 @@
 					 		label-info
 					 		<% end %>
 					 		">
-					 		remaining in <b>"<%= session[:budget][:description] %>"</b> budget: <%= @remainingBudget.round(2) %> zł
+					 		<%= I18n.t 'remaining in budget' %> <b>"<%= session[:budget][:description] %>"</b>: <%= number_to_currency @remainingBudget %>
 					 	</span>
 				 	<% end %>
 				</div>
@@ -57,7 +57,7 @@
 		    </div>
 		    <div class="span10 offset2">
 		    <hr />
-				you are here: <em><%= render_breadcrumbs %></em>
+				<%= I18n.t 'you are here' %>: <em><%= render_breadcrumbs %></em>
 			</div>
 	    </div>
 	</div>

@@ -1,5 +1,7 @@
 class ExpensesController < ApplicationController
 
+  # include ActionView::Helpers::NumberHelper
+
   add_breadcrumb "expenses", :expenses_url
 
   # GET /expenses

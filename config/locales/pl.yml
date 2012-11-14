@@ -1,0 +1,34 @@
+pl:
+    number:
+        currency:
+          format:
+            delimiter: ! ' '
+            format: ! '%n %u'
+            precision: 2
+            separator: ! ","
+            significant: false
+            strip_insignificant_zeros: true
+            unit: 'zł'
+    budgets: 'budżety'
+    expenses: 'wydatki'
+    home: 'home'
+    tags: 'tagi'
+    users: 'użytkownicy'
+    log out: 'wyloguj się'
+    description: 'opis'
+    amount: 'ilość'
+    start date: 'data początkowa'
+    start: 'początek'
+    end date: 'data końcowa'
+    end: 'koniec'
+    id: 'nr'
+    new budget: 'nowy budżet'
+    you are here: 'jesteś tutaj'
+    remaining in budget: 'pozostało w budżecie'
+    back: 'powrót'
+    budget description: 'opis budżetu'
+    budget: 'budżet'
+    value: 'wartość'
+    budget value: 'wartość budżetu'
+    budgets list: 'lista budżetów'
+    active budget: 'aktywny budżet'

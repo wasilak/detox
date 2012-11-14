@@ -87,6 +87,8 @@ GEM
       activesupport (= 3.2.8)
       bundler (~> 1.0)
       railties (= 3.2.8)
+    rails-i18n (0.7.0)
+      i18n (~> 0.5)
     railties (3.2.8)
       actionpack (= 3.2.8)
       activesupport (= 3.2.8)
@@ -133,6 +135,7 @@ DEPENDENCIES
   mysql2
   rack-bug!
   rails (= 3.2.8)
+  rails-i18n
   sass-rails (~> 3.2.3)
   therubyracer
   uglifier (>= 1.0.3)

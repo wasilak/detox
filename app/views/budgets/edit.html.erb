@@ -5,4 +5,4 @@
         <%= render 'form' %>
     </div>
 </div>
-<p><%= link_to '<i class="icon-chevron-left"></i> budgets list'.html_safe, budgets_path, :title => 'budgets list' %></p>
+<p><%= link_to '<i class="icon-chevron-left"></i> '.html_safe+(I18n.t 'budgets list'), budgets_path, :title => (I18n.t 'budgets list') %></p>
