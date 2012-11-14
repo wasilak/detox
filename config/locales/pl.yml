@@ -59,3 +59,5 @@ pl:
     type: 'typ'
     new user: 'nowy użytkownik'
     password: 'hasło'
+    log in: "zaloguj się"
+    log in name or password incorrect!: 'nieprawdiłowa nazwa użytkownika lub hasło'

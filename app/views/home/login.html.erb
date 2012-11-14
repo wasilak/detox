@@ -2,16 +2,16 @@
 
 <%= form_tag checkLogin_url, :class => 'form-horizontal' do %>
   <div class="control-group">
-    <%= label_tag :username %>
-    <%= text_field_tag :username, params[:username], :placeholder => "user name"%>
+    <%= label_tag :username, (I18n.t 'username') %>
+    <%= text_field_tag :username, params[:username], :placeholder => (I18n.t "username")%>
   </div>
   <div class="control-group">
-    <%= label_tag :password %>
+    <%= label_tag :password, (I18n.t 'password') %>
     <%= password_field_tag :password %>
   </div>
   <div class="control-group">
   	<div class="control">
-  		<%= submit_tag "Log in" %>
+  		<%= submit_tag (I18n.t "log in") %>
   	</div>
   </div>
 <% end %>

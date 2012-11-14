@@ -52,3 +52,5 @@ en:
     type: 'type'
     new user: 'new user'
     password: 'password'
+    log in: 'log in'
+    log in name or password incorrect!: 'log in name or password incorrect!'

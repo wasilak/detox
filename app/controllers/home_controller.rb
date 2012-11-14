@@ -23,7 +23,7 @@ class HomeController < ApplicationController
       session[:budget] = Budget.getBudget(Time.new,session[:user][:id])
       redirect_to :controller => "home", :action => "index"
   	 else
-  		flash[:warning]='Log in name or password incorrect!'
+  		flash[:warning]=(I18n.t 'log in name or password incorrect!')
 	    redirect_to :controller => "home", :action => "login"
 	end
   end
