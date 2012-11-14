@@ -1,5 +1,5 @@
 class Tag < ActiveRecord::Base
-	has_many :expenses_tags_association
+	has_many :expenses_tags_association, :dependent => :delete_all
 	belongs_to :user
   	attr_accessible :name, :description, :user_id, :budget
 
