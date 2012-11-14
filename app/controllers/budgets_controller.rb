@@ -7,6 +7,9 @@ class BudgetsController < ApplicationController
   end
 
   def new
+    # example of Airbrake notification
+    # Airbrake.notify(Exception.new("eoor!"))
+
     @budget = Budget.new
   end
 
