@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name, :placeholder => "tag name" %>
+    <%= f.label :name, (I18n.t "name") %>
+    <%= f.text_field :name, :placeholder => (I18n.t "name") %>
   </div>
   <div class="field">
     <%= f.hidden_field :user_id, :value => session[:user][:id] %>
   </div>
   <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description, :size => '30x4', :placeholder => "optional tag description goes here" %>
+    <%= f.label :description, (I18n.t "description") %>
+    <%= f.text_area :description, :size => '30x4', :placeholder => (I18n.t "optional tag description goes here") %>
   </div>
   <div class="field">
-    <%= f.label :budget, 'class' => "checkbox inline" %>
+    <%= f.label :budget, (I18n.t 'budget'), 'class' => "checkbox inline" %>
     <%= f.check_box :budget %>
   </div>
   <div class="actions">

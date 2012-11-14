@@ -1,17 +1,17 @@
 <% title "Tags" %>
 <div class="buttonNew">
-  <%= link_to '<i class="icon-pencil"></i> new tag'.html_safe, new_tag_path, :title => 'new', :class => 'btn btn-small' %>
+  <%= link_to '<i class="icon-pencil"></i> '.html_safe+(I18n.t 'new tag'), new_tag_path, :title => (I18n.t 'new'), :class => 'btn btn-small' %>
 </div>
 
 <table class="table table-striped table-hover table-condensed">
   <thead>
     <tr>
-      <th>no.</th>
+      <th><%= I18n.t 'id' %></th>
       <th></th>
-      <th>name</th>
-      <th>description</th>
+      <th><%= I18n.t 'name' %></th>
+      <th><%= I18n.t 'description' %></th>
       <% if session[:user][:type_id] == 2 %>
-        <th>username</th>
+        <th><%= I18n.t 'username' %></th>
       <% end %>
       <th></th>
     </tr>
@@ -25,7 +25,7 @@ n = 0
     <td><%= n %></td>
     <td>
     <% if tag.budget %>
-      <i class="icon-asterisk" title="included in budget"></i>
+      <i class="icon-asterisk" title="<%= I18n.t 'included in budget' %>"></i>
     <% end %>
     </td>
     <td><%= link_to tag.name, edit_tag_path(tag) %></td>
@@ -34,12 +34,12 @@ n = 0
         <td><%= tag.user.username %></td>
       <% end %>
     <td>
-      <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_tag_path(tag), :title => 'edit' %>
+      <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_tag_path(tag), :title => (I18n.t 'edit') %>
       <% times_used = tag.expenses_tags_association.count %>
       <% if times_used == 0 %>
-        <%= link_to '<i class="icon-trash"></i>'.html_safe, tag, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'delete' %>
+        <%= link_to '<i class="icon-trash"></i>'.html_safe, tag, method: :delete, data: { confirm: (I18n.t 'Are you sure?') }, :title => (I18n.t 'delete') %>
       <% else %>
-        <i class="icon-lock" title="cannot be deleted (used <%= times_used %> times)"></i>
+        <i class="icon-lock" title="<%= I18n.t 'cannot be deleted' %> (<%= I18n.t 'used' %> <%= times_used %> <%= I18n.t 'times' %>)"></i>
       <% end %>
     </td>
   </tr>

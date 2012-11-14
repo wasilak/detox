@@ -1,6 +1,6 @@
 <% title "Users" %>
 <div class="buttonNew">
-  <%= link_to '<i class="icon-pencil"></i> new user'.html_safe, new_user_path, :title => 'new', :class => 'btn btn-small' %>
+  <%= link_to '<i class="icon-pencil"></i> '.html_safe+(I18n.t 'new user'), new_user_path, :title => (I18n.t 'new'), :class => 'btn btn-small' %>
 </div>
 <br />
 <br />
@@ -8,10 +8,10 @@
 <table class="table table-striped table-hover table-condensed">
   <tr>
     <thead>
-      <th>No.</th>
-      <th>Username</th>
-      <th>Name</th>
-      <th>Usertype</th>
+      <th><%= I18n.t 'id' %></th>
+      <th><%= I18n.t 'username' %></th>
+      <th><%= I18n.t 'name' %></th>
+      <th><%= I18n.t 'type' %></th>
       <th></th>
     </thead>
   </tr>
@@ -22,12 +22,12 @@ n = 0
   %>
   <tr>
     <td><%= n %></td>
-    <td><%= link_to user.username, user %></td>
+    <td><%= link_to user.username, edit_user_path(user) %></td>
     <td><%= user.name %></td>
     <td><b><%= user.type.typeName %></b></td>
     <td>
-      <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_user_path(user), :title => 'edit' %>
-      <%= link_to '<i class="icon-trash"></i>'.html_safe, user, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'delete' %>
+      <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_user_path(user), :title => (I18n.t 'edit') %>
+      <%= link_to '<i class="icon-trash"></i>'.html_safe, user, method: :delete, data: { confirm: (I18n.t 'Are you sure?') }, :title => (I18n.t 'delete') %>
     </td>
   </tr>
 <% end %>

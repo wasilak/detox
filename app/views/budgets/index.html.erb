@@ -29,8 +29,8 @@
             <td class="amount"><%= number_to_currency b.amount %></td>
             <td><%= b.dateStart %></td>
             <td><%= b.dateEnd %></td>
-            <td><%= link_to '<i class="icon-edit"></i>'.html_safe, edit_budget_path(b), :title => 'edit' %>
-                <%= link_to '<i class="icon-trash"></i>'.html_safe, b, method: :delete, data: { confirm: 'Are you sure?' }, :title => 'delete' %>
+            <td><%= link_to '<i class="icon-edit"></i>'.html_safe, edit_budget_path(b), :title => (I18n.t 'edit') %>
+                <%= link_to '<i class="icon-trash"></i>'.html_safe, b, method: :delete, data: { confirm: (I18n.t 'Are you sure?') }, :title => (I18n.t 'delete') %>
             </td>
         </tr>
     <% end %>

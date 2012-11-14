@@ -12,15 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :username %>
+    <%= f.label :username, (I18n.t 'username') %>
     <%= f.text_field :username %>
   </div>
   <div class="field" id="pass">
-    <%= f.label :password %>
+    <%= f.label :password, (I18n.t 'password') %>
     <%= f.password_field :password, :disabled => 'disabled' %>
   </div>
   <div class="field">
-    <%= f.label :name %>
+    <%= f.label :name, (I18n.t 'name') %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
