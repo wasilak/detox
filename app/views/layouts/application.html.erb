@@ -31,15 +31,9 @@
 		    <% if @loggedIn %>
 				<div class="span10">
 					<% if @remainingBudget and session[:budget][:id] != 0 %>
-						<%= I18n.t 'remining for today' %>: <span class="
-							 		<% if @remainingBudgetDay < @budgetToday %>
-							 		belowBudget
-							 		<% else %>
-							 		overBudget
-							 		<% end %>
-							 		"><%= number_to_currency @remainingBudgetDay %></span>
-							 		<%= I18n.t 'from' %> <%= number_to_currency @budgetToday %>
-							 		<span title="<%= @daysInBudget %> <%= I18n.t 'days' %> x <%= number_to_currency @budgetToday %> = <%= number_to_currency session[:budget][:amount] %>">
+						<%= I18n.t 'remaining daily budget' %>:
+							 		<%= number_to_currency @budgetLeftPerDay %>
+							 		<span title="<%= @daysLeftInBudget %> <%= I18n.t 'days' %> x <%= number_to_currency @budgetLeftPerDay %> = <%= number_to_currency @remainingBudget %>">
 							 	<i class="icon-question-sign"></i></span>
 					<% end %>
 					<div id="moneyLeft">

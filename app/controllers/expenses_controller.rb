@@ -19,13 +19,13 @@ class ExpensesController < ApplicationController
 
     @used_tags = {}
     @expenses.each do |expense|
+      @budgetsSum += expense.amount
       expense.expenses_tags_association.each do |tag|
         if !tag.tag.nil?
           if @used_tags[tag.tag.name].nil?
             @used_tags[tag.tag.name] = 0
           end
           @used_tags[tag.tag.name] += expense.amount
-          @budgetsSum += expense.amount
         end
       end
     end
