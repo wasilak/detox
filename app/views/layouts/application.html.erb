@@ -29,17 +29,31 @@
 				</ul>
 		    </div>
 		    <% if @loggedIn %>
-				<div class="span10" id="moneyLeft">
+				<div class="span10">
 					<% if @remainingBudget and session[:budget][:id] != 0 %>
-					 	<span class="label <% if @remainingBudgetPercentage < 10 %>
-					 		label-important
-					 		<% else %>
-					 		label-info
-					 		<% end %>
-					 		">
-					 		<%= I18n.t 'remaining in budget' %> <b>"<%= session[:budget][:description] %>"</b>: <%= number_to_currency @remainingBudget %>
-					 	</span>
-				 	<% end %>
+						<%= I18n.t 'remining for today' %>: <span class="
+							 		<% if @remainingBudgetDay < @budgetToday %>
+							 		belowBudget
+							 		<% else %>
+							 		overBudget
+							 		<% end %>
+							 		"><%= number_to_currency @remainingBudgetDay %></span>
+							 		<%= I18n.t 'from' %> <%= number_to_currency @budgetToday %>
+							 		<span title="<%= @daysInBudget %> <%= I18n.t 'days' %> x <%= number_to_currency @budgetToday %> = <%= number_to_currency session[:budget][:amount] %>">
+							 	<i class="icon-question-sign"></i></span>
+					<% end %>
+					<div id="moneyLeft">
+						<% if @remainingBudget and session[:budget][:id] != 0 %>
+						 		<%= I18n.t 'remaining in budget' %> <b>"<%= session[:budget][:description] %>"</b>: <span class="
+						 		<% if @remainingBudgetPercentage < 10 %>
+						 		belowBudget
+						 		<% else %>
+						 		overBudget
+						 		<% end %>
+						 		"><%= number_to_currency @remainingBudget %>
+						 	</span>
+					 	<% end %>
+					</div>
 				</div>
 			<% end %>
 		    <div class="span10">

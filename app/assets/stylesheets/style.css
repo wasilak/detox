@@ -24,6 +24,17 @@ td.amount, th.amount
 
 #moneyLeft
 {
-    text-align: right;
+    /*text-align: right;*/
     margin-bottom: 20px;
+    float:right;
+}
+
+.belowBudget
+{
+    color: #F71818;
+}
+
+.overBudget
+{
+    color: #62ADC5;
 }

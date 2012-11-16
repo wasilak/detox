@@ -15,6 +15,8 @@ class ExpensesController < ApplicationController
 
     @budgets = Budget.getAllUserBudgets(session[:user][:id])
 
+    @budgetsSum = 0
+
     @used_tags = {}
     @expenses.each do |expense|
       expense.expenses_tags_association.each do |tag|
@@ -23,6 +25,7 @@ class ExpensesController < ApplicationController
             @used_tags[tag.tag.name] = 0
           end
           @used_tags[tag.tag.name] += expense.amount
+          @budgetsSum += expense.amount
         end
       end
     end

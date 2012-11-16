@@ -60,4 +60,8 @@ pl:
     new user: 'nowy użytkownik'
     password: 'hasło'
     log in: "zaloguj się"
-    log in name or password incorrect!: 'nieprawdiłowa nazwa użytkownika lub hasło'
+    log in name or password incorrect: 'nieprawdiłowa nazwa użytkownika lub hasło'
+    remining for today: 'na dzisiaj pozostało'
+    days: 'dni'
+    from: 'z'
+    Log in successfull: 'logowanie pomyślne'

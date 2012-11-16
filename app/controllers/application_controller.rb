@@ -51,7 +51,13 @@ class ApplicationController < ActionController::Base
 
         budgetAmount = Budget.find(session[:budget][:id])
         @remainingBudget = budgetAmount[:amount] - expensesSum
+
         @remainingBudgetPercentage = (100*@remainingBudget)/budgetAmount[:amount]
+
+        @expensesToday = Expense.getByDate Date.today, session[:budget][:dateStart], session[:budget][:dateEnd]
+        @daysInBudget = (session[:budget][:dateEnd] - session[:budget][:dateStart]).to_i
+        @budgetToday = session[:budget][:amount] / @daysInBudget
+        @remainingBudgetDay = @budgetToday - @expensesToday
       else
         @remainingBudget = 0
       end

@@ -68,7 +68,7 @@ if @budgets.count > 0 %>
     <% options = options_for_select(
       [["all expenses","all"]] +
         @budgets.collect {
-          |budget| ["#{budget.description} (#{budget.dateStart} - #{budget.dateEnd})", budget.id]
+          |budget| ["#{budget.description} (#{budget.dateStart} - #{budget.dateEnd}) - #{number_to_currency budget.amount}", budget.id]
         },
         defaultBudget
         ) %>
@@ -97,7 +97,17 @@ if @budgets.count > 0 %>
           <th></th>
         </tr>
       </thead>
-
+    <% if @budgetsSum > 0 %>
+      <tr class="info">
+        <td></td>
+        <td></td>
+        <td><%= I18n.t 'sum' %></td>
+        <td class="amount"><%= number_to_currency @budgetsSum %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    <% end %>
     <%
     sum = 0;
     id = 0;
@@ -130,17 +140,6 @@ if @budgets.count > 0 %>
           <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_expense_path(expense), :title => (I18n.t 'edit') %>
           <%= link_to '<i class="icon-trash"></i>'.html_safe, expense, method: :delete, data: { confirm: (I18n.t 'Are you sure?') }, :title => (I18n.t 'delete') %>
         </td>
-      </tr>
-    <% end %>
-    <% if sum > 0 %>
-      <tr class="info">
-        <td></td>
-        <td></td>
-        <td><%= I18n.t 'sum' %></td>
-        <td class="amount"><%= number_to_currency sum %></td>
-        <td></td>
-        <td></td>
-        <td></td>
       </tr>
     <% end %>
     </table>

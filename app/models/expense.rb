@@ -56,4 +56,12 @@ class Expense < ActiveRecord::Base
       self.where(:userId).sum(:amount)
     end
 
+    def self.getByDate date, budgetStart, budgetEnd
+      self.joins(:expenses_tags_association => :tag)
+        .where({:date => date})
+        .where("date >= ? and date <= ?", budgetStart, budgetEnd)
+        .where({:tags => {:budget => 1}})
+        .sum(:amount)
+    end
+
 end

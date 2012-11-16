@@ -3,5 +3,5 @@ Airbrake.configure do |config|
   config.host    = 'bugs.wasil.org'
   config.port    = 80
   config.secure  = config.port == 443
-  config.development_environments = []
+  # config.development_environments = []
 end
