@@ -5,6 +5,14 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <script type="text/javascript">
+  	jQuery(document).ready(function(){
+  		jQuery('table i').tooltip();
+  		jQuery('table a').tooltip();
+  		jQuery('p a').tooltip();
+  		jQuery('.ttip').tooltip({'placement': 'bottom'});
+  	});
+  </script>
 </head>
 <body>
 	<%= airbrake_javascript_notifier %>
@@ -33,7 +41,7 @@
 					<% if @remainingBudget and session[:budget][:id] != 0 %>
 						<%= I18n.t 'remaining daily budget' %>:
 							 		<%= number_to_currency @budgetLeftPerDay %>
-							 		<span title="<%= @daysLeftInBudget %> <%= I18n.t 'days' %> x <%= number_to_currency @budgetLeftPerDay %> = <%= number_to_currency @remainingBudget %>">
+							 		<span class="ttip" title="<%= @daysLeftInBudget %> <%= I18n.t 'days' %> x <%= number_to_currency @budgetLeftPerDay %> = <%= number_to_currency @remainingBudget %>">
 							 	<i class="icon-question-sign"></i></span>
 					<% end %>
 					<div id="moneyLeft">
