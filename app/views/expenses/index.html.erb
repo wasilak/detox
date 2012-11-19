@@ -16,6 +16,7 @@
       var chart;
       jQuery(document).ready(function() {
           chart = new Highcharts.Chart({
+              credits: false,
               chart: {
                   renderTo: 'pieChart',
                   plotBackgroundColor: null,
@@ -23,7 +24,8 @@
                   plotShadow: true
               },
               title: {
-                  text: '<%= I18n.t 'all expenses categories' %>'
+                  text: '<%= I18n.t 'all expenses categories' %>',
+                  floating: true
               },
               tooltip: {
                 pointFormat: '<b>{point.y} zł ( {point.percentage}% )</b>',
@@ -52,14 +54,16 @@
               }]
           });
           chart2 = new Highcharts.Chart({
+              credits: false,
               chart: {
                   renderTo: 'pieChart2',
                   plotBackgroundColor: null,
                   plotBorderWidth: null,
-                  plotShadow: true
+                  plotShadow: true,
               },
               title: {
-                  text: '<%= I18n.t 'budget expenses categories' %>'
+                  text: '<%= I18n.t 'budget expenses categories' %>',
+                  floating: true
               },
               tooltip: {
                 // pointFormat: '{series.name}: <b>{point.percentage}%</b>',
