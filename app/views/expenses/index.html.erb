@@ -26,7 +26,7 @@
                   text: '<%= I18n.t 'all expenses categories' %>'
               },
               tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                pointFormat: '<b>{point.y} zł ( {point.percentage}% )</b>',
                 percentageDecimals: 1
               },
               plotOptions: {
@@ -42,7 +42,7 @@
               legend: {
                 layout: 'horizontal',
                 labelFormatter: function() {
-                  return '<b>'+ this.name +'</b>( '+ this.y.toFixed(2) +' zł )';
+                  return this.name;
                 }
               },
               series: [{
@@ -62,7 +62,8 @@
                   text: '<%= I18n.t 'budget expenses categories' %>'
               },
               tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                // pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                pointFormat: '<b>{point.y} zł ( {point.percentage}% )</b>',
                 percentageDecimals: 1
               },
               plotOptions: {
@@ -78,7 +79,8 @@
               legend: {
                 layout: 'horizontal',
                 labelFormatter: function() {
-                  return '<b>'+ this.name +'</b>( '+ this.y.toFixed(2) +' zł )';
+                  // return '<b>'+ this.name +'</b>( '+ this.y.toFixed(2) +' zł )';
+                  return this.name;
                 }
               },
               series: [{
