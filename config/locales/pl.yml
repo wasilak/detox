@@ -66,3 +66,5 @@ pl:
     from: 'z'
     Log in successfull: 'logowanie pomyślne'
     remaining daily budget: 'pozostały budżet dzienny'
+    all expenses categories: 'wszystkie kategorie wydatków'
+    budget expenses categories: 'kategorie wydatków w budżecie'

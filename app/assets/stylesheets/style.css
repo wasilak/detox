@@ -38,3 +38,10 @@ td.amount, th.amount
 {
     color: #62ADC5;
 }
+
+.chart
+{
+    height:300px;
+    width: 390px;
+    float: left;
+}

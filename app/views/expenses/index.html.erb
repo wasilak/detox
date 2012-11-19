@@ -23,7 +23,7 @@
                   plotShadow: true
               },
               title: {
-                  text: 'expenses categories'
+                  text: '<%= I18n.t 'all expenses categories' %>'
               },
               tooltip: {
                 pointFormat: '{series.name}: <b>{point.percentage}%</b>',
@@ -34,19 +34,57 @@
                       allowPointSelect: true,
                       cursor: 'pointer',
                       dataLabels: {
-                          enabled: true,
-                          color: '#000000',
-                          connectorColor: '#000000',
-                          formatter: function() {
-                              return '<b>'+ this.point.name +'</b>: '+ this.y.toFixed(2) +' zł';
-                          }
+                          enabled: false
+                      },
+                      showInLegend: true
                       }
-                  }
+              },
+              legend: {
+                layout: 'horizontal',
+                labelFormatter: function() {
+                  return '<b>'+ this.name +'</b>( '+ this.y.toFixed(2) +' zł )';
+                }
               },
               series: [{
                   type: 'pie',
                   name: 'share',
                   data: <%= @chart_data.to_json.html_safe %>
+              }]
+          });
+          chart2 = new Highcharts.Chart({
+              chart: {
+                  renderTo: 'pieChart2',
+                  plotBackgroundColor: null,
+                  plotBorderWidth: null,
+                  plotShadow: true
+              },
+              title: {
+                  text: '<%= I18n.t 'budget expenses categories' %>'
+              },
+              tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage}%</b>',
+                percentageDecimals: 1
+              },
+              plotOptions: {
+                  pie: {
+                      allowPointSelect: true,
+                      cursor: 'pointer',
+                      dataLabels: {
+                          enabled: false
+                      },
+                      showInLegend: true
+                  }
+              },
+              legend: {
+                layout: 'horizontal',
+                labelFormatter: function() {
+                  return '<b>'+ this.name +'</b>( '+ this.y.toFixed(2) +' zł )';
+                }
+              },
+              series: [{
+                  type: 'pie',
+                  name: 'share',
+                  data: <%= @chart_data2.to_json.html_safe %>
               }]
           });
       });
@@ -145,6 +183,7 @@ if @budgets.count > 0 %>
     </table>
   </div>
   <div class="tab-pane" id="charts">
-    <div id="pieChart"></div>
+    <div id="pieChart2" class="chart"></div>
+    <div id="pieChart" class="chart"></div>
   </div>
 </div>

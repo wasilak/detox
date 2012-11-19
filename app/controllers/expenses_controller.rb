@@ -30,10 +30,8 @@ class ExpensesController < ApplicationController
       end
     end
 
-    @chart_data = []
-    @used_tags.each do |tag, sum|
-      @chart_data.push([tag, sum])
-    end
+    @chart_data = expensesChart1 @used_tags
+    @chart_data2 = expensesChart2
 
     respond_to do |format|
       format.html # index.html.erb
@@ -192,6 +190,42 @@ class ExpensesController < ApplicationController
         format.html { redirect_to expenses_url, notice: 'budget successfully changed.' }
         format.json { render json: @expense, status: :created, location: @expense }
     end
+  end
+
+  private
+
+  def expensesChart1 used_tags
+    chart_data = []
+    used_tags.each do |tag, sum|
+      chart_data.push([tag, sum])
+    end
+    chart_data
+  end
+
+  def expensesChart2
+    expenses = Expense.getExpensesBudget(
+      session[:user][:id],
+      session[:budget][:dateStart],
+      session[:budget][:dateEnd]
+    )
+
+    used_tags = {}
+    expenses.each do |expense|
+      expense.expenses_tags_association.each do |tag|
+        if !tag.tag.nil?
+          if used_tags[tag.tag.name].nil?
+            used_tags[tag.tag.name] = 0
+          end
+          used_tags[tag.tag.name] += expense.amount
+        end
+      end
+    end
+
+    chart_data = []
+    used_tags.each do |tag, sum|
+      chart_data.push([tag, sum])
+    end
+    chart_data
   end
 
 end
