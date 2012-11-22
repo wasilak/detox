@@ -80,6 +80,10 @@ td.amount, th.amount
     margin-left: 4px;
 }
 
+#pager .btn:hover {
+    background-position: 0 -20px;
+}
+
 /*white*/.white
 {
     background-color: #FFFFFF;

@@ -10,7 +10,7 @@
     })
 
     jQuery('#pager').smartpaginator({ totalrecords: <%= @expenses.count %>,
-                                      recordsperpage: 20,
+                                      recordsperpage: 10,
                                       datacontainer: 'expensesTable',
                                       dataelement: 'tr',
                                       theme: 'white',
@@ -19,7 +19,8 @@
                                       first: '<%= I18n.t 'first' %>',
                                       last: '<%= I18n.t 'last' %>',
                                       go: '<%= I18n.t 'go' %>',
-                                      display: "single"
+                                      display: "single",
+                                      length: 2
                                     });
 
   })
@@ -144,7 +145,12 @@ if @budgets.count > 0 %>
 <div class="tab-content">
   <div class="tab-pane active" id="tabular">
     <% if @budgetsSum > 0 %>
-        <p><u><b><%= I18n.t 'sum' %>: <%= number_to_currency @budgetsSum %></b></u></p>
+    <table class="table">
+      <tr class="info">
+        <td><%= I18n.t 'sum' %>:</td>
+        <td><%= number_to_currency @budgetsSum %></td>
+      </tr>
+    </table>
     <% end %>
     <table id="expensesTable" class="table table-striped table-hover table-condensed">
       <thead>
