@@ -68,3 +68,8 @@ pl:
     remaining daily budget: 'pozostały budżet dzienny'
     all expenses categories: 'wszystkie kategorie wydatków'
     budget expenses categories: 'kategorie wydatków w budżecie'
+    go: 'idź'
+    next: 'nast'
+    prev: 'poprz'
+    last: 'ost'
+    first: 'pierw'

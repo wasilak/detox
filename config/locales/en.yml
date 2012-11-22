@@ -61,3 +61,8 @@ en:
     remaining daily budget: 'remaining daily budget'
     all expenses categories: 'all expenses categories'
     budget expenses categories: 'budget expenses categories'
+    go: 'go'
+    next: 'next'
+    prev: 'prev'
+    last: 'last'
+    first: 'first'

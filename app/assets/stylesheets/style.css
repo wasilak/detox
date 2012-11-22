@@ -45,3 +45,60 @@ td.amount, th.amount
     width: 390px;
     float: left;
 }
+
+#pager span
+{
+    background-color: inherit;
+    border: none;
+    padding: 0px;
+}
+
+#pager div.short {
+    width: auto;
+}
+
+#pager input.btn:hover {
+    /*background-position: 0px;*/
+}
+
+#pager input.btn
+{
+    background-image:none;
+}
+
+#pager a, .pager span {
+    padding: 0px;
+}
+
+#pager select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+    padding: 0px;
+}
+
+#pager span {
+    color: #0088CC;
+    float: left;
+    margin-left: 4px;
+}
+
+/*white*/.white
+{
+    background-color: #FFFFFF;
+}
+.white.normal
+{
+    background-color: #FFFFFF;
+    color: #0088CC;
+    border: solid 0px #000;
+}
+.white.active
+{
+    background-color: #FFFFFF;
+    color: #333;
+    border: solid 0px #000;
+}
+.pager.white .btn
+{
+    background-color: #FFFFFF;
+    color: #0088CC;
+    border: solid 0px #000;
+}
