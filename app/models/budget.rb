@@ -16,28 +16,22 @@ class Budget < ActiveRecord::Base
     end
 
     def self.getAllBudgets userId
-        self.where(:userid => userId)
+        self.where(:userId => userId)
     end
 
     def self.getAllUserBudgets userId
-        self.find(
-            :all,
-            :conditions => ['userId = ?', userId]
+      self.where(
+          :userId => userId
         )
+        .all
     end
 
     def self.getBudget date, userId
         date = "#{date.year}-#{date.month}-#{date.day}"
-        self.find(
-            :all,
-            :conditions => ['dateStart <= ? and dateEnd >= ? and userId = ?', date, date, userId]
-            ).first
+        self.where('dateStart <= ? and dateEnd >= ? and userId = ?', date, date, userId).first
     end
 
     def self.getBudgetById budgetId
-        self.find(
-            :all,
-            :conditions => ['id = ?', budgetId]
-        )
+      self.where(:id => budgetId).all
     end
 end
