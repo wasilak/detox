@@ -103,7 +103,7 @@ class TagsController < ApplicationController
   def destroy
     @tag = Tag.find(params[:id])
 
-    if @tag.countExpenses == 0
+    if @tag.count_expenses == 0
       @tag.destroy
     end
 

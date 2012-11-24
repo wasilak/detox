@@ -6,7 +6,7 @@ class Tag < ActiveRecord::Base
 	validates :name, :presence => true, :uniqueness => { :scope => :user_id, :message => "you already have this tag" }
 	validates :user_id, :presence => true
 
-  	def countExpenses
-  		expenses_tags_association.find(:all).count
+  	def count_expenses
+  		expenses_tags_association.all
   	end
 end
