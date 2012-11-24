@@ -10,62 +10,56 @@ class Expense < ActiveRecord::Base
   	attr_accessible :amount, :date, :description, :userId
 
   	def getTags
-  		expenses_tags_association.find(:all)
+  		expenses_tags_association.all
   	end
 
-    def self.getExpenses userId, dateStart, dateEnd
-        self.find(
-          :all,
-          :conditions =>  ['userId = ? and date >= ? and date <= ?',
-            "#{userId}",
-            "#{dateStart}",
-            "#{dateEnd}"],
-          :order  =>  ['date desc'],
-          :include => { :expenses_tags_association => :tag }
-        )
+    def self.getExpenses user_id, date_start, date_end
+      self.order("date desc")
+        .where('date >= ? and date <= ?', date_start, date_end)
+        .where(:userId => user_id)
+        .includes(:expenses_tags_association => :tag)
+        .all
     end
 
-    def self.getExpensesBudget userId, dateStart, dateEnd
-        self.find(
-          :all,
-          :conditions =>  ['userId = ? and date >= ? and date <= ? and budget = 1',
-            "#{userId}",
-            "#{dateStart}",
-            "#{dateEnd}"],
-          :order  =>  ['date desc'],
-          :joins => { :expenses_tags_association => :tag }
-        )
+    def self.getExpensesBudget user_id, date_start, date_end
+      self.order("date desc")
+      .where('date >= ? and date <= ?', date_start, date_end)
+      .where({
+                 :userId => user_id,
+                 :tags => {:budget => 1}
+             })
+      .includes(:expenses_tags_association => :tag)
+      .all
     end
 
-    def self.getExpensesBudgetSum userId, dateStart, dateEnd
-      self.where('userId = ? and date >= ? and date <= ? and budget = 1', userId, dateStart, dateEnd)
+    def self.getExpensesBudgetSum user_id, date_start, date_end
+      self.where('user_id = ? and date >= ? and date <= ? and budget = 1', user_id, date_start, date_end)
         .joins(:expenses_tags_association => :tag ).sum(:amount)
     end
 
-    def self.getAll userId
-      # output = []
+    def self.getAll user_id
       output = {}
 
-      output[:dateStart] = self.where(:userId => userId).minimum(:date)
-      output[:dateEnd] = self.where(:userId => userId).maximum(:date)
+      output[:dateStart] = self.where(:userId => user_id).minimum(:date)
+      output[:dateEnd] = self.where(:userId => user_id).maximum(:date)
 
       output[:description] = 'all expenses'
       output[:id] = 0
 
-      output[:userId] = userId
+      output[:userId] = user_id
 
-      return output
+      output
     end
 
-    def self.getAllSum userId
+    def self.getAllSum
       self.where(:userId).sum(:amount)
     end
 
-    def self.getByDate userId, date, budgetStart, budgetEnd
+    def self.getByDate user_id, date, budget_start, budget_end
       self.joins(:expenses_tags_association => :tag)
-        .where({:userId => userId})
+        .where({:userId => user_id})
         .where({:date => date})
-        .where("date >= ? and date <= ?", budgetStart, budgetEnd)
+        .where("date >= ? and date <= ?", budget_start, budget_end)
         .where({:tags => {:budget => 1}})
         .sum(:amount)
     end
