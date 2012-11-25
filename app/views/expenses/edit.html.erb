@@ -22,7 +22,7 @@ jQuery(document).ready(function(){
 				</thead>
 				<% @expenseTags.each do |tag| %>
 				<tr>
-					<%= form_tag delTag_url(@expense), :method => 'POST', :class => 'form-inline' do %>
+					<%= form_tag del_tag_url(@expense), :method => 'POST', :class => 'form-inline' do %>
 					<%= hidden_field :tag, 'id', :value => tag.id %>
 					<td>
 						<% if !tag.tag.nil? %>
@@ -36,7 +36,7 @@ jQuery(document).ready(function(){
 				</tr>
 				<% end %>
 				<tr>
-					<%= form_tag addTag_url(@expense), :method => 'POST', :class => 'form-inline' do %>
+					<%= form_tag add_tag_url(@expense), :method => 'POST', :class => 'form-inline' do %>
 					<td>
 						<% options = options_for_select(
 							[["select...",""]] +

@@ -17,10 +17,10 @@ Detox::Application.routes.draw do
   match 'home/checkLogin' => 'home#checkLogin', :as => :checkLogin
   match 'home/logout' => 'home#logout', :as => :logout
 
-  match 'expenses/:id/addTag' => 'expenses#addTag', :as => :addTag
-  match 'expenses/:id/delTag' => 'expenses#delTag', :as => :delTag
+  match 'expenses/:id/add_tag' => 'expenses#add_tag', :as => :add_tag
+  match 'expenses/:id/del_tag' => 'expenses#del_tag', :as => :del_tag
 
-  match 'expenses/setBudget' => 'expenses#setBudget', :as => :setBudget
+  match 'expenses/set_budget' => 'expenses#set_budget', :as => :set_budget
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

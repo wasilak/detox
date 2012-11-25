@@ -117,7 +117,7 @@ else
   defaultBudget = ''
 end
 if @budgets.count > 0 %>
-  <%= form_tag setBudget_path, :method => 'POST', :class => 'form-inline', :id => 'formBudget' do %>
+  <%= form_tag set_budget_path, :method => 'POST', :class => 'form-inline', :id => 'formBudget' do %>
     <% options = options_for_select(
       [["all expenses","all"]] +
         @budgets.collect {
@@ -186,11 +186,11 @@ if @budgets.count > 0 %>
       </tr>
     <% end %>
     </table>
-    <% if @budgetsSum > 0 %>
+    <% if @budgets_sum > 0 %>
     <table class="table">
       <tr class="info">
         <td><%= I18n.t 'sum' %>:</td>
-        <td><%= number_to_currency @budgetsSum %></td>
+        <td><%= number_to_currency @budgets_sum %></td>
       </tr>
     </table>
     <% end %>

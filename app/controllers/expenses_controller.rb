@@ -15,13 +15,13 @@ class ExpensesController < ApplicationController
 
     @budgets = Budget.get_all_user_budgets(session[:user][:id])
 
-    @budgetsSum = 0
+    @budgets_sum = 0
 
     @used_tags = {}
     @expenses.each do |expense|
-      @budgetsSum += expense.amount
+      @budgets_sum += expense.amount
       expense.expenses_tags_association.each do |tag|
-        if !tag.tag.nil?
+        unless tag.tag.nil?
           if @used_tags[tag.tag.name].nil?
             @used_tags[tag.tag.name] = 0
           end
@@ -30,8 +30,8 @@ class ExpensesController < ApplicationController
       end
     end
 
-    @chart_data = expensesChart1 @used_tags
-    @chart_data2 = expensesChart2
+    @chart_data = expenses_chart1 @used_tags
+    @chart_data2 = expenses_chart2
 
     respond_to do |format|
       format.html # index.html.erb
@@ -61,12 +61,6 @@ class ExpensesController < ApplicationController
 
     add_breadcrumb 'new', ''
 
-    @tags = Tag.find(
-        :all,
-        :conditions => ['user_id = ?', session[:user][:id]],
-        :include => [:expenses_tags_association, :user]
-        )
-
     # domyslnie dzisiejsza data
     time = Time.new
     @expense.date = "#{time.year}-#{time.month}-#{time.day}"
@@ -85,11 +79,8 @@ class ExpensesController < ApplicationController
     add_breadcrumb 'edit', ''
 
     @expenseTags = @expense.get_tags
-    @tags = Tag.find(
-        :all,
-        :conditions => ['user_id = ?', session[:user][:id]],
-        :include => [:expenses_tags_association, :user]
-        )
+
+    @tags = Tag.where(:user_id => session[:user][:id]).includes(:user).all
   end
 
   # POST /expenses
@@ -119,11 +110,7 @@ class ExpensesController < ApplicationController
 
     @expenseTags = @expense.get_tags
 
-    @tags = Tag.find(
-        :all,
-        :conditions => ['user_id = ?', session[:user][:id]],
-        :include => [:expenses_tags_association, :user]
-        )
+    @tags = Tag.where(:user_id => session[:user][:id]).includes(:user).all
 
     respond_to do |format|
       if @expense.update_attributes(params[:expense])
@@ -148,7 +135,7 @@ class ExpensesController < ApplicationController
     end
   end
 
-  def addTag
+  def add_tag
     @expense = Expense.find(params[:id])
 
     @association = {
@@ -156,10 +143,10 @@ class ExpensesController < ApplicationController
       :tag_id =>  params[:tag],
     }
 
-    @expenseTagAssociation = ExpensesTagsAssociation.new(@association)
+    @expense_tag_association = ExpensesTagsAssociation.new(@association)
 
     respond_to do |format|
-      if @expenseTagAssociation.save
+      if @expense_tag_association.save
         format.html { redirect_to edit_expense_path(@expense), notice: 'Tag was successfully added.' }
       else
         format.html { redirect_to edit_expense_path(@expense), notice: 'There was an error while adding tag.' }
@@ -167,23 +154,23 @@ class ExpensesController < ApplicationController
     end
   end
 
-  def delTag
+  def del_tag
     # @expense = Expense.find(params[:id])
 
-    @expenseTagAssociation = ExpensesTagsAssociation.find(params[:tag][:id])
+    @expense_tag_association = ExpensesTagsAssociation.find(params[:tag][:id])
 
     respond_to do |format|
-      if @expenseTagAssociation.destroy
-        format.html { redirect_to edit_expense_path(@expenseTagAssociation[:expense_id]),
+      if @expense_tag_association.destroy
+        format.html { redirect_to edit_expense_path(@expense_tag_association[:expense_id]),
           notice: 'Tag was successfully deleted.' }
       else
-        format.html { redirect_to edit_expense_path(@expenseTagAssociation[:expense_id]),
+        format.html { redirect_to edit_expense_path(@expense_tag_association[:expense_id]),
           notice: 'There was an error while adding tag.' }
       end
     end
   end
 
-  def setBudget
+  def set_budget
     setSessionBudget
 
     respond_to do |format|
@@ -194,7 +181,7 @@ class ExpensesController < ApplicationController
 
   private
 
-  def expensesChart1 used_tags
+  def expenses_chart1 (used_tags)
     chart_data = []
     used_tags.each do |tag, sum|
       chart_data.push([tag, sum])
@@ -202,7 +189,7 @@ class ExpensesController < ApplicationController
     chart_data
   end
 
-  def expensesChart2
+  def expenses_chart2
     expenses = Expense.get_expenses_budget(
       session[:user][:id],
       session[:budget][:dateStart],
@@ -211,14 +198,13 @@ class ExpensesController < ApplicationController
 
     used_tags = {}
     expenses.each do |expense|
-      expense.expenses_tags_association.each do |tag|
-        if !tag.tag.nil?
+      expense.expenses_tags_association.each { |tag|
+        unless tag.tag.nil?
           if used_tags[tag.tag.name].nil?
             used_tags[tag.tag.name] = 0
           end
           used_tags[tag.tag.name] += expense.amount
-        end
-      end
+        end }
     end
 
     chart_data = []
