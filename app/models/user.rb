@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   	attr_accessible :name, :password, :type_id, :username
 
-  	def self.checkLogin(username, password)
+  	def self.check_login(username, password)
       passwordHashed = Digest::MD5.hexdigest(password)
 
   		user = User.find(

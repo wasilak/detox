@@ -18,7 +18,7 @@ class ActiveSupport::TestCase
 
     	old_controller = @controller
     	@controller = HomeController.new
-    	post :checkLogin, {:username => 'admin', :password =>'admin'}
+    	post :check_login, {:username => 'admin', :password =>'admin'}
     	@controller = old_controller
     end
   end

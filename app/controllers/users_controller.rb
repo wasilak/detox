@@ -2,16 +2,13 @@ class UsersController < ApplicationController
 
   add_breadcrumb "users", :users_url
 
-  before_filter :checkAdmin
+  before_filter :check_admin
 
   # GET /users
   # GET /users.json
   def index
 
-    @users = User.find(
-      :all,
-      :include => :type
-      )
+    @users = User.includes(:type).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -75,9 +72,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    if !params[:user][:password].nil?
-      params[:user][:password] = Digest::MD5.hexdigest(params[:user][:password])
-    end
+    params[:user][:password] = Digest::MD5.hexdigest(params[:user][:password]) if !params[:user][:password].nil?
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
@@ -104,7 +99,7 @@ class UsersController < ApplicationController
 
   private
 
-  def checkAdmin
+  def check_admin
     if session[:user][:type_id] == 2
       return true
     else

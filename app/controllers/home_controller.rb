@@ -1,22 +1,22 @@
 class HomeController < ApplicationController
 
-  skip_before_filter :login_required, :only => [:login, :checkLogin]
-  skip_before_filter :check_budget, :only => [:login, :checkLogin, :logout]
+  skip_before_filter :login_required, :only => [:login, :check_login]
+  skip_before_filter :check_budget, :only => [:login, :check_login, :logout]
 
   def index
-    @presentBudget = session[:budget]
+    @present_budget = session[:budget]
   end
 
   def login
   end
 
-  def checkLogin
+  def check_login
   	username = params[:username]
   	password = params[:password]
 
-    check = User.checkLogin(username, password)
+    check = User.check_login(username, password)
 
-  	if (false != check)
+  	if check
   		session[:userId] = check.id
       flash[:success]=(I18n.t 'Log in successfull')+' :)'
       session[:user] = check

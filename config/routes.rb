@@ -14,7 +14,7 @@ Detox::Application.routes.draw do
   get "home/index"
 
   match 'home/login' => 'home#login', :as => :login
-  match 'home/checkLogin' => 'home#checkLogin', :as => :checkLogin
+  match 'home/check_login' => 'home#check_login', :as => :check_login
   match 'home/logout' => 'home#logout', :as => :logout
 
   match 'expenses/:id/add_tag' => 'expenses#add_tag', :as => :add_tag

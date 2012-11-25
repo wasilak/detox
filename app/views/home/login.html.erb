@@ -1,6 +1,6 @@
 <% title "Log in" %>
 
-<%= form_tag checkLogin_url, :class => 'form-horizontal' do %>
+<%= form_tag check_login_url, :class => 'form-horizontal' do %>
   <div class="control-group">
     <%= label_tag :username, (I18n.t 'username') %>
     <%= text_field_tag :username, params[:username], :placeholder => (I18n.t "username")%>
