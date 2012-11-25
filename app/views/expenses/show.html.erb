@@ -18,7 +18,7 @@
 <p>tags:</p>
 <div class="well well-small">
 	<% tags = []
-      @expense.getTags.each do |tag| %>
+      @expense.get_tags.each do |tag| %>
         <% if !tag.tag.nil? %>
           <% tags.push(link_to tag.tag.name, tag.tag, {:target => '_blank'}) %>
         <% end %>

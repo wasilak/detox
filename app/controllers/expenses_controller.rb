@@ -7,13 +7,13 @@ class ExpensesController < ApplicationController
   # GET /expenses
   # GET /expenses.json
   def index
-    @expenses = Expense.getExpenses(
+    @expenses = Expense.get_expenses(
       session[:user][:id],
       session[:budget][:dateStart],
       session[:budget][:dateEnd]
     )
 
-    @budgets = Budget.getAllUserBudgets(session[:user][:id])
+    @budgets = Budget.get_all_user_budgets(session[:user][:id])
 
     @budgetsSum = 0
 
@@ -46,7 +46,7 @@ class ExpensesController < ApplicationController
 
     add_breadcrumb @expense.description, :expense_url
 
-    @tags = @expense.getTags
+    @tags = @expense.get_tags
 
     respond_to do |format|
       format.html # show.html.erb
@@ -84,7 +84,7 @@ class ExpensesController < ApplicationController
     add_breadcrumb @expense.description, :expense_url
     add_breadcrumb 'edit', ''
 
-    @expenseTags = @expense.getTags
+    @expenseTags = @expense.get_tags
     @tags = Tag.find(
         :all,
         :conditions => ['user_id = ?', session[:user][:id]],
@@ -117,7 +117,7 @@ class ExpensesController < ApplicationController
 
     @expense = Expense.find(params[:id])
 
-    @expenseTags = @expense.getTags
+    @expenseTags = @expense.get_tags
 
     @tags = Tag.find(
         :all,
@@ -203,7 +203,7 @@ class ExpensesController < ApplicationController
   end
 
   def expensesChart2
-    expenses = Expense.getExpensesBudget(
+    expenses = Expense.get_expenses_budget(
       session[:user][:id],
       session[:budget][:dateStart],
       session[:budget][:dateEnd]

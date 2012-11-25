@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   def remainingBudget
     if session[:user] and session[:budget]
       if session[:budget][:id] != 0
-        expenses = Expense.getExpensesBudget(
+        expenses = Expense.get_expenses_budget(
           session[:user][:id],
           session[:budget][:dateStart],
           session[:budget][:dateEnd]
@@ -65,9 +65,9 @@ class ApplicationController < ActionController::Base
   def setSessionBudget all = 0
 
     if params[:budget] == 'all' or all == 1
-     session[:budget] = Expense.getAll(session[:user][:id])
+     session[:budget] = Expense.get_all(session[:user][:id])
     else
-      session[:budget] = Budget.getBudgetById(params[:budget]).first
+      session[:budget] = Budget.get_budget_by_id(params[:budget])
     end
   end
 

@@ -2,7 +2,7 @@ require 'test_helper'
 
 class BudgetTest < ActiveSupport::TestCase
     test "get all budgets" do
-        budgets = Budget.getAllBudgets
+        budgets = Budget.get_all_budgets
         assert_kind_of Array, budgets, "No budgets queried."
     end
 
@@ -14,7 +14,7 @@ class BudgetTest < ActiveSupport::TestCase
 
     test "should return budget bassed on present date" do
         time = Time.new
-        budgets = Budget.getBudget(time,1)
+        budgets = Budget.get_budget(time,1)
 
         if budgets.count > 0
             assert_kind_of Array, budgets
