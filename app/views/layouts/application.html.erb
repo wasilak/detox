@@ -20,12 +20,12 @@
 		<div class="row">
 		    <div class="span2">
 					<h4>Detox</h4>
-				<% if @loggedIn %>
+				<% if @logged_in %>
 					<!-- <p>Welcome, <%= session[:user][:name] %></p> -->
 				<% end %>
 				<ul class="unstyled">
 				<li> <i class="icon-home"></i> <%= link_to (I18n.t 'home'), '/' %></li>
-				<% if @loggedIn %>
+				<% if @logged_in %>
 					<li> <i class="icon-shopping-cart"></i> <%= link_to (I18n.t 'expenses'), expenses_path %></li>
 					<li> <i class="icon-list-alt"></i> <%= link_to (I18n.t 'budgets'), budgets_path %></li>
 					<li> <i class="icon-tags"></i> <%= link_to (I18n.t 'tags'), tags_path %></li>
@@ -36,23 +36,23 @@
 				<% end %>
 				</ul>
 		    </div>
-		    <% if @loggedIn %>
+		    <% if @logged_in %>
 				<div class="span10">
-					<% if @remainingBudget and session[:budget][:id] != 0 %>
+					<% if @remaining_budget and session[:budget][:id] != 0 %>
 						<%= I18n.t 'remaining daily budget' %>:
-							 		<%= number_to_currency @budgetLeftPerDay %>
-							 		<span class="ttip" title="<%= @daysLeftInBudget %> <%= I18n.t 'days' %> x <%= number_to_currency @budgetLeftPerDay %> = <%= number_to_currency @remainingBudget %>">
+							 		<%= number_to_currency @budget_left_per_day %>
+							 		<span class="ttip" title="<%= @days_left_in_budget %> <%= I18n.t 'days' %> x <%= number_to_currency @budget_left_per_day %> = <%= number_to_currency @remaining_budget %>">
 							 	<i class="icon-question-sign"></i></span>
 					<% end %>
 					<div id="moneyLeft">
-						<% if @remainingBudget and session[:budget][:id] != 0 %>
+						<% if @remaining_budget and session[:budget][:id] != 0 %>
 						 		<%= I18n.t 'remaining in budget' %> <b>"<%= session[:budget][:description] %>"</b>: <span class="
-						 		<% if @remainingBudgetPercentage < 10 %>
+						 		<% if @remaining_budget_percentage < 10 %>
 						 		belowBudget
 						 		<% else %>
 						 		overBudget
 						 		<% end %>
-						 		"><%= number_to_currency @remainingBudget %>
+						 		"><%= number_to_currency @remaining_budget %>
 						 	</span>
 					 	<% end %>
 					</div>

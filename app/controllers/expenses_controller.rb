@@ -171,7 +171,7 @@ class ExpensesController < ApplicationController
   end
 
   def set_budget
-    setSessionBudget
+    set_session_budget
 
     respond_to do |format|
         format.html { redirect_to expenses_url, notice: 'budget successfully changed.' }

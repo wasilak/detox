@@ -6,7 +6,7 @@ class TagsController < ApplicationController
   # GET /tags.json
   def index
     if session[:user][:type_id] == 2
-      @tags = Tag.all
+      @tags = Tag.includes(:user).all
     else
       @tags = Tag.where({:user_id => session[:user][:id]}).all
     end

@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   skip_before_filter :login_required, :only => [:login, :checkLogin]
-  skip_before_filter :checkBudget, :only => [:login, :checkLogin, :logout]
+  skip_before_filter :check_budget, :only => [:login, :checkLogin, :logout]
 
   def index
     @presentBudget = session[:budget]

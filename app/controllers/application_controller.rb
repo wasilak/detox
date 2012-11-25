@@ -4,23 +4,22 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :login_required
-  before_filter :checkBudget
-  before_filter :remainingBudget
+  before_filter :check_budget
+  before_filter :remaining_budget
 
   private
 
   def login_required
     if session[:userId]
-      @loggedIn = true
+      @logged_in = true
       return true
     end
     flash[:warning]='Please login to continue'
-    # session[:return_to]=request.request_uri
+    # TODO session[:return_to]=request.request_uri
     redirect_to :controller => "home", :action => "login"
-    return false
   end
 
-  def correct_value number
+  def correct_value (number)
     # zamiana przecinkow na kropki :)
     if number =~ /,/
       number = number.gsub(/,/, ".")
@@ -29,13 +28,13 @@ class ApplicationController < ActionController::Base
     number
   end
 
-  def checkBudget
+  def check_budget
     unless session[:budget]
-      setSessionBudget 1
+      set_session_budget 1
     end
   end
 
-  def remainingBudget
+  def remaining_budget
     if session[:user] and session[:budget]
       if session[:budget][:id] != 0
         expenses = Expense.get_expenses_budget(
@@ -44,25 +43,25 @@ class ApplicationController < ActionController::Base
           session[:budget][:dateEnd]
           )
 
-        expensesSum = 0
+        expenses_sum = 0
         expenses.each do |expense|
-          expensesSum += expense[:amount]
+          expenses_sum += expense[:amount]
         end
 
-        budgetAmount = Budget.find(session[:budget][:id])
-        @remainingBudget = budgetAmount[:amount] - expensesSum
+        budget_amount = Budget.find(session[:budget][:id])
+        @remaining_budget = budget_amount[:amount] - expenses_sum
 
-        @remainingBudgetPercentage = (100*@remainingBudget)/budgetAmount[:amount]
+        @remaining_budget_percentage = (100*@remaining_budget)/budget_amount[:amount]
 
-        @daysLeftInBudget = (session[:budget][:dateEnd] - Date.today).to_i
-        @budgetLeftPerDay = @remainingBudget / @daysLeftInBudget
+        @days_left_in_budget = (session[:budget][:dateEnd] - Date.today).to_i
+        @budget_left_per_day = @remaining_budget / @days_left_in_budget
       else
-        @remainingBudget = 0
+        @remaining_budget = 0
       end
     end
   end
 
-  def setSessionBudget all = 0
+  def set_session_budget (all = 0)
 
     if params[:budget] == 'all' or all == 1
      session[:budget] = Expense.get_all(session[:user][:id])
