@@ -6,21 +6,13 @@ class TagsController < ApplicationController
   # GET /tags.json
   def index
     if session[:user][:type_id] == 2
-      @tags = Tag.find(
-        :all,
-        :include => [:expenses_tags_association, :user]
-        )
+      @tags = Tag.all
     else
-      @tags = Tag.find(
-        :all,
-        :conditions => ['user_id = ?', session[:user][:id]],
-        :include => [:expenses_tags_association, :user]
-        )
+      @tags = Tag.where({:user_id => session[:user][:id]}).all
     end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @tags }
     end
   end
 
