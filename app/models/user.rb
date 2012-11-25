@@ -11,23 +11,25 @@ class User < ActiveRecord::Base
   	attr_accessible :name, :password, :type_id, :username
 
   	def self.check_login(username, password)
-      passwordHashed = Digest::MD5.hexdigest(password)
+      password_hashed = Digest::MD5.hexdigest(password)
 
-  		user = User.find(
-  			:all,
-  			:conditions	=>	["username = ? and password = ?", "#{username}", "#{passwordHashed}"]
-  			)
+      user = User
+        .where(:username => username)
+        .where(:password => password_hashed)
+        .first
+  		#user = User.find(
+  		#	:all,
+  		#	:conditions	=>	["username = ? and password = ?", "#{username}", "#{password_hashed}"]
+  		#	)
 
-      # Rails.logger.debug("user to check: #{username} : #{password} (#{passwordHashed})")
+      # Rails.logger.debug("user to check: #{username} : #{password} (#{password_hashed})")
 
-      if user.count == 1
-        return user[0]
-      else
-        return false
+      unless user.nil?
+        return user
       end
   	end
 
-    def getTags
-      tag.find(:all)
+    def get_tags
+      tag.all
     end
 end
