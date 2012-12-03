@@ -76,6 +76,14 @@
 				<%= I18n.t 'you are here' %>: <em><%= render_breadcrumbs %></em>
 			</div>
 	    </div>
-	</div>
+      <% if session && session[:user][:type_id] == 2 %>
+        <div class="row">
+          <div class="span12">
+            Rails version: <%= Rails::VERSION::STRING %><br />
+            Ruby version: <%= RUBY_VERSION %>
+          </div>
+        </div>
+      <% end %>
+  </div>
 </body>
 </html>
