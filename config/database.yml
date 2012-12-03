@@ -33,10 +33,11 @@ test:
 
 production:
   adapter: mysql2
+  host: ${env.OPENSHIFT_DB_HOST}
   encoding: utf8
   reconnect: false
   database: detox_production
   pool: 5
-  username: root
-  password:
+  username: admin
+  password: RK2xwH4Nk6IQ
   # socket: /var/run/mysqld/mysqld.sock
