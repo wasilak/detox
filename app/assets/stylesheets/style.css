@@ -70,7 +70,10 @@ td.amount, th.amount
     padding: 0px;
 }
 
-#pager select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+#pager select, #pager textarea, #pager input[type="text"], #pager input[type="password"], #pager input[type="datetime"],
+#pager input[type="datetime-local"], #pager input[type="date"], #pager input[type="month"], #pager input[type="time"],
+#pager input[type="week"], #pager input[type="number"], #pager input[type="email"], #pager input[type="url"],
+#pager input[type="search"], #pager input[type="tel"], #pager input[type="color"], #pager .uneditable-input {
     padding: 0px;
 }
 
