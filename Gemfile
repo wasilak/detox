@@ -46,4 +46,4 @@ gem 'airbrake'
 
 gem 'rails-i18n'
 
-# gem 'devise'
+gem 'devise'

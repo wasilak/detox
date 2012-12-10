@@ -10,7 +10,7 @@
       <th></th>
       <th><%= I18n.t 'name' %></th>
       <th><%= I18n.t 'description' %></th>
-      <% if session[:user][:type_id] == 2 %>
+      <% if current_user[:type_id] == 2 %>
         <th><%= I18n.t 'username' %></th>
       <% end %>
       <th></th>
@@ -30,7 +30,7 @@ n = 0
     </td>
     <td><%= link_to tag.name, edit_tag_path(tag) %></td>
     <td><%= tag.description %></td>
-    <% if session[:user][:type_id] == 2 %>
+    <% if current_user[:type_id] == 2 %>
         <td><%= tag.user.username %></td>
       <% end %>
     <td>

@@ -5,10 +5,10 @@ class TagsController < ApplicationController
   # GET /tags
   # GET /tags.json
   def index
-    if session[:user][:type_id] == 2
+    if current_user[:type_id] == 2
       @tags = Tag.includes(:user).all
     else
-      @tags = Tag.where({:user_id => session[:user][:id]}).all
+      @tags = Tag.where({:user_id => current_user[:id]}).all
     end
 
     respond_to do |format|

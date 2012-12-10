@@ -3,21 +3,12 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-  before_filter :login_required
+  before_filter :authenticate_user!
   before_filter :check_budget
   before_filter :remaining_budget
+  before_filter :init_budget
 
   private
-
-  def login_required
-    if session[:userId]
-      @logged_in = true
-      return true
-    end
-    flash[:warning]='Please login to continue'
-    # TODO session[:return_to]=request.request_uri
-    redirect_to :controller => "home", :action => "login"
-  end
 
   def correct_value (number)
     # zamiana przecinkow na kropki :)
@@ -28,6 +19,12 @@ class ApplicationController < ActionController::Base
     number
   end
 
+  def init_budget
+    if user_signed_in? and session[:budget].nil?
+      session[:budget] = Budget.get_budget(Time.new,current_user[:id])
+    end
+  end
+
   def check_budget
     unless session[:budget]
       set_session_budget 1
@@ -35,10 +32,10 @@ class ApplicationController < ActionController::Base
   end
 
   def remaining_budget
-    if session[:user] and session[:budget]
+    if current_user and session[:budget]
       if session[:budget][:id] != 0
         expenses = Expense.get_expenses_budget(
-          session[:user][:id],
+          current_user[:id],
           session[:budget][:dateStart],
           session[:budget][:dateEnd]
           )
@@ -57,6 +54,7 @@ class ApplicationController < ActionController::Base
         @budget_left_per_day = @remaining_budget / @days_left_in_budget
       else
         @remaining_budget = 0
+        @remaining_budget_percentage = 0
       end
     end
   end
@@ -64,7 +62,7 @@ class ApplicationController < ActionController::Base
   def set_session_budget (all = 0)
 
     if params[:budget] == 'all' or all == 1
-     session[:budget] = Expense.get_all(session[:user][:id])
+     session[:budget] = Expense.get_all(current_user[:id])
     else
       session[:budget] = Budget.get_budget_by_id(params[:budget])
     end

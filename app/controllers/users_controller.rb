@@ -100,7 +100,7 @@ class UsersController < ApplicationController
   private
 
   def check_admin
-    if session[:user][:type_id] == 2
+    if current_user[:type_id] == 2
       return true
     else
       redirect_to :controller => 'home', :action => 'index'

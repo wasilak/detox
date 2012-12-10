@@ -3,7 +3,7 @@ class BudgetsController < ApplicationController
   skip_before_filter :login_required, :only => [:login, :checkLogin]
 
   def index
-    @budgets = Budget.get_all_budgets session[:user][:id]
+    @budgets = Budget.get_all_budgets current_user[:id]
   end
 
   def new
@@ -20,7 +20,7 @@ class BudgetsController < ApplicationController
 
     respond_to do |format|
       if @budget.save
-        session[:budget] = Budget.get_budget(Time.new,session[:user][:id])
+        session[:budget] = Budget.get_budget(Time.new,current_user[:id])
         format.html { redirect_to budgets_url, notice: 'budget was successfully created.' }
         format.json { render json: @budget, status: :created, location: @budget }
       else
@@ -41,7 +41,7 @@ class BudgetsController < ApplicationController
 
     respond_to do |format|
       if @budget.update_attributes(params[:budget])
-        session[:budget] = Budget.get_budget(Time.new,session[:user][:id])
+        session[:budget] = Budget.get_budget(Time.new,current_user[:id])
         format.html { redirect_to budgets_path, notice: 'budget was successfully updated.' }
         format.json { head :no_content }
       else

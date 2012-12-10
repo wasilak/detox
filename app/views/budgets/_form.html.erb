@@ -14,7 +14,7 @@
     </div>
   <% end %>
 
-  <%= f.hidden_field :userId, {:value => session[:user][:id]} %>
+  <%= f.hidden_field :userId, {:value => current_user[:id]} %>
   <div class="field">
     <%= f.label :description, (I18n.t 'budget') %>
     <%= f.text_field :description, :placeholder => (I18n.t "budget description"), :class => 'input-xxlarge' %>

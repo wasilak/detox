@@ -1,5 +1,7 @@
 Detox::Application.routes.draw do
 
+  devise_for :users
+
   # match '/tags' => 'tags#index', :via => :post
   # match '/expenses' => 'expenses#index', :via => :post
 

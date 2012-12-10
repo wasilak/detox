@@ -8,12 +8,12 @@ class ExpensesController < ApplicationController
   # GET /expenses.json
   def index
     @expenses = Expense.get_expenses(
-      session[:user][:id],
+      current_user[:id],
       session[:budget][:dateStart],
       session[:budget][:dateEnd]
     )
 
-    @budgets = Budget.get_all_user_budgets(session[:user][:id])
+    @budgets = Budget.get_all_user_budgets(current_user[:id])
 
     @budgets_sum = 0
 
@@ -80,7 +80,7 @@ class ExpensesController < ApplicationController
 
     @expenseTags = @expense.get_tags
 
-    @tags = Tag.where(:user_id => session[:user][:id]).includes(:user).all
+    @tags = Tag.where(:user_id => current_user[:id]).includes(:user).all
   end
 
   # POST /expenses
@@ -110,7 +110,7 @@ class ExpensesController < ApplicationController
 
     @expenseTags = @expense.get_tags
 
-    @tags = Tag.where(:user_id => session[:user][:id]).includes(:user).all
+    @tags = Tag.where(:user_id => current_user[:id]).includes(:user).all
 
     respond_to do |format|
       if @expense.update_attributes(params[:expense])
@@ -191,7 +191,7 @@ class ExpensesController < ApplicationController
 
   def expenses_chart2
     expenses = Expense.get_expenses_budget(
-      session[:user][:id],
+      current_user[:id],
       session[:budget][:dateStart],
       session[:budget][:dateEnd]
     )
