@@ -45,5 +45,3 @@ gem 'rack-bug', :require => 'rack/bug', :git => 'git://github.com/brynary/rack-b
 gem 'airbrake'
 
 gem 'rails-i18n'
-
-gem 'thin'
