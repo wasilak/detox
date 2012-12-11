@@ -109,3 +109,8 @@ td.amount, th.amount
     color: #0088CC;
     border: solid 0px #000;
 }
+
+#login_checkbox label
+{
+  display: inline;
+}

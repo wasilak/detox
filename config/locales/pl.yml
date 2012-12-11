@@ -73,3 +73,8 @@ pl:
     prev: 'poprz'
     last: 'ost'
     first: 'pierw'
+    Sign in: 'Zaloguj się'
+    remember me: 'zapamiętaj mnie'
+    e-mail: 'e-mail'
+    Forgot your password?: 'Zapomniałeś swojego hasła?'
+    Send me reset password instructions: 'Wyślij mi instrukcje resetowania hasła'

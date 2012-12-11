@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_filter :check_budget
   before_filter :remaining_budget
-  before_filter :init_budget
 
   private
 
@@ -19,15 +18,9 @@ class ApplicationController < ActionController::Base
     number
   end
 
-  def init_budget
+  def check_budget
     if user_signed_in? and session[:budget].nil?
       session[:budget] = Budget.get_budget(Time.new,current_user[:id])
-    end
-  end
-
-  def check_budget
-    unless session[:budget]
-      set_session_budget 1
     end
   end
 
@@ -60,7 +53,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_session_budget (all = 0)
-
     if params[:budget] == 'all' or all == 1
      session[:budget] = Expense.get_all(current_user[:id])
     else
