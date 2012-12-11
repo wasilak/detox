@@ -19,8 +19,12 @@ class ApplicationController < ActionController::Base
   end
 
   def check_budget
+    # TODO: fix this odd workaround to set correct budget on log in
     if user_signed_in? and session[:budget].nil?
       session[:budget] = Budget.get_budget(Time.new,current_user[:id])
+    end
+    if user_signed_in? and session[:budget].nil?
+      set_session_budget 1
     end
   end
 
