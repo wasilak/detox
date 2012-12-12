@@ -1,15 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# both users password: test12
+# if it won't work for any reasons: just change email and use "remind password" feature
 
 one:
   id: 1
   username: admin
-  password: 21232f297a57a5a743894a0e4a801fc3
   name: Administrator
+  email: change@me.com
+  encrypted_password: $2a$10$f1KNddqHT2HZ9UqQwOm81eAeYFjfpjjGMnFvc3xPT9cPqo6o3ypCS
   type_id: 2
 
 two:
   id: 2
-  username: aga
-  password: fea30f2213e57de1a3c985f0cad303b7
-  name: Aga
+  username: user
+  name: user
+  email: change@me_too.com
+  encrypted_password: $2a$10$f1KNddqHT2HZ9UqQwOm81eAeYFjfpjjGMnFvc3xPT9cPqo6o3ypCS
   type_id: 1
