@@ -16,7 +16,7 @@ development:
   pool: 5
   username: root
   password:
-  # socket: /var/run/mysqld/mysqld.sock
+  socket: /var/lib/mysql/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -31,14 +31,27 @@ test:
   password:
   # socket: /var/run/mysqld/mysqld.sock
 
+#Openshift
+#production:
+#  adapter: mysql2
+#  host: <%=ENV['OPENSHIFT_MYSQL_DB_HOST']%>
+#  encoding: utf8
+#  reconnect: false
+#  database: <%=ENV['OPENSHIFT_APP_NAME']%>
+#  port: <%=ENV['OPENSHIFT_MYSQL_DB_PORT']%>
+#  pool: 5
+#  username: <%=ENV['OPENSHIFT_MYSQL_DB_USERNAME']%>
+#  password: <%=ENV['OPENSHIFT_MYSQL_DB_PASSWORD']%>
+ # socket: <%=ENV['OPENSHIFT_MYSQL_DB_SOCKET']%>
+
 production:
   adapter: mysql2
-  host: <%=ENV['OPENSHIFT_MYSQL_DB_HOST']%>
+  host: localhost
   encoding: utf8
   reconnect: false
-  database: <%=ENV['OPENSHIFT_APP_NAME']%>
-  port: <%=ENV['OPENSHIFT_MYSQL_DB_PORT']%>
+  database: detox
+  port: 3306
   pool: 5
-  username: <%=ENV['OPENSHIFT_MYSQL_DB_USERNAME']%>
-  password: <%=ENV['OPENSHIFT_MYSQL_DB_PASSWORD']%>
-  socket: <%=ENV['OPENSHIFT_MYSQL_DB_SOCKET']%>
+  username: mysql_user
+  password: mysql_password
+  socket: /var/lib/mysql/mysql.sock
