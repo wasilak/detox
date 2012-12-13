@@ -23,3 +23,6 @@ config/database.yml
 config/errbit.yml
 
 .idea
+
+# ignoring assets
+public/assets
