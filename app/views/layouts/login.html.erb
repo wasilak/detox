@@ -10,7 +10,7 @@
     <%= airbrake_javascript_notifier %>
     <div class="container">
         <div class="row">
-            <div class="span7 offset2">
+            <div class="span8 offset2">
                 <% flash.each do |severity, message| %>
                     <div class="alert">
                         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -20,8 +20,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="span3 offset4">
-                <%= yield %>
+            <div class="span4 offset4">
+                <div class="well">
+                    <%= yield %>
+                </div>
             </div>
         </div>
   </div>
