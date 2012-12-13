@@ -19,29 +19,26 @@
 	<div class="container">
 		<div class="row">
 		    <div class="span2">
-					<h4>Detox</h4>
-				<% if user_signed_in? %>
-				<% end %>
-				<ul class="unstyled">
-				<li> <i class="icon-home"></i> <%= link_to (I18n.t 'home'), '/' %></li>
-				<% if user_signed_in? %>
-					<li> <i class="icon-shopping-cart"></i> <%= link_to (I18n.t 'expenses'), expenses_path %></li>
-					<li> <i class="icon-list-alt"></i> <%= link_to (I18n.t 'budgets'), budgets_path %></li>
-					<li> <i class="icon-tags"></i> <%= link_to (I18n.t 'tags'), tags_path %></li>
-					<% if session && current_user[:type_id] == 2 %>
-						<li> <i class="icon-user"></i> <%= link_to  (I18n.t'users'), users_path %></li>
-					<% end %>
-					<li> <i class="icon-off"></i> <%= link_to  (I18n.t'log out'), destroy_user_session_path, :method => :delete %></li>
-				<% end %>
-				</ul>
+  				<% if user_signed_in? %>
+            <h4>Detox</h4>
+  				  <ul class="unstyled">
+  				    <li> <i class="icon-home"></i> <%= link_to (I18n.t 'home'), '/' %></li>
+  					  <li> <i class="icon-shopping-cart"></i> <%= link_to (I18n.t 'expenses'), expenses_path %></li>
+  					  <li> <i class="icon-list-alt"></i> <%= link_to (I18n.t 'budgets'), budgets_path %></li>
+  					  <li> <i class="icon-tags"></i> <%= link_to (I18n.t 'tags'), tags_path %></li>
+    					<% if session && current_user[:type_id] == 2 %>
+    						<li> <i class="icon-user"></i> <%= link_to  (I18n.t'users'), users_path %></li>
+    					<% end %>
+  					  <li> <i class="icon-off"></i> <%= link_to  (I18n.t'log out'), destroy_user_session_path, :method => :delete %></li>
+            </ul>
+  				<% end %>
 		    </div>
 		    <% if user_signed_in? %>
 				<div class="span10">
 					<% if @remaining_budget and session[:budget][:id] != 0 %>
 						<%= I18n.t 'remaining daily budget' %>:
-							 		<%= number_to_currency @budget_left_per_day %>
-							 		<span class="ttip" title="<%= @days_left_in_budget %> <%= I18n.t 'days' %> x <%= number_to_currency @budget_left_per_day %> = <%= number_to_currency @remaining_budget %>">
-							 	<i class="icon-question-sign"></i></span>
+					 		<%= number_to_currency @budget_left_per_day %>
+					 		<span class="ttip" title="<%= @days_left_in_budget %> <%= I18n.t 'days' %> x <%= number_to_currency @budget_left_per_day %> = <%= number_to_currency @remaining_budget %>"><i class="icon-question-sign"></i></span>
 					<% end %>
 					<div id="moneyLeft">
 						<% if @remaining_budget and session[:budget][:id] != 0 %>
@@ -58,22 +55,22 @@
 				</div>
 			<% end %>
 		    <div class="span10">
-				<div class="row">
-					<div class="span10">
-						<% flash.each do |severity, message| %>
-							<div class="alert">
-								<button type="button" class="close" data-dismiss="alert">×</button>
-								<%= content_tag(:div, message) %>
-							</div>
-						<% end %>
-					</div>
-				</div>
-				<%= yield %>
+  				<div class="row">
+  					<div class="span10">
+  						<% flash.each do |severity, message| %>
+  							<div class="alert">
+  								<button type="button" class="close" data-dismiss="alert">×</button>
+  								<%= content_tag(:div, message) %>
+  							</div>
+  						<% end %>
+  					</div>
+  				</div>
+				  <%= yield %>
 		    </div>
 		    <div class="span10 offset2">
-		    <hr />
-				<%= I18n.t 'you are here' %>: <em><%= render_breadcrumbs %></em>
-			</div>
+		      <hr />
+				  <%= I18n.t 'you are here' %>: <em><%= render_breadcrumbs %></em>
+			  </div>
 	    </div>
       <% if user_signed_in? && current_user[:type_id] == 2 %>
         <div class="row">

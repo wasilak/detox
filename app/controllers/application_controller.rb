@@ -7,8 +7,6 @@ class ApplicationController < ActionController::Base
   before_filter :check_budget
   before_filter :remaining_budget
 
-  private
-
   def correct_value (number)
     # zamiana przecinkow na kropki :)
     if number =~ /,/

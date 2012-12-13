@@ -63,5 +63,9 @@ module Detox
     # config.to_prepare do
     #   Devise::SessionsController.skip_before_filter :check_budget
     # end
+
+    config.to_prepare do
+      Devise::SessionsController.layout proc{ |controller| action_name == 'new' ? "login"   : "application" }
+    end
   end
 end

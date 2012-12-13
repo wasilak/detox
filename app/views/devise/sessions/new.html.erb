@@ -1,28 +1,26 @@
 <% title "Log in" %>
-<h5><%= I18n.t 'Sign in' %></h5>
+<h1 class="center">Detox</h1>
 
 <%= form_for(resource, :as => resource_name, :html => { :class => 'form-horizontal'}, :url => session_path(resource_name)) do |f| %>
   <div class="control-group">
-    <%= f.label :email, (I18n.t 'e-mail') %>
-    <%= f.email_field :email %>
+    <%= f.email_field :email, :placeholder => (I18n.t 'e-mail') %>
   </div>
 
   <div class="control-group">
-    <%= f.label :password, (I18n.t 'password') %>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, :placeholder => (I18n.t 'password') %>
   </div>
 
+  <div class="control-group">
+    <div class="control">
+      <%= f.submit (I18n.t "log in"), :class => 'btn btn-block' %>
+    </div>
+  </div>
   <% if devise_mapping.rememberable? -%>
     <div class="control-group" id="login_checkbox">
       <%= f.check_box :remember_me %> <%= f.label :remember_me, (I18n.t "remember me") %>
     </div>
   <% end -%>
 
-  <div class="control-group">
-    <div class="control">
-      <%= f.submit (I18n.t "log in") %>
-    </div>
-  </div>
 <% end %>
 
 <%= render "links" %>

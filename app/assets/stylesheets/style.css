@@ -114,3 +114,8 @@ td.amount, th.amount
 {
   display: inline;
 }
+
+.center
+{
+  text-align: center;
+}

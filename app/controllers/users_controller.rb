@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   add_breadcrumb "users", :users_url
 
   before_filter :check_admin
+  before_filter :action_name
+
+  # layout change
+  layout :resolve_layout
 
   # GET /users
   # GET /users.json
@@ -107,4 +111,13 @@ class UsersController < ApplicationController
       return false
     end
   end
+
+  # def resolve_layout
+  #   case action_name
+  #   when "new"
+  #     "login"
+  #   else
+  #     "application"
+  #   end
+  # end
 end
