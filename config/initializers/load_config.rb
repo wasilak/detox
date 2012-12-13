@@ -4,8 +4,6 @@ rescue Errno::ENOENT
   APP_CONFIG = false
 end
 
-print APP_CONFIG.inspect
-
 print "* Loading config\t" + (APP_CONFIG ? "[ \033[32mSUCCESS\033[0m ]" : "[ \033[31mFAILURE\033[0m ]") + "\n"
 
 unless APP_CONFIG
