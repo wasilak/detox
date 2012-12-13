@@ -1,0 +1,8 @@
+development:
+  app_name: Detox
+
+production:
+  app_name: Detox
+
+testing:
+  app_name: Detox

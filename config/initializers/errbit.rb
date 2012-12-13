@@ -8,7 +8,7 @@ print "* Loading Errbit config\t" + (ERRBIT_CONFIG ? "[ \033[32mSUCCESS\033[0m ]
 
 if ERRBIT_CONFIG
   if ERRBIT_CONFIG['enabled']
-    print "* Errbit status\t[ \033[32mENABLED\033[0m ]\n"
+    print "* Errbit status\t\t[ \033[32mENABLED\033[0m ]\n"
     Airbrake.configure do |config|
       config.api_key = ERRBIT_CONFIG['api_key']
       config.host    = ERRBIT_CONFIG['host']
@@ -19,6 +19,6 @@ if ERRBIT_CONFIG
       end
     end
   else
-    print "* Errbit status\t[ \033[31mDISABLED\033[0m ]\n"
+    print "* Errbit status\t\t[ \033[36mDISABLED\033[0m ]\n"
   end
 end
