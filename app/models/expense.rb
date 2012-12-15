@@ -13,15 +13,15 @@ class Expense < ActiveRecord::Base
   		expenses_tags_association.all
   	end
 
-    def self.get_expenses user_id, date_start, date_end
-      self.order("date desc")
+    def self.get_expenses user_id, date_start, date_end, order = 'date desc'
+      self
         .where('date >= ? and date <= ?', date_start, date_end)
         .where(:userId => user_id)
         .includes(:expenses_tags_association => :tag)
+        .order(order)
         .all
     end
-
-    def self.get_expenses_budget user_id, date_start, date_end
+   def self.get_expenses_budget user_id, date_start, date_end
       self.order("date desc")
       .where('date >= ? and date <= ?', date_start, date_end)
       .where({

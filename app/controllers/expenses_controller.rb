@@ -10,7 +10,8 @@ class ExpensesController < ApplicationController
     @expenses = Expense.get_expenses(
       current_user[:id],
       session[:budget][:dateStart],
-      session[:budget][:dateEnd]
+      session[:budget][:dateEnd],
+      sort
     )
 
     @budgets = Budget.get_all_user_budgets(current_user[:id])
@@ -212,6 +213,27 @@ class ExpensesController < ApplicationController
       chart_data.push([tag, sum])
     end
     chart_data
+  end
+
+  def sort
+    order = params[:sort]
+    @direction = params[:direction]
+
+    if @direction.nil?
+      @direction = "desc"
+    else
+      @direction = (params[:direction] == "asc") ? "desc" : "asc"
+    end
+
+    if order.nil?
+      sort = "date desc"
+    else
+      sort = "#{order} #{@direction}"
+    end
+
+    @order_icon = (@direction == 'asc') ? "icon-chevron-up" : "icon-chevron-down"
+
+    sort
   end
 
 end

@@ -9,20 +9,21 @@
       jQuery('#formBudget').submit();
     })
 
-    jQuery('#pager').smartpaginator({ totalrecords: <%= @expenses.count %>,
-                                      recordsperpage: 10,
-                                      datacontainer: 'expensesTable',
-                                      dataelement: 'tr',
-                                      theme: 'white',
-                                      next: '<%= I18n.t 'next' %>',
-                                      prev: '<%= I18n.t 'prev' %>',
-                                      first: '<%= I18n.t 'first' %>',
-                                      last: '<%= I18n.t 'last' %>',
-                                      go: '<%= I18n.t 'go' %>',
-                                      display: "single",
-                                      length: 5
-                                    });
-
+    jQuery('#pager').smartpaginator(
+      { totalrecords: <%= @expenses.count %>,
+        recordsperpage: 10,
+        datacontainer: 'expensesTable',
+        dataelement: 'tr',
+        theme: 'white',
+        next: '<%= I18n.t 'next' %>',
+        prev: '<%= I18n.t 'prev' %>',
+        first: '<%= I18n.t 'first' %>',
+        last: '<%= I18n.t 'last' %>',
+        go: '<%= I18n.t 'go' %>',
+        display: "single",
+        length: 5
+      }
+    );
   })
 </script>
 
@@ -143,9 +144,9 @@ if @budgets.count > 0 %>
         <tr>
           <th><%= I18n.t 'id' %></th>
           <th></th>
-          <th><%= I18n.t 'description' %></th>
-          <th class="amount"><%= I18n.t 'value' %></th>
-          <th><%= I18n.t 'expense date' %></th>
+          <th><%= link_to (I18n.t 'description'), {:sort => "description", :direction => @direction} %><i class="<%= (params[:sort] == 'description') ? @order_icon : '' %>"></i></th>
+          <th class="amount"><%= link_to (I18n.t 'value'), {:sort => "amount", :direction => @direction} %><i class="<%= (params[:sort] == 'amount') ? @order_icon : '' %>"></i></th>
+          <th><%= link_to (I18n.t 'expense date'), {:sort => "date", :direction => @direction} %><i class="<%= (params[:sort] == 'date' || params[:sort].nil?) ? @order_icon : '' %>"></i></th>
           <th><%= I18n.t 'tags' %></th>
           <th></th>
         </tr>
