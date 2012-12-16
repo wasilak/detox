@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   before_filter :action_name
 
   # layout change
-  layout :resolve_layout
+  # layout :resolve_layout
 
   # GET /users
   # GET /users.json
