@@ -81,7 +81,7 @@ class ExpensesController < ApplicationController
 
     @expenseTags = @expense.get_tags
 
-    @tags = Tag.where(:user_id => current_user[:id]).includes(:user).all
+    @tags = Tag.where(:user_id => current_user[:id]).all
   end
 
   # POST /expenses
@@ -199,12 +199,12 @@ class ExpensesController < ApplicationController
 
     used_tags = {}
     expenses.each do |expense|
-      expense.expenses_tags_association.each { |tag|
-        unless tag.tag.nil?
-          if used_tags[tag.tag.name].nil?
-            used_tags[tag.tag.name] = 0
+      expense.tags.each { |tag|
+        unless tag.nil?
+          if used_tags[tag.name].nil?
+            used_tags[tag.name] = 0
           end
-          used_tags[tag.tag.name] += expense.amount
+          used_tags[tag.name] += expense.amount
         end }
     end
 

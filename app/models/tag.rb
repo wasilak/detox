@@ -1,5 +1,7 @@
 class Tag < ActiveRecord::Base
-	has_many :expenses_tags_association, :dependent => :delete_all
+  has_many :expenses_tags_association, :dependent => :delete_all
+	has_many :expenses, :through => :expenses_tags_association
+
 	belongs_to :user
   	attr_accessible :name, :description, :user_id, :budget
 
@@ -7,6 +9,6 @@ class Tag < ActiveRecord::Base
 	validates :user_id, :presence => true
 
   	def count_expenses
-  		expenses_tags_association.all
+  		expenses.all
   	end
 end

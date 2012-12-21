@@ -1,6 +1,7 @@
 class Expense < ActiveRecord::Base
 	belongs_to :user
-	has_many :expenses_tags_association, :dependent => :destroy
+  has_many :expenses_tags_association, :dependent => :destroy
+	has_many :tags, :through => :expenses_tags_association
 
 	validates :amount, :presence => true, :numericality => { :greater_than => 0}
 	validates :date, :presence => true
@@ -10,31 +11,32 @@ class Expense < ActiveRecord::Base
   	attr_accessible :amount, :date, :description, :userId
 
   	def get_tags
-  		expenses_tags_association.all
+  		expenses_tags_association.includes(:tag).all
   	end
 
     def self.get_expenses user_id, date_start, date_end, order = 'date desc'
       self
         .where('date >= ? and date <= ?', date_start, date_end)
         .where(:userId => user_id)
-        .includes(:expenses_tags_association => :tag)
+        .includes(:tags)
         .order(order)
         .all
     end
    def self.get_expenses_budget user_id, date_start, date_end
-      self.order("date desc")
+      self
+      .order("date desc")
       .where('date >= ? and date <= ?', date_start, date_end)
       .where({
                  :userId => user_id,
                  :tags => {:budget => 1}
              })
-      .includes(:expenses_tags_association => :tag)
+      .joins(:tags)
       .all
     end
 
     def self.get_expenses_budget_sum user_id, date_start, date_end
       self.where('user_id = ? and date >= ? and date <= ? and budget = 1', user_id, date_start, date_end)
-        .joins(:expenses_tags_association => :tag ).sum(:amount)
+        .joins(:tags ).sum(:amount)
     end
 
     def self.get_all user_id
@@ -56,7 +58,7 @@ class Expense < ActiveRecord::Base
     end
 
     def self.get_by_date user_id, date, budget_start, budget_end
-      self.joins(:expenses_tags_association => :tag)
+      self.joins(:tags)
         .where({:userId => user_id})
         .where({:date => date})
         .where("date >= ? and date <= ?", budget_start, budget_end)

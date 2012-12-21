@@ -20,13 +20,13 @@ jQuery(document).ready(function(){
 						<th></th>
 					</tr>
 				</thead>
-				<% @expenseTags.each do |tag| %>
+				<% @expenseTags.each do |expenses_tags_association| %>
 				<tr>
 					<%= form_tag del_tag_url(@expense), :method => 'POST', :class => 'form-inline' do %>
-					<%= hidden_field :tag, 'id', :value => tag.id %>
+					<%= hidden_field :tag, 'id', :value => expenses_tags_association.id %>
 					<td>
-						<% if !tag.tag.nil? %>
-							<%= tag.tag.name %>
+						<% if !expenses_tags_association.nil? %>
+							<%= expenses_tags_association.tag.name %>
 						<% end %>
 					</td>
 					<td>
