@@ -9,7 +9,8 @@
             <th><%= I18n.t 'id' %></th>
             <th></th>
             <th><%= I18n.t 'description' %></th>
-            <th><%= I18n.t 'amount' %></th>
+            <th class="amount"><%= I18n.t 'amount' %></th>
+            <th class="amount"><%= I18n.t 'percentage' %></th>
             <th><%= I18n.t 'start' %></th>
             <th><%= I18n.t 'end' %></th>
             <th></th>
@@ -27,6 +28,7 @@
             </td>
             <td><%= link_to b.description, edit_budget_path(b) %></td>
             <td class="amount"><%= number_to_currency b.amount %></td>
+            <td class="amount"><%= number_to_percentage (b.get_budget_expenses*100/b.amount), :precision => 0 %></td>
             <td><%= b.dateStart %></td>
             <td><%= b.dateEnd %></td>
             <td><%= link_to '<i class="icon-edit"></i>'.html_safe, edit_budget_path(b), :title => (I18n.t 'edit') %>

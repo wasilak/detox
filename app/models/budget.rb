@@ -33,4 +33,16 @@ class Budget < ActiveRecord::Base
     def self.get_budget_by_id budget_id
       self.where(:id => budget_id).first
     end
+
+    def get_budget_expenses
+      Expense
+        .order("date desc")
+        .where('date >= ? and date <= ?', dateStart, dateEnd)
+        .where({
+                   :userId => userId,
+                   :tags => {:budget => 1}
+               })
+        .joins(:tags)
+        .sum(:amount)
+    end
 end
