@@ -32,7 +32,7 @@ class ExpensesController < ApplicationController
     end
 
     @chart_data = expenses_chart1 @used_tags
-    @chart_data2 = expenses_chart2
+    @chart_data2 = expenses_chart2 @expenses
 
     respond_to do |format|
       format.html # index.html.erb
@@ -190,23 +190,25 @@ class ExpensesController < ApplicationController
     chart_data
   end
 
-  def expenses_chart2
-    expenses = Expense.get_expenses_budget(
-      current_user[:id],
-      session[:budget][:dateStart],
-      session[:budget][:dateEnd]
-    )
+  def expenses_chart2 expenses
+    # expenses = Expense.get_expenses_budget(
+    #   current_user[:id],
+    #   session[:budget][:dateStart],
+    #   session[:budget][:dateEnd]
+    # )
 
     used_tags = {}
     expenses.each do |expense|
       expense.tags.each { |tag|
-        unless tag.nil?
+        if !tag.nil? and tag.budget
           if used_tags[tag.name].nil?
             used_tags[tag.name] = 0
           end
           used_tags[tag.name] += expense.amount
         end }
     end
+
+    # logger.debug "\033[31mused tags: #{used_tags.inspect}\033[0m"
 
     chart_data = []
     used_tags.each do |tag, sum|
