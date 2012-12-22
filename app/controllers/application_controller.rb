@@ -7,6 +7,13 @@ class ApplicationController < ActionController::Base
   before_filter :check_budget
   before_filter :remaining_budget
 
+  # fix for i18n after adding Active Admin
+  before_filter :set_locale
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+  # end of fix
+
   def correct_value (number)
     # zamiana przecinkow na kropki :)
     if number =~ /,/
