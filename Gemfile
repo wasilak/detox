@@ -54,3 +54,5 @@ gem 'rails-i18n'
 gem 'devise'
 
 #gem 'thin'
+
+gem 'activeadmin'
