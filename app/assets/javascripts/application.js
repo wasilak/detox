@@ -15,4 +15,9 @@
 //= require bootstrap.min.js
 //= require bootstrap-datepicker.js
 //= require bootstrap-datepicker-activation.js
-//= require_tree .
+//= require chosen.jquery.min.js
+//= require highcharts.js
+//= require smartpaginator.js
+//
+// disabled require tree to prevent active admin JS loading on every page - brakes some jQuery :/
+//= #require_tree .
