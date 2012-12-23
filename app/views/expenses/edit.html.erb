@@ -45,9 +45,9 @@ jQuery(document).ready(function(){
 					<%= form_tag add_tag_url(@expense), :method => 'POST', :class => 'form-inline' do %>
 					<td>
 						<% options = options_for_select(
-							[["select...",""]] +
+							[[(I18n.t 'select')+"...",""]] +
 						  	@tags.collect {
-						    	|t| [t.name, t.id]
+						    	|t| [t.name+(t.budget ? " ("+(I18n.t 'budget')+")" : ''), t.id]
 						  	}
 						  	) %>
 						<%= select_tag(:tag, options) %>
