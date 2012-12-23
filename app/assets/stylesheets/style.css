@@ -119,3 +119,9 @@ td.amount, th.amount
 {
   text-align: center;
 }
+
+.login_button
+{
+  color: #fff;
+  width: 94%;
+}

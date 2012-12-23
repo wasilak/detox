@@ -20,6 +20,7 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to (I18n.t "Sign in with #{provider.to_s.titleize}"), omniauth_authorize_path(resource_name, provider) %><br />
+    <% provider.to_s.titleize == 'Google' ? button_class = 'zocial google login_button' : '' %>
+    <%= link_to (I18n.t "Sign in with #{provider.to_s.titleize}"), omniauth_authorize_path(resource_name, provider), :class => button_class %><br />
   <% end -%>
 <% end -%>
