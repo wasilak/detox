@@ -16,20 +16,9 @@ class ExpensesController < ApplicationController
 
     @budgets = Budget.get_all_user_budgets(current_user[:id])
 
-    @budgets_sum = 0
+    @expenses_sum = calculate_expenses_sum @expenses
 
-    @used_tags = {}
-    @expenses.each do |expense|
-      @budgets_sum += expense.amount
-      expense.expenses_tags_association.each do |tag|
-        unless tag.tag.nil?
-          if @used_tags[tag.tag.name].nil?
-            @used_tags[tag.tag.name] = 0
-          end
-          @used_tags[tag.tag.name] += expense.amount
-        end
-      end
-    end
+    @used_tags = used_tags @expenses
 
     @chart_data = expenses_chart1 @used_tags
     @chart_data2 = expenses_chart2 @expenses
@@ -180,6 +169,29 @@ class ExpensesController < ApplicationController
       chart_data.push([tag, sum])
     end
     chart_data
+  end
+
+  def used_tags expenses
+    tags = {}
+    expenses.each do |expense|
+      expense.expenses_tags_association.each do |tag|
+        unless tag.tag.nil?
+          if tags[tag.tag.name].nil?
+            tags[tag.tag.name] = 0
+          end
+          tags[tag.tag.name] += expense.amount
+        end
+      end
+    end
+    tags
+  end
+
+  def calculate_expenses_sum expenses
+    sum = 0
+    expenses.each do |expense|
+      sum += expense.amount
+    end
+    sum
   end
 
   def sort

@@ -187,11 +187,11 @@ if @budgets.count > 0 %>
       </tr>
     <% end %>
     </table>
-    <% if @budgets_sum > 0 %>
+    <% if @expenses_sum > 0 %>
     <table class="table">
       <tr class="info">
         <td><%= I18n.t 'sum' %>:</td>
-        <td><%= number_to_currency @budgets_sum %></td>
+        <td><%= number_to_currency @expenses_sum %></td>
       </tr>
     </table>
     <% end %>
