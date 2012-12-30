@@ -18,15 +18,11 @@ class BudgetsController < ApplicationController
 
     @budget = Budget.new(params[:budget])
 
-    respond_to do |format|
-      if @budget.save
-        session[:budget] = Budget.get_budget(Time.new,current_user[:id])
-        format.html { redirect_to budgets_url, notice: 'budget was successfully created.' }
-        format.json { render json: @budget, status: :created, location: @budget }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @budget.errors, status: :unprocessable_entity }
-      end
+    if @budget.save
+      session[:budget] = Budget.get_budget(Time.new,current_user[:id])
+      redirect_to budgets_url, notice: 'budget was successfully created.'
+    else
+      render action: "new"
     end
   end
 
