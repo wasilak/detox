@@ -4,7 +4,7 @@ class Detox < Thor
   def deploy restart = true
     puts "* pulling changes from \033[36mgit\033[0m"
     system('git pull')
-    puts "* performing \033[DB migrations\033[0m"
+    puts "* performing \033[36DB migrations\033[0m"
     system('bundle exec rake db:migrate')
     puts "* cleaning \033[36massets\033[0m"
     system('bundle exec rake assets:clean')
