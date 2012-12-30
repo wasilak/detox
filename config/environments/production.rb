@@ -1,4 +1,17 @@
 Detox::Application.configure do
+  begin
+    APP_CONFIG = YAML.load_file("#{Rails.root}/config/config.yml")[Rails.env]
+  rescue Errno::ENOENT
+    APP_CONFIG = false
+  end
+
+  print "* Loading config\t" + (APP_CONFIG ? "[ \033[32mSUCCESS\033[0m ]" : "[ \033[31mFAILURE\033[0m ]") + "\n"
+
+  unless APP_CONFIG
+    print "\033[36mNo config file found. Please copy config/config.yml.example to config/config.yml.\033[0m\n"
+    exit
+  end
+
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -66,4 +79,6 @@ Detox::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   #
   config.action_mailer.default_url_options = { :protocol => 'https', :host => 'detox.wasil.org' }
+
+  config.i18n.default_locale = APP_CONFIG['locale']
 end
