@@ -35,15 +35,11 @@ class BudgetsController < ApplicationController
 
     @budget = Budget.find(params[:id])
 
-    respond_to do |format|
-      if @budget.update_attributes(params[:budget])
-        session[:budget] = Budget.get_budget(Time.new,current_user[:id])
-        format.html { redirect_to budgets_path, notice: 'budget was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @budget.errors, status: :unprocessable_entity }
-      end
+    if @budget.update_attributes(params[:budget])
+      session[:budget] = Budget.get_budget(Time.new,current_user[:id])
+      redirect_to budgets_path, notice: 'budget was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
@@ -51,10 +47,7 @@ class BudgetsController < ApplicationController
     @budget = Budget.find(params[:id])
     @budget.destroy
 
-    respond_to do |format|
-      format.html { redirect_to budgets_url }
-      format.json { head :no_content }
-    end
+    redirect_to budgets_url
   end
 
 end
