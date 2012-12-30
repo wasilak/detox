@@ -33,11 +33,6 @@ class ExpensesController < ApplicationController
 
     @chart_data = expenses_chart1 @used_tags
     @chart_data2 = expenses_chart2 @expenses
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @expenses }
-    end
   end
 
   # GET /expenses/1
@@ -48,11 +43,6 @@ class ExpensesController < ApplicationController
     add_breadcrumb @expense.description, :expense_url
 
     @tags = @expense.get_tags
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @expense }
-    end
   end
 
   # GET /expenses/new
@@ -65,11 +55,6 @@ class ExpensesController < ApplicationController
     # domyslnie dzisiejsza data
     time = Time.new
     @expense.date = "#{time.year}-#{time.month}-#{time.day}"
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @expense }
-    end
   end
 
   # GET /expenses/1/edit
@@ -91,14 +76,10 @@ class ExpensesController < ApplicationController
 
     @expense = Expense.new(params[:expense])
 
-    respond_to do |format|
-      if @expense.save
-        format.html { redirect_to edit_expense_path(@expense), notice: 'Expense was successfully created.' }
-        format.json { render json: @expense, status: :created, location: @expense }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
-      end
+    if @expense.save
+      redirect_to edit_expense_path(@expense), notice: 'Expense was successfully created.'
+    else
+      render action: "new"
     end
   end
 
@@ -113,14 +94,10 @@ class ExpensesController < ApplicationController
 
     @tags = Tag.where(:user_id => current_user[:id]).includes(:user).all
 
-    respond_to do |format|
-      if @expense.update_attributes(params[:expense])
-        format.html { redirect_to expenses_path, notice: 'Expense was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @expense.errors, status: :unprocessable_entity }
-      end
+    if @expense.update_attributes(params[:expense])
+      redirect_to expenses_path, notice: 'Expense was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
@@ -130,10 +107,7 @@ class ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
     @expense.destroy
 
-    respond_to do |format|
-      format.html { redirect_to expenses_url }
-      format.json { head :no_content }
-    end
+    redirect_to expenses_url
   end
 
   def add_tag
@@ -146,12 +120,10 @@ class ExpensesController < ApplicationController
 
     @expense_tag_association = ExpensesTagsAssociation.new(@association)
 
-    respond_to do |format|
-      if @expense_tag_association.save
-        format.html { redirect_to edit_expense_path(@expense), notice: 'Tag was successfully added.' }
-      else
-        format.html { redirect_to edit_expense_path(@expense), notice: 'There was an error while adding tag.' }
-      end
+    if @expense_tag_association.save
+      redirect_to edit_expense_path(@expense), notice: 'Tag was successfully added.'
+    else
+      redirect_to edit_expense_path(@expense), notice: 'There was an error while adding tag.'
     end
   end
 
@@ -160,24 +132,17 @@ class ExpensesController < ApplicationController
 
     @expense_tag_association = ExpensesTagsAssociation.find(params[:tag][:id])
 
-    respond_to do |format|
-      if @expense_tag_association.destroy
-        format.html { redirect_to edit_expense_path(@expense_tag_association[:expense_id]),
-          notice: 'Tag was successfully deleted.' }
-      else
-        format.html { redirect_to edit_expense_path(@expense_tag_association[:expense_id]),
-          notice: 'There was an error while adding tag.' }
-      end
+    if @expense_tag_association.destroy
+      redirect_to edit_expense_path(@expense_tag_association[:expense_id]), notice: 'Tag was successfully deleted.'
+    else
+      redirect_to edit_expense_path(@expense_tag_association[:expense_id]), notice: 'There was an error while adding tag.'
     end
   end
 
   def set_budget
     set_session_budget
 
-    respond_to do |format|
-        format.html { redirect_to expenses_url, notice: 'budget successfully changed.' }
-        format.json { render json: @expense, status: :created, location: @expense }
-    end
+    redirect_to expenses_url, notice: 'budget successfully changed.'
   end
 
   private
