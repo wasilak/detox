@@ -1,8 +1,11 @@
 development:
   app_name: Detox
+  locale: en
 
 production:
   app_name: Detox
+  locale: en
 
 testing:
   app_name: Detox
+  locale: en
