@@ -132,3 +132,15 @@ td.amount, th.amount
   color: #fff;
   width: 94%;
 }
+
+h1 {
+  font: 400 70px/1.2 'Nixie One', Georgia, serif;
+}
+
+h4 {
+  font: 400 40px/1.2 'Nixie One', Georgia, serif;
+}
+
+body {
+  font: 400 14px/1.6 'Ledger', Garamond, Georgia, serif;
+}
