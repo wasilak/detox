@@ -8,7 +8,7 @@
 </head>
 <body>
     <%= airbrake_javascript_notifier %>
-    <div class="container">
+    <div class="container" style="background:none;">
         <div class="row">
             <div class="span8 offset2">
                 <% flash.each do |severity, message| %>
@@ -21,7 +21,7 @@
         </div>
         <div class="row">
             <div class="span4 offset4">
-                <div class="well">
+                <div class="well" style="background:#fff">
                     <%= yield %>
                 </div>
             </div>
