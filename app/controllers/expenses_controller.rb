@@ -2,8 +2,6 @@ class ExpensesController < ApplicationController
 
   # include ActionView::Helpers::NumberHelper
 
-  add_breadcrumb "expenses", :expenses_url
-
   # GET /expenses
   # GET /expenses.json
   def index
@@ -29,8 +27,6 @@ class ExpensesController < ApplicationController
   def show
     @expense = Expense.find(params[:id])
 
-    add_breadcrumb @expense.description, :expense_url
-
     @tags = @expense.get_tags
   end
 
@@ -38,8 +34,6 @@ class ExpensesController < ApplicationController
   # GET /expenses/new.json
   def new
     @expense = Expense.new
-
-    add_breadcrumb 'new', ''
 
     # domyslnie dzisiejsza data
     time = Time.new
@@ -49,9 +43,6 @@ class ExpensesController < ApplicationController
   # GET /expenses/1/edit
   def edit
     @expense = Expense.find(params[:id])
-
-    add_breadcrumb @expense.description, :expense_url
-    add_breadcrumb 'edit', ''
 
     @expenseTags = @expense.get_tags
 

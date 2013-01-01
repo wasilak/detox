@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
 
-  add_breadcrumb "users", :users_url
-
   before_filter :check_admin
   before_filter :action_name
 
@@ -18,23 +16,17 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-
-    add_breadcrumb @user.username, :user_url
   end
 
   # GET /users/new
   # GET /users/new.json
   def new
     @user = User.new
-
-    add_breadcrumb 'new', ''
   end
 
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
-
-    add_breadcrumb 'edit', ''
   end
 
   # POST /users

@@ -1,7 +1,5 @@
 class TagsController < ApplicationController
 
-  add_breadcrumb "tags", :tags_url
-
   # GET /tags
   # GET /tags.json
   def index
@@ -16,23 +14,17 @@ class TagsController < ApplicationController
   # GET /tags/1.json
   def show
     @tag = Tag.find(params[:id])
-
-    add_breadcrumb @tag.name, :tag_url
   end
 
   # GET /tags/new
   # GET /tags/new.json
   def new
     @tag = Tag.new
-
-    add_breadcrumb 'new', ''
   end
 
   # GET /tags/1/edit
   def edit
     @tag = Tag.find(params[:id])
-
-    add_breadcrumb 'edit', ''
   end
 
   # POST /tags

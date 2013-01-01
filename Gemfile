@@ -43,8 +43,6 @@ gem 'jquery-rails'
 
 gem 'execjs'
 
-gem 'breadcrumbs_on_rails'
-
 gem 'rack-bug', :require => 'rack/bug', :git => 'git://github.com/brynary/rack-bug.git', :branch => 'rails3'
 
 gem 'airbrake'
