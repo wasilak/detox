@@ -50,5 +50,3 @@ gem 'rails-i18n'
 
 gem 'devise'
 gem 'omniauth-google-apps'
-
-gem 'activeadmin'
