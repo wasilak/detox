@@ -4,10 +4,6 @@ body
   font: 400 14px/1.6 'Ledger', Garamond, Georgia, serif;
 }
 
-h1 {
-  font: 400 70px/1.2 'Nixie One', Georgia, serif;
-}
-
 h4 {
   font: 400 40px/1.2 'Nixie One', Georgia, serif;
 }
@@ -23,9 +19,15 @@ h4 {
   padding: 10px;
 }
 
-.field_with_errors #expense_amount, .field_with_errors #budget_amount
-{
-	float: left;
+@mixin error {
+  float: left;
+}
+
+.field_with_errors {
+  #expense_amount, #budget_amount
+  {
+  	@include error;
+  }
 }
 
 td.amount, th.amount
@@ -40,7 +42,6 @@ td.amount, th.amount
 
 #moneyLeft
 {
-    /*text-align: right;*/
     margin-bottom: 20px;
     float:left;
 }
@@ -103,7 +104,8 @@ td.amount, th.amount
     background-position: 0 -20px;
 }
 
-/*white*/.white
+/*white*/
+.white
 {
     background-color: #FFFFFF;
 }
