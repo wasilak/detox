@@ -108,9 +108,6 @@
 });
 </script>
 <% title "Expenses" %>
-<div class="buttonNew">
-  <%= link_to '<i class="icon-pencil"></i> '.html_safe+(I18n.t 'new expense'), new_expense_path, :class => 'btn btn-small' %>
-</div>
 <%
 if session[:budget]
   defaultBudget = session[:budget][:id]

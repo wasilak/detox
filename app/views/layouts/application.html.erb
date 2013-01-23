@@ -37,11 +37,6 @@
 		    </div>
 		    <% if user_signed_in? %>
 				<div class="span10">
-					<% if @remaining_budget and session[:budget][:id] != 0 %>
-						<%= I18n.t 'remaining daily budget' %>:
-					 		<%= number_to_currency @budget_left_per_day %>
-					 		<span class="ttip" title="<%= @days_left_in_budget %> <%= I18n.t 'days' %> x <%= number_to_currency @budget_left_per_day %> = <%= number_to_currency @remaining_budget %>"><i class="icon-question-sign"></i></span>
-					<% end %>
 					<div id="moneyLeft">
 						<% if @remaining_budget and session[:budget][:id] != 0 %>
 						 		<%= I18n.t 'remaining in budget' %> <b>"<%= session[:budget][:description] %>"</b>: <span class="
@@ -51,10 +46,13 @@
 						 		overBudget
 						 		<% end %>
 						 		"><%= number_to_currency @remaining_budget %>
-						 	</span>
+						 	</span> (<%= number_to_currency @budget_left_per_day %>/<%= I18n.t 'day' %><span class="ttip" title="<%= @days_left_in_budget %> <%= I18n.t 'days' %> x <%= number_to_currency @budget_left_per_day %> = <%= number_to_currency @remaining_budget %>"><i class="icon-question-sign"></i></span>)
 					 	<% end %>
 					</div>
-				</div>
+        <div class="buttonNew">
+          <%= link_to '<i class="icon-pencil"></i> '.html_safe+(I18n.t 'new expense'), new_expense_path, :class => 'btn btn-small' %>
+        </div>
+        </div>
 			<% end %>
 		    <div class="span10">
   				<div class="row">

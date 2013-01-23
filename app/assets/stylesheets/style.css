@@ -42,7 +42,7 @@ td.amount, th.amount
 {
     /*text-align: right;*/
     margin-bottom: 20px;
-    float:right;
+    float:left;
 }
 
 .belowBudget
