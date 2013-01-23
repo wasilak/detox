@@ -15,6 +15,5 @@ Main features:
 
 Additionally:
 
-* Admin panel based on [Active Admin](http://activeadmin.info)
 * user authentication based on [Devise](https://github.com/plataformatec/devise) with [Google Auth](https://rubygems.org/gems/omniauth-google-apps)
-* Polish localisation
+* Polish localization
