@@ -9,6 +9,7 @@ gem 'mysql2'
 
 group :development do
     gem 'bullet'
+    gem 'better_errors'
 end
 
 # Gems used only for assets and not required
