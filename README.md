@@ -1,10 +1,10 @@
 
-Detox [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/wasilak/detox)
+Detox [![Code Climate](https://codeclimate.com/github/wasilak/detox.png)](https://codeclimate.com/github/wasilak/detox)
 ----
 
 Simple finance managing application.
 
-> Let it be detox for your finances
+> Detox for your finances :)
 
 Main features:
 
