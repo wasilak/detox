@@ -13,6 +13,7 @@ if ERRBIT_CONFIG
       config.api_key = ERRBIT_CONFIG['api_key']
       config.host    = ERRBIT_CONFIG['host']
       config.port    = ERRBIT_CONFIG['port']
+      config.js_notifier = ERRBIT_CONFIG['js_notifier']
       config.secure  = config.port == ERRBIT_CONFIG['secure']
       if ERRBIT_CONFIG['development_environments']
         config.development_environments = []

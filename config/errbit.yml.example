@@ -4,6 +4,7 @@ development:
   host: your_errbit_host
   port: 80
   secure: 443
+  js_notifier: false
   development_environments: true
 
 production:
@@ -12,4 +13,5 @@ production:
   host: your_errbit_host
   port: 80
   secure: 443
+  js_notifier: false
   development_environments: false

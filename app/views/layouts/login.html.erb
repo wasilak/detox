@@ -9,7 +9,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <%= airbrake_javascript_notifier %>
+    <% if ERRBIT_CONFIG['js_notifier'] %>
+      <%= airbrake_javascript_notifier %>
+    <% end %>
     <div class="container" style="background:none;">
         <div class="row">
             <div class="span8 offset2">
