@@ -135,7 +135,7 @@
     sum = 0;
     id = 0;
     @expenses.each do |expense|
-      sum += expense.amount
+      # sum += expense.amount
       id += 1
       %>
       <%
@@ -153,9 +153,18 @@
           <% if budgetIncluded %>
             <i class="icon-asterisk" title="<%= I18n.t 'included in budget' %>"></i>
           <% end %>
+          <% if expense.half == 1 %>
+            <i class="icon-star-empty" title="<%= I18n.t 'half of amount' %>"></i>
+          <% end %>
         </td>
         <td><%= link_to expense.description, edit_expense_path(expense) %></td>
-        <td class="amount"><%= number_to_currency expense.amount %></td>
+        <td class="amount">
+          <% if expense.half == 1 %>
+            <%= number_to_currency expense.amount / 2 %>
+          <% else %>
+            <%= number_to_currency expense.amount %>
+          <% end %>
+        </td>
         <td><%= expense.date %></td>
         <td>
           <%= tags.to_sentence.html_safe %>

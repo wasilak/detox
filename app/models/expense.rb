@@ -8,7 +8,7 @@ class Expense < ActiveRecord::Base
 	validates :description, :presence => true
 	validates :userId, :presence => true
 
-  	attr_accessible :amount, :date, :description, :userId
+  	attr_accessible :amount, :date, :description, :userId, :half
 
   	def get_tags
   		expenses_tags_association.includes(:tag).all
@@ -22,7 +22,8 @@ class Expense < ActiveRecord::Base
         .order(order)
         .all
     end
-   def self.get_expenses_budget user_id, date_start, date_end
+
+    def self.get_expenses_budget user_id, date_start, date_end
       self
       .order("date desc")
       .where('date >= ? and date <= ?', date_start, date_end)

@@ -43,7 +43,11 @@ class ApplicationController < ActionController::Base
 
         expenses_sum = 0
         expenses.each do |expense|
-          expenses_sum += expense[:amount]
+          if expense[:half] == 1
+            expenses_sum += expense[:amount] / 2
+          else
+            expenses_sum += expense[:amount]
+          end
         end
 
         budget_amount = Budget.find(session[:budget][:id])
@@ -68,4 +72,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def log variable, info = ""
+    logger.debug "\033[31m#{info} #{variable.inspect}\033[0m"
+  end
 end

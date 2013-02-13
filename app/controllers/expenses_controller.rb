@@ -144,16 +144,20 @@ class ExpensesController < ApplicationController
 
     used_tags = {}
     expenses.each do |expense|
-      expense.tags.each { |tag|
+      expense.tags.each do |tag|
         if !tag.nil? and tag.budget
           if used_tags[tag.name].nil?
             used_tags[tag.name] = 0
           end
-          used_tags[tag.name] += expense.amount
-        end }
-    end
 
-    # logger.debug "\033[31mused tags: #{used_tags.inspect}\033[0m"
+          if expense.half == 1
+            used_tags[tag.name] += expense.amount / 2
+          else
+            used_tags[tag.name] += expense.amount
+          end
+        end
+      end
+    end
 
     chart_data = []
     used_tags.each do |tag, sum|
@@ -170,7 +174,12 @@ class ExpensesController < ApplicationController
           if tags[tag.tag.name].nil?
             tags[tag.tag.name] = 0
           end
-          tags[tag.tag.name] += expense.amount
+
+          if expense.half == 1
+            tags[tag.tag.name] += expense.amount / 2
+          else
+            tags[tag.tag.name] += expense.amount
+          end
         end
       end
     end
@@ -180,7 +189,11 @@ class ExpensesController < ApplicationController
   def calculate_expenses_sum expenses
     sum = 0
     expenses.each do |expense|
-      sum += expense.amount
+      if expense.half == 1
+        sum += expense.amount / 2
+      else
+        sum += expense.amount
+      end
     end
     sum
   end

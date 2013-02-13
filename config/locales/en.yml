@@ -76,3 +76,5 @@ en:
     select: 'select'
     Sign in with Google: 'Sign in with Google'
     day: 'day'
+    half: 'half'
+    half of amount: 'half of amount'

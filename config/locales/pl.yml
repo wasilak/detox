@@ -59,7 +59,7 @@ pl:
     type: 'typ'
     new user: 'nowy użytkownik'
     password: 'hasło'
-    log in: "zaloguj się"
+    log in: 'zaloguj się'
     log in name or password incorrect: 'nieprawdiłowa nazwa użytkownika lub hasło'
     remining for today: 'na dzisiaj pozostało'
     days: 'dni'
@@ -83,3 +83,5 @@ pl:
     select: 'wybierz'
     Sign in with Google: 'Zaloguj się przez Google'
     day: 'dzień'
+    half: 'połowa'
+    half of amount: 'połowa kwoty'
