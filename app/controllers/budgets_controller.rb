@@ -20,7 +20,7 @@ class BudgetsController < ApplicationController
 
     if @budget.save
       session[:budget] = Budget.get_budget(Time.new,current_user[:id])
-      redirect_to budgets_url, notice: 'budget was successfully created.'
+      redirect_to budgets_url, notice: (I18n.t 'Budget was successfully created.')
     else
       render action: "new"
     end
@@ -37,7 +37,7 @@ class BudgetsController < ApplicationController
 
     if @budget.update_attributes(params[:budget])
       session[:budget] = Budget.get_budget(Time.new,current_user[:id])
-      redirect_to budgets_path, notice: 'budget was successfully updated.'
+      redirect_to budgets_path, notice: (I18n.t 'Budget was successfully updated.')
     else
       render action: "edit"
     end
@@ -47,7 +47,7 @@ class BudgetsController < ApplicationController
     @budget = Budget.find(params[:id])
     @budget.destroy
 
-    redirect_to budgets_url
+    redirect_to budgets_url, notice: (I18n.t 'Budget was successfully deleted.')
   end
 
 end

@@ -85,3 +85,15 @@ pl:
     day: 'dzień'
     half: 'połowa'
     half of amount: 'połowa kwoty'
+    Tag was successfully added: 'Tag został dodany'
+    Tag was successfully deleted: 'Tag został usunięty'
+    There was an error while adding tag: "Podczas dodawania Tag'a pojawił się błąd"
+    Expense was successfully updated: "Wydatek został zaktualizowany"
+    Expense was successfully created: "Wydatek został dodany"
+    Expense was successfully deleted: "Wydatek został usunięty"
+    Tag was successfully created: "Tag został dodany"
+    Tag was successfully updated: "Tag został zaktualizowany"
+    Tag was successfully deleted: "Tag został usunięty"
+    Budget was successfully created: "Budżet został dodany"
+    Budget was successfully updated: "Budżet został zaktualizowany "
+    Budget was successfully deleted: "Budżet został usunięty"

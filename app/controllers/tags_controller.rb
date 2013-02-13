@@ -38,7 +38,7 @@ class TagsController < ApplicationController
     end
 
     if @tag.save
-      redirect_to tags_url, notice: 'Tag was successfully created.'
+      redirect_to tags_url, notice: (I18n.t 'Tag was successfully created.')
     else
       render action: "new"
     end
@@ -54,7 +54,7 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
 
     if @tag.update_attributes(params[:tag])
-      redirect_to tags_path, notice: 'Tag was successfully updated.'
+      redirect_to tags_path, notice: (I18n.t 'Tag was successfully updated.')
     else
       render action: "edit"
     end
@@ -65,10 +65,11 @@ class TagsController < ApplicationController
   def destroy
     @tag = Tag.find(params[:id])
 
-    if @tag.count_expenses == 0
+    if @tag.count_expenses.size == 0
       @tag.destroy
+      redirect_to tags_url, notice: (I18n.t 'Tag was successfully deleted.')
+    else
+      redirect_to tags_url
     end
-
-    redirect_to tags_url
   end
 end

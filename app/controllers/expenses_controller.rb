@@ -57,7 +57,7 @@ class ExpensesController < ApplicationController
     @expense = Expense.new(params[:expense])
 
     if @expense.save
-      redirect_to edit_expense_path(@expense), notice: 'Expense was successfully created.'
+      redirect_to edit_expense_path(@expense), notice: (I18n.t 'Expense was successfully created.')
     else
       render action: "new"
     end
@@ -75,7 +75,7 @@ class ExpensesController < ApplicationController
     @tags = Tag.where(:user_id => current_user[:id]).includes(:user).all
 
     if @expense.update_attributes(params[:expense])
-      redirect_to expenses_path, notice: 'Expense was successfully updated.'
+      redirect_to expenses_path, notice: (I18n.t 'Expense was successfully updated.')
     else
       render action: "edit"
     end
@@ -87,7 +87,7 @@ class ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
     @expense.destroy
 
-    redirect_to expenses_url
+    redirect_to expenses_url, notice: (I18n.t 'Expense was successfully deleted.')
   end
 
   def add_tag
@@ -101,9 +101,9 @@ class ExpensesController < ApplicationController
     @expense_tag_association = ExpensesTagsAssociation.new(@association)
 
     if @expense_tag_association.save
-      redirect_to edit_expense_path(@expense), notice: 'Tag was successfully added.'
+      redirect_to edit_expense_path(@expense), notice: (I18n.t 'Tag was successfully added.')
     else
-      redirect_to edit_expense_path(@expense), notice: 'There was an error while adding tag.'
+      redirect_to edit_expense_path(@expense), notice: (I18n.t 'There was an error while adding tag.')
     end
   end
 
@@ -113,9 +113,9 @@ class ExpensesController < ApplicationController
     @expense_tag_association = ExpensesTagsAssociation.find(params[:tag][:id])
 
     if @expense_tag_association.destroy
-      redirect_to edit_expense_path(@expense_tag_association[:expense_id]), notice: 'Tag was successfully deleted.'
+      redirect_to edit_expense_path(@expense_tag_association[:expense_id]), notice: (I18n.t 'Tag was successfully deleted.')
     else
-      redirect_to edit_expense_path(@expense_tag_association[:expense_id]), notice: 'There was an error while adding tag.'
+      redirect_to edit_expense_path(@expense_tag_association[:expense_id]), notice: (I18n.t 'There was an error while adding tag.')
     end
   end
 

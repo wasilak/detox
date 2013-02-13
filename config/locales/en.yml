@@ -78,3 +78,15 @@ en:
     day: 'day'
     half: 'half'
     half of amount: 'half of amount'
+    Tag was successfully added: 'Tag was successfully added'
+    Tag was successfully deleted: 'Tag was successfully deleted'
+    There was an error while adding tag: "There was an error while adding tag"
+    Expense was successfully updated: "Expense was successfully updated"
+    Expense was successfully created: "Expense was successfully created"
+    Expense was successfully deleted: "Expense was successfully deleted"
+    Tag was successfully created: "Tag was successfully created"
+    Tag was successfully updated: "Tag was successfully updated"
+    Tag was successfully deleted: "Tag was successfully deleted"
+    Budget was successfully created: "Budget was successfully created"
+    Budget was successfully updated: "Budget was successfully updated"
+    Budget was successfully deleted: "Budget was successfully deleted"
