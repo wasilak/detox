@@ -6,6 +6,7 @@ gem 'rails', '3.2.12'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
+gem 'sqlite3'
 
 group :development do
     gem 'bullet'
@@ -51,3 +52,5 @@ gem 'rails-i18n'
 
 gem 'devise'
 gem 'omniauth-google-apps'
+
+gem 'yaml_db'
