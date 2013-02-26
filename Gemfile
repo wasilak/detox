@@ -11,6 +11,7 @@ gem 'sqlite3'
 group :development do
     gem 'bullet'
     gem 'better_errors'
+    gem 'rack-bug', :require => 'rack/bug', :git => 'git://github.com/brynary/rack-bug.git', :branch => 'rails3'
 end
 
 # Gems used only for assets and not required
@@ -43,8 +44,6 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'execjs'
-
-gem 'rack-bug', :require => 'rack/bug', :git => 'git://github.com/brynary/rack-bug.git', :branch => 'rails3'
 
 gem 'airbrake'
 
