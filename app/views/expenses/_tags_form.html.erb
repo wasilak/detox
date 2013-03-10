@@ -1,0 +1,10 @@
+  <%= form_tag set_tag_filter_url, :method => 'POST', :class => 'form-inline', :id => 'formTags' do %>
+    <% options = options_for_select(
+      [["select tag",""]] +
+        @tags_form.collect do |tag|
+          [tag.name, tag.name]
+        end,
+          @tag_form_current
+        ) %>
+    <%= select_tag :tag, options, :class => 'input-xxlarge' %>
+  <% end %>

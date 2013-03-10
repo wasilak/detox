@@ -12,6 +12,12 @@ class ExpensesController < ApplicationController
       sort
     )
 
+    @tags_form = Tag.where({:user_id => current_user[:id]}).all
+    log @tag_form_current = Expense.get_current_tags
+
+    #clear selected tags
+    Expense.set_tags []
+
     @budgets = Budget.get_all_user_budgets(current_user[:id])
 
     @expenses_sum = calculate_expenses_sum @expenses
@@ -125,6 +131,14 @@ class ExpensesController < ApplicationController
     redirect_to expenses_url, notice: 'budget successfully changed.'
   end
 
+  def set_tag_filter
+    unless params[:tag].nil?
+      Expense.set_tags params[:tag]
+    end
+
+    redirect_to expenses_url, notice: 'tag filter successfully set.'
+  end
+
   private
 
   def expenses_chart1 (used_tags)
@@ -169,16 +183,16 @@ class ExpensesController < ApplicationController
   def used_tags expenses
     tags = {}
     expenses.each do |expense|
-      expense.expenses_tags_association.each do |tag|
-        unless tag.tag.nil?
-          if tags[tag.tag.name].nil?
-            tags[tag.tag.name] = 0
+      expense.expenses_tags_association.each do |assoc|
+        unless assoc.tag.nil?
+          if tags[assoc.tag.name].nil?
+            tags[assoc.tag.name] = 0
           end
 
           if expense.half == 1
-            tags[tag.tag.name] += expense.amount / 2
+            tags[assoc.tag.name] += expense.amount / 2
           else
-            tags[tag.tag.name] += expense.amount
+            tags[assoc.tag.name] += expense.amount
           end
         end
       end
@@ -217,6 +231,20 @@ class ExpensesController < ApplicationController
     @order_icon = (@direction == 'asc') ? "icon-chevron-up" : "icon-chevron-down"
 
     sort
+  end
+
+  def get_tags expenses
+    tags = {}
+    expenses.each do |expense|
+      expense.expenses_tags_association.each do |assoc|
+        unless assoc.tag.nil?
+          if tags[assoc.tag.id].nil?
+            tags[assoc.tag.id] = assoc.tag.name
+          end
+        end
+      end
+    end
+    tags
   end
 
 end

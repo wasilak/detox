@@ -10,17 +10,24 @@ class Expense < ActiveRecord::Base
 
   	attr_accessible :amount, :date, :description, :userId, :half
 
+    @tags = []
+
   	def get_tags
   		expenses_tags_association.includes(:tag).all
   	end
 
     def self.get_expenses user_id, date_start, date_end, order = 'date desc'
-      self
-        .where('date >= ? and date <= ?', date_start, date_end)
-        .where(:userId => user_id)
-        .includes(:tags)
-        .order(order)
-        .all
+      sql = self
+          .where('date >= ? and date <= ?', date_start, date_end)
+          .where(:userId => user_id)
+          .includes(:tags)
+          .order(order)
+
+      if !@tags.nil? and @tags.size > 0
+        sql = sql.includes(:expenses_tags_association).where(:tags => {:name => @tags})
+      end
+
+      sql.all
     end
 
     def self.get_expenses_budget user_id, date_start, date_end
@@ -65,6 +72,14 @@ class Expense < ActiveRecord::Base
         .where("date >= ? and date <= ?", budget_start, budget_end)
         .where({:tags => {:budget => 1}})
         .sum(:amount)
+    end
+
+    def self.set_tags tags
+      @tags = tags
+    end
+
+    def self.get_current_tags
+      @tags
     end
 
 end
