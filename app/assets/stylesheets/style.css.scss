@@ -138,3 +138,14 @@ td.amount, th.amount
   color: #fff;
   width: 94%;
 }
+
+#show_options
+{
+  color: #08c;
+  cursor: pointer;
+}
+
+#show_options:hover
+{
+  text-decoration: underline;
+}

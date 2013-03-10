@@ -13,7 +13,7 @@ class ExpensesController < ApplicationController
     )
 
     @tags_form = Tag.where({:user_id => current_user[:id]}).all
-    log @tag_form_current = Expense.get_current_tags
+    @tag_form_current = Expense.get_current_tags
 
     #clear selected tags
     Expense.set_tags []
@@ -136,7 +136,7 @@ class ExpensesController < ApplicationController
       Expense.set_tags params[:tag]
     end
 
-    redirect_to expenses_url, notice: 'tag filter successfully set.'
+    redirect_to expenses_url, notice: 'Filter successfully applied.'
   end
 
   private

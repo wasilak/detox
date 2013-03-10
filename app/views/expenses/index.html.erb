@@ -1,6 +1,9 @@
 <% title "Expenses" %>
-<%= render 'budgets_form' %>
-<%= render 'tags_form' %>
+<span id="show_options"><%= I18n.t 'show options' %></span>
+<div id="options">
+  <%= render 'budgets_form' %>
+  <%= render 'tags_form' %>
+</div>
 <div id="tabs">
   <ul class="nav nav-tabs">
     <li><a href="#tabular" data-toggle="tab"><%= I18n.t 'table' %></a></li>
@@ -96,8 +99,10 @@
       jQuery('#formBudget').submit();
     })
 
-    jQuery('#tag').change(function(){
-      jQuery('#formTags').submit();
+    jQuery('#options').hide();
+
+    jQuery('#show_options').click(function(){
+      jQuery('#options').toggle('slow');
     })
 
     jQuery('#pager').smartpaginator(

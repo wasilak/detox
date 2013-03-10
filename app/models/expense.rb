@@ -20,11 +20,12 @@ class Expense < ActiveRecord::Base
       sql = self
           .where('date >= ? and date <= ?', date_start, date_end)
           .where(:userId => user_id)
-          .includes(:tags)
           .order(order)
 
       if !@tags.nil? and @tags.size > 0
-        sql = sql.includes(:expenses_tags_association).where(:tags => {:name => @tags})
+        sql = sql.includes(:tags, :expenses_tags_association).where(:tags => {:name => @tags})
+      else
+        sql = sql.includes(:tags)
       end
 
       sql.all

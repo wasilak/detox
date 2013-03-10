@@ -97,3 +97,5 @@ pl:
     Budget was successfully created: "Budżet został dodany"
     Budget was successfully updated: "Budżet został zaktualizowany "
     Budget was successfully deleted: "Budżet został usunięty"
+    show options: "pokaż opcje"
+    filter: "filtruj"
