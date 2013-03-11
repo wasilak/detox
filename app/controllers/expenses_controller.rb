@@ -12,7 +12,7 @@ class ExpensesController < ApplicationController
       sort
     )
 
-    @tags_form = Tag.where({:user_id => current_user[:id]}).all
+    @tags_form = Tag.where({:user_id => current_user[:id]}).order('name asc').all
     @tag_form_current = Expense.get_current_tags
 
     #clear selected tags
@@ -52,7 +52,7 @@ class ExpensesController < ApplicationController
 
     @expenseTags = @expense.get_tags
 
-    @tags = Tag.where(:user_id => current_user[:id]).all
+    @tags = Tag.where(:user_id => current_user[:id]).order('name asc').all
   end
 
   # POST /expenses
@@ -78,7 +78,7 @@ class ExpensesController < ApplicationController
 
     @expenseTags = @expense.get_tags
 
-    @tags = Tag.where(:user_id => current_user[:id]).includes(:user).all
+    @tags = Tag.where(:user_id => current_user[:id]).includes(:user).order('name asc').all
 
     if @expense.update_attributes(params[:expense])
       redirect_to expenses_path, notice: (I18n.t 'Expense was successfully updated.')

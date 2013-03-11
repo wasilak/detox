@@ -4,9 +4,9 @@ class TagsController < ApplicationController
   # GET /tags.json
   def index
     if current_user[:type_id] == 2
-      @tags = Tag.includes(:user).all
+      @tags = Tag.includes(:user).order('name asc').all
     else
-      @tags = Tag.where({:user_id => current_user[:id]}).all
+      @tags = Tag.where({:user_id => current_user[:id]}).order('name asc').all
     end
   end
 
