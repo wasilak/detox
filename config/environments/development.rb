@@ -63,7 +63,6 @@ Detox::Application.configure do
     Bullet.growl = false
     Bullet.rails_logger = true
     Bullet.airbrake = true
-    Bullet.disable_browser_cache = true
   end
 
   config.i18n.default_locale = APP_CONFIG['locale']
