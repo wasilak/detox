@@ -21,6 +21,7 @@ Gemfile.lock
 config/config.yml
 config/database.yml
 config/errbit.yml
+config/newrelic.yml
 
 .idea
 

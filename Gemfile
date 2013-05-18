@@ -53,3 +53,5 @@ gem 'devise'
 gem 'omniauth-google-apps'
 
 gem 'yaml_db'
+
+gem 'newrelic_rpm'
