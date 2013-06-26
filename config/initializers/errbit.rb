@@ -13,7 +13,6 @@ if ERRBIT_CONFIG
       config.api_key = ERRBIT_CONFIG['api_key']
       config.host    = ERRBIT_CONFIG['host']
       config.port    = ERRBIT_CONFIG['port']
-      config.js_notifier = ERRBIT_CONFIG['js_notifier']
       config.secure  = config.port == ERRBIT_CONFIG['secure']
       if ERRBIT_CONFIG['development_environments']
         config.development_environments = []
@@ -23,3 +22,7 @@ if ERRBIT_CONFIG
     print "* Errbit status\t\t[ \033[36mDISABLED\033[0m ]\n"
   end
 end
+
+# [AIRBRAKE] config.js_notifier has been deprecated and has no effect.  
+# You should use <%= airbrake_javascript_notifier %> directly at the top of your layouts. 
+# Be sure to place it before all other javascript.
