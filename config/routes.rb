@@ -15,15 +15,15 @@ Detox::Application.routes.draw do
 
   get "home/index"
 
-  match 'home/login' => 'home#login', :as => :login
-  match 'home/check_login' => 'home#check_login', :as => :check_login
-  match 'home/logout' => 'home#logout', :as => :logout
+  get 'home/login' => 'home#login', :as => :login
+  post 'home/check_login' => 'home#check_login', :as => :check_login
+  get 'home/logout' => 'home#logout', :as => :logout
 
-  match 'expenses/:id/add_tag' => 'expenses#add_tag', :as => :add_tag
-  match 'expenses/:id/del_tag' => 'expenses#del_tag', :as => :del_tag
+  post 'expenses/:id/add_tag' => 'expenses#add_tag', :as => :add_tag
+  post 'expenses/:id/del_tag' => 'expenses#del_tag', :as => :del_tag
 
-  match 'expenses/set_budget' => 'expenses#set_budget', :as => :set_budget
-  match 'expenses/set_tag_filter' => 'expenses#set_tag_filter', :as => :set_tag_filter
+  post 'expenses/set_budget' => 'expenses#set_budget', :as => :set_budget
+  post 'expenses/set_tag_filter' => 'expenses#set_tag_filter', :as => :set_tag_filter
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

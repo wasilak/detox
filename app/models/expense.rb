@@ -8,8 +8,6 @@ class Expense < ActiveRecord::Base
 	validates :description, :presence => true
 	validates :userId, :presence => true
 
-  	attr_accessible :amount, :date, :description, :userId, :half
-
     @tags = []
 
   	def get_tags

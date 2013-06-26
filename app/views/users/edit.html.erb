@@ -3,10 +3,12 @@ jQuery(document).ready(function(){
 	jQuery("#user_type_id").chosen();
 
 	jQuery('#pass').append(
-		'<input type="checkbox" id="enable_password">'
+		'<input type="checkbox" id="enable_password" value="1">'
 		);
 	jQuery('#enable_password').change(function(){
-		if (jQuery('#enable_password').attr('checked') == 'checked') {
+		var checked = jQuery('#enable_password').is(':checked')
+
+		if (checked) {
 			jQuery('#user_password').removeAttr('disabled')
 		} else {
 			jQuery('#user_password').attr('disabled', 'disabled')
