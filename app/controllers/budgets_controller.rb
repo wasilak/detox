@@ -2,6 +2,10 @@ class BudgetsController < ApplicationController
 
   skip_before_filter :login_required, :only => [:login, :checkLogin]
 
+  def budget_params
+    params.require(:budget).permit(:amount, :dateStart, :dateEnd, :description, :userId)
+  end
+
   def index
     @budgets = Budget.get_all_budgets current_user[:id]
   end
@@ -14,9 +18,9 @@ class BudgetsController < ApplicationController
   end
 
   def create
-    params[:budget][:amount] = correct_value(params[:budget][:amount])
+    budget_params[:amount] = correct_value(budget_params[:amount])
 
-    @budget = Budget.new(params[:budget])
+    @budget = Budget.new(budget_params)
 
     if @budget.save
       session[:budget] = Budget.get_budget(Time.new,current_user[:id])
@@ -31,11 +35,11 @@ class BudgetsController < ApplicationController
   end
 
   def update
-    params[:budget][:amount] = correct_value(params[:budget][:amount])
+    budget_params[:amount] = correct_value(budget_params[:amount])
 
     @budget = Budget.find(params[:id])
 
-    if @budget.update_attributes(params[:budget])
+    if @budget.update_attributes(budget_params)
       session[:budget] = Budget.get_budget(Time.new,current_user[:id])
       redirect_to budgets_path, notice: (I18n.t 'Budget was successfully updated.')
     else

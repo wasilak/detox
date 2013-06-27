@@ -6,8 +6,6 @@ class Budget < ActiveRecord::Base
     validates :dateEnd, :presence => true, :uniqueness => { :scope => :userId}
     validates :description, :presence => true
 
-    attr_accessible :amount, :dateStart, :dateEnd, :description, :userId
-
     #def end_date_cannot_be_lower_then_start_date
     #    if !dateEnd.blank? and dateEnd < dateStart
     #      errors.add(:dateEnd, "can't be lower then start date")
@@ -22,7 +20,7 @@ class Budget < ActiveRecord::Base
       self.where(
           :userId => user_id
         )
-        .all
+        .load
     end
 
     def self.get_budget date, user_id

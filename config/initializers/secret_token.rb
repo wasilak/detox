@@ -5,3 +5,4 @@
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
 Detox::Application.config.secret_token = '80ad5327b969f574f146042e5e03e3e45d1ed767bc48af8fd8c912a48b18c5bae0c5448f495b852949ec65e326264abbdb9f9cb54391f95548534a8f91d06216'
+Detox::Application.config.secret_key_base = '80ad5327b969f574f146042e5e03e3e45d1ed767bc48af8fd8c912a48b18c5bae0c5448f495b852949ec65e326264abbdb9f9cb54391f95548534a8f91d06216'

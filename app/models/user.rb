@@ -5,8 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
          #, :registerable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
   has_many :expense
   has_many :tag
 	belongs_to :type
@@ -15,8 +13,6 @@ class User < ActiveRecord::Base
 	# validates :password, :presence => true
 	validates :name, :presence => true
 	validates :type_id, :presence => true
-
-  	attr_accessible :name, :password, :type_id, :username
 
   	def self.check_login(username, password)
       password_hashed = Digest::MD5.hexdigest(password)
@@ -38,7 +34,7 @@ class User < ActiveRecord::Base
   	end
 
     def get_tags
-      tag.all
+      tag.load
     end
 
     def self.find_for_open_id(access_token, signed_in_resource=nil)

@@ -5,11 +5,19 @@ class UsersController < ApplicationController
 
   # layout change
   # layout :resolve_layout
+  
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :remember_me, :type_id, :username, :name)
+  end
+
+  def type_params
+    params.require(:type).permit(:type)
+  end
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.includes(:type).all
+    @users = User.includes(:type).load
   end
 
   # GET /users/1
@@ -32,9 +40,8 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    params[:user][:password] = Digest::MD5.hexdigest(params[:user][:password])
-
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
+    @user.password = Digest::MD5.hexdigest(user_params[:username])
 
     if @user.save
       redirect_to @user, notice: 'User was successfully created.'
@@ -48,9 +55,9 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    params[:user][:password] = Digest::MD5.hexdigest(params[:user][:password]) if !params[:user][:password].nil?
+    user_params[:password] = Digest::MD5.hexdigest(user_params[:password]) if !user_params[:password].nil?
 
-    if @user.update_attributes(params[:user])
+    if @user.update_attributes(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
       render action: "edit"

@@ -27,3 +27,7 @@ config/newrelic.yml
 
 # ignoring assets
 public/assets
+
+# Sublime Text 2 project files
+detox.sublime-project
+detox.sublime-workspace
