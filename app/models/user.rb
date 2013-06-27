@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   	end
 
     def get_tags
-      tag.all
+      tag.load
     end
 
     def self.find_for_open_id(access_token, signed_in_resource=nil)

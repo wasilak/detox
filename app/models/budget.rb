@@ -20,7 +20,7 @@ class Budget < ActiveRecord::Base
       self.where(
           :userId => user_id
         )
-        .all
+        .load
     end
 
     def self.get_budget date, user_id

@@ -11,7 +11,7 @@ class Expense < ActiveRecord::Base
     @tags = []
 
   	def get_tags
-  		expenses_tags_association.includes(:tag).all
+  		expenses_tags_association.includes(:tag).load
   	end
 
     def self.get_expenses user_id, date_start, date_end, order = 'date desc'
@@ -26,7 +26,7 @@ class Expense < ActiveRecord::Base
         sql = sql.includes(:tags)
       end
 
-      sql.all
+      sql.load
     end
 
     def self.get_expenses_budget user_id, date_start, date_end
@@ -38,7 +38,7 @@ class Expense < ActiveRecord::Base
                  :tags => {:budget => 1}
              })
       .joins(:tags)
-      .all
+      .load
     end
 
     def self.get_expenses_budget_sum user_id, date_start, date_end
