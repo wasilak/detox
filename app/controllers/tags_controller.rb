@@ -1,12 +1,20 @@
 class TagsController < ApplicationController
 
+  def tag_params
+    params.require(:tag).permit(:name, :description, :user_id, :budget)
+  end
+
+  def expens_tags_association_params
+    params.require(:expens_tags_association).permit(:expense_id, :tag_id)
+  end
+
   # GET /tags
   # GET /tags.json
   def index
     if current_user[:type_id] == 2
-      @tags = Tag.includes(:user).order('name asc').all
+      @tags = Tag.includes(:user).order('name asc').load
     else
-      @tags = Tag.where({:user_id => current_user[:id]}).order('name asc').all
+      @tags = Tag.where({:user_id => current_user[:id]}).order('name asc').load
     end
   end
 
@@ -30,11 +38,11 @@ class TagsController < ApplicationController
   # POST /tags
   # POST /tags.json
   def create
-    # logger.debug "nowy tag: #{params[:tag]}"
-    @tag = Tag.new(params[:tag])
+    # logger.debug "nowy tag: #{tag_params}"
+    @tag = Tag.new(tag_params)
 
-    if params[:tag][:description] == ''
-      params[:tag][:description] = nil
+    if tag_params[:description] == ''
+      tag_params[:description] = nil
     end
 
     if @tag.save
@@ -47,13 +55,13 @@ class TagsController < ApplicationController
   # PUT /tags/1
   # PUT /tags/1.json
   def update
-    if params[:tag][:description] == ''
-      params[:tag][:description] = nil
+    if tag_params[:description] == ''
+      tag_params[:description] = nil
     end
 
     @tag = Tag.find(params[:id])
 
-    if @tag.update_attributes(params[:tag])
+    if @tag.update_attributes(tag_params)
       redirect_to tags_path, notice: (I18n.t 'Tag was successfully updated.')
     else
       render action: "edit"

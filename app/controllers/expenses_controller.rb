@@ -2,6 +2,18 @@ class ExpensesController < ApplicationController
 
   # include ActionView::Helpers::NumberHelper
 
+  def expense_params
+    params.require(:expense).permit(:amount, :date, :description, :userId, :half)
+  end
+
+  def tag_params
+    params.require(:tag).permit(:name, :description, :user_id, :budget)
+  end
+
+  def expenses_tags_association_params
+    params.require(:expenses_tags_association).permit(:expense_id, :tag_id)
+  end
+
   # GET /expenses
   # GET /expenses.json
   def index
@@ -12,7 +24,7 @@ class ExpensesController < ApplicationController
       sort
     )
 
-    @tags_form = Tag.where({:user_id => current_user[:id]}).order('name asc').all
+    @tags_form = Tag.where({:user_id => current_user[:id]}).order('name asc').load
     @tag_form_current = Expense.get_current_tags
 
     #clear selected tags
@@ -52,15 +64,15 @@ class ExpensesController < ApplicationController
 
     @expenseTags = @expense.get_tags
 
-    @tags = Tag.where(:user_id => current_user[:id]).order('name asc').all
+    @tags = Tag.where(:user_id => current_user[:id]).order('name asc').load
   end
 
   # POST /expenses
   # POST /expenses.json
   def create
-    params[:expense][:amount] = correct_value(params[:expense][:amount])
+    expense_params[:amount] = correct_value(expense_params[:amount])
 
-    @expense = Expense.new(params[:expense])
+    @expense = Expense.new(expense_params)
 
     if @expense.save
       redirect_to edit_expense_path(@expense), notice: (I18n.t 'Expense was successfully created.')
@@ -72,15 +84,15 @@ class ExpensesController < ApplicationController
   # PUT /expenses/1
   # PUT /expenses/1.json
   def update
-    params[:expense][:amount] = correct_value(params[:expense][:amount])
+    expense_params[:amount] = correct_value(expense_params[:amount])
 
     @expense = Expense.find(params[:id])
 
     @expenseTags = @expense.get_tags
 
-    @tags = Tag.where(:user_id => current_user[:id]).includes(:user).order('name asc').all
+    @tags = Tag.where(:user_id => current_user[:id]).includes(:user).order('name asc').load
 
-    if @expense.update_attributes(params[:expense])
+    if @expense.update_attributes(expense_params)
       redirect_to expenses_path, notice: (I18n.t 'Expense was successfully updated.')
     else
       render action: "edit"
@@ -114,7 +126,7 @@ class ExpensesController < ApplicationController
   end
 
   def del_tag
-    # @expense = Expense.find(params[:id])
+    # @expense = Expense.find(expense_params[:id])
 
     @expense_tag_association = ExpensesTagsAssociation.find(params[:tag][:id])
 
@@ -219,7 +231,7 @@ class ExpensesController < ApplicationController
     if @direction.nil?
       @direction = "desc"
     else
-      @direction = (params[:direction] == "asc") ? "desc" : "asc"
+      @direction = (expense_params[:direction] == "asc") ? "desc" : "asc"
     end
 
     if order.nil?
