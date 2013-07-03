@@ -19,9 +19,9 @@
         <tr>
           <th><%= I18n.t 'id' %></th>
           <th></th>
-          <th><%= link_to (I18n.t 'description'), {:sort => "description", :direction => @direction} %><i class="<%= (params[:sort] == 'description') ? @order_icon : '' %>"></i></th>
-          <th class="amount"><%= link_to (I18n.t 'value'), {:sort => "amount", :direction => @direction} %><i class="<%= (params[:sort] == 'amount') ? @order_icon : '' %>"></i></th>
-          <th><%= link_to (I18n.t 'expense date'), {:sort => "date", :direction => @direction} %><i class="<%= (params[:sort] == 'date' || params[:sort].nil?) ? @order_icon : '' %>"></i></th>
+          <th><%= I18n.t 'description' %></th>
+          <th class="amount"><%= I18n.t 'value' %></th>
+          <th><%= I18n.t 'expense date' %></th>
           <th><%= I18n.t 'tags' %></th>
           <th></th>
         </tr>
@@ -70,16 +70,18 @@
         </td>
       </tr>
     <% end %>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><%= I18n.t 'sum' %>:</td>
+          <td id="sum"><%= number_to_currency @expenses_sum %></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tfoot>
     </table>
-    <% if @expenses_sum > 0 %>
-    <table class="table">
-      <tr class="info">
-        <td><%= I18n.t 'sum' %>:</td>
-        <td><%= number_to_currency @expenses_sum %></td>
-      </tr>
-    </table>
-    <% end %>
-    <div id="pager" style="margin: auto;"></div>
   </div>
   <div class="tab-pane" id="charts1">
     <div id="pieChart2" class="chart"></div>
@@ -105,22 +107,24 @@
       jQuery('#options').toggle('slow');
     })
 
-    jQuery('#pager').smartpaginator(
-      { totalrecords: <%= @expenses.count %>,
-        recordsperpage: 10,
-        datacontainer: 'expensesTable',
-        dataelement: 'tr',
-        theme: 'white',
-        next: '<%= I18n.t 'next' %>',
-        prev: '<%= I18n.t 'prev' %>',
-        first: '<%= I18n.t 'first' %>',
-        last: '<%= I18n.t 'last' %>',
-        go: '<%= I18n.t 'go' %>',
-        display: "single",
-        length: 5
-      }
-    );
-  })
+    jQuery('#expensesTable').dataTable({
+      "fnFooterCallback": function ( nRow, aaData, iStart, iEnd, aiDisplay ) {
+
+            var expenses_sum = 0;
+            for ( var i=0 ; i<aiDisplay.length ; i++ )
+            {
+                Globalize.culture("pl");
+                amount = Globalize.parseFloat(Globalize.format(aaData[aiDisplay[i]][3], "c"));
+                console.log(amount);
+                expenses_sum += Number(amount);
+            }
+            
+            jQuery("#sum").html(Globalize.format(expenses_sum, "c"));
+            // jQuery("#sum").html(expenses_sum, "c");
+        }
+    });
+    
+  });
 </script>
 <script type="text/javascript">
   jQuery(function () {

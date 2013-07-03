@@ -17,7 +17,9 @@
 //= require bootstrap-datepicker-activation.js
 //= require chosen.jquery.min.js
 //= require highcharts.js
-//= require smartpaginator.js
+//= require jquery.dataTables.min.js
+//= require jqueryui.globalize.js
+//= require globalize.culture.pl.js
 //
 // disabled require tree to prevent active admin JS loading on every page - brakes some jQuery :/
 //= #require_tree .
