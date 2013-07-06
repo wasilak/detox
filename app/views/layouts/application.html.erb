@@ -46,7 +46,7 @@
 						 		overBudget
 						 		<% end %>
 						 		"><%= number_to_currency @remaining_budget %>
-						 	</span> (<%= number_to_currency @budget_left_per_day %>/<%= I18n.t 'day' %><span class="ttip" title="<%= @days_left_in_budget %> <%= I18n.t 'days' %> x <%= number_to_currency @budget_left_per_day %> = <%= number_to_currency @remaining_budget %>"><i class="icon-question-sign"></i></span>)
+						 	</span> (<%= number_to_currency @budget_left_per_day %>/<%= I18n.t 'day' %><span class="ttip" title="<%= @days_left_in_budget %> <%= I18n.t 'days' %> x <%= number_to_currency @budget_left_per_day %> = <%= number_to_currency (@budget_left_per_day * @days_left_in_budget) %>"><i class="icon-question-sign"></i></span>)
 					 	<% end %>
 					</div>
         <div class="buttonNew">
