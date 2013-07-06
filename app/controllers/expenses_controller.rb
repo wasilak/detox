@@ -196,20 +196,18 @@ class ExpensesController < ApplicationController
     tags = {}
     expenses.each do |expense|
       expense.expenses_tags_association.each do |assoc|
-        unless assoc.tag.nil?
-          if tags[assoc.tag.name].nil?
-            tags[assoc.tag.name] = 0
-          end
-
-          if expense.half == 1
-            tags[assoc.tag.name] += expense.amount / 2
-          else
-            tags[assoc.tag.name] += expense.amount
-          end
-        end
+        calculate_used_tags assoc, tags, expense
       end
     end
     tags
+  end
+
+  def calculate_used_tags assoc, tags, expense
+    unless assoc.tag.nil?
+      tags[assoc.tag.name] = 0 if tags[assoc.tag.name].nil?
+
+      tags[assoc.tag.name] += expense.half == 1 ? expense.amount / 2 : expense.amount
+    end
   end
 
   def calculate_expenses_sum expenses
