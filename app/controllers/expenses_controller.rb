@@ -95,15 +95,19 @@ class ExpensesController < ApplicationController
 
     @expense = Expense.find(params[:id])
 
-    @expenseTags = @expense.get_tags
-
-    @tags = Tag.where(:user_id => current_user[:id]).includes(:user).order('name asc').load
+    update_prepare_tags
 
     if @expense.update_attributes(expense_params)
       redirect_to expenses_path, notice: (I18n.t 'Expense was successfully updated.')
     else
       render action: "edit"
     end
+  end
+
+  def update_prepare_tags
+    @expenseTags = @expense.get_tags
+
+    @tags = Tag.where(:user_id => current_user[:id]).includes(:user).order('name asc').load
   end
 
   # DELETE /expenses/1
@@ -169,34 +173,32 @@ class ExpensesController < ApplicationController
   end
 
   def expenses_chart2 expenses
-    # expenses = Expense.get_expenses_budget(
-    #   current_user[:id],
-    #   session[:budget][:dateStart],
-    #   session[:budget][:dateEnd]
-    # )
 
-    used_tags = {}
-    expenses.each do |expense|
-      expense.tags.each do |tag|
-        if !tag.nil? and tag.budget
-          if used_tags[tag.name].nil?
-            used_tags[tag.name] = 0
-          end
-
-          if expense.half == 1
-            used_tags[tag.name] += expense.amount / 2
-          else
-            used_tags[tag.name] += expense.amount
-          end
-        end
-      end
-    end
+    used_tags = chart2_prepare_used_tags expenses
 
     chart_data = []
     used_tags.each do |tag, sum|
       chart_data.push([tag, sum])
     end
     chart_data
+  end
+
+  def chart2_prepare_used_tags expenses
+    used_tags = {}
+    expenses.each do |expense|
+      expense.tags.each do |tag|
+        expenses_chart2_tags tag, used_tags, expense
+      end
+    end
+    used_tags
+  end
+
+  def expenses_chart2_tags tag, used_tags, expense
+    if !tag.nil? and tag.budget
+      used_tags[tag.name] = 0 if used_tags[tag.name].nil?
+      used_tags[tag.name] += expense.half == 1 ? expense.amount / 2 : expense.amount
+    end
+    used_tags
   end
 
   def used_tags expenses
