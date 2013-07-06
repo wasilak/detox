@@ -34,33 +34,55 @@ class ApplicationController < ActionController::Base
 
   def remaining_budget
     if current_user and session[:budget]
+
       if session[:budget][:id] != 0
-        expenses = Expense.get_expenses_budget(
-          current_user[:id],
-          session[:budget][:dateStart],
-          session[:budget][:dateEnd]
-          )
-
-        expenses_sum = 0
-        expenses.each do |expense|
-          if expense[:half] == 1
-            expenses_sum += expense[:amount] / 2
-          else
-            expenses_sum += expense[:amount]
-          end
-        end
-
-        budget_amount = Budget.find(session[:budget][:id])
-        @remaining_budget = budget_amount[:amount] - expenses_sum
-
-        @remaining_budget_percentage = (100*@remaining_budget)/budget_amount[:amount]
-
-        @days_left_in_budget = (session[:budget][:dateEnd] - Date.today).to_i
-        @budget_left_per_day = @remaining_budget / @days_left_in_budget
+      
+        calculate_budget
+     
       else
         @remaining_budget = 0
         @remaining_budget_percentage = 0
       end
+    end
+  end
+
+  def calculate_budget
+    expenses = Expense.get_expenses_budget(
+          current_user[:id],
+          session[:budget][:dateStart],
+          session[:budget][:dateEnd]
+          )
+    calculate_budget_details expenses        
+  end
+
+  def calculate_expenses_sum expenses
+    expenses_sum = 0
+    expenses.each do |expense|
+      if expense[:half] == 1
+        expenses_sum += expense[:amount] / 2
+      else
+        expenses_sum += expense[:amount]
+      end
+    end
+    expenses_sum
+  end
+
+  def calculate_budget_details expenses
+    budget = Budget.find(session[:budget][:id]) rescue nil # so we can delete active budget
+
+    unless budget.nil?
+      @remaining_budget = budget[:amount] - calculate_expenses_sum(expenses)
+
+      @remaining_budget_percentage = (100*@remaining_budget)/budget[:amount]
+
+      if (Date.today < session[:budget][:dateEnd])
+        @days_left_in_budget = (session[:budget][:dateEnd] - Date.today).to_i
+        @budget_left_per_day = @remaining_budget / @days_left_in_budget
+      else
+        @days_left_in_budget = 0
+        @budget_left_per_day = 0
+      end
+
     end
   end
 
