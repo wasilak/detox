@@ -24,20 +24,27 @@ class ExpensesController < ApplicationController
       sort
     )
 
-    @tags_form = Tag.where({:user_id => current_user[:id]}).order('name asc').load
-    @tag_form_current = Expense.get_current_tags
-
-    #clear selected tags
-    Expense.set_tags []
+    get_tag_forms
 
     @budgets = Budget.get_all_user_budgets(current_user[:id])
 
     @expenses_sum = calculate_expenses_sum @expenses
 
-    @used_tags = used_tags @expenses
+    get_charts_and_tags @expenses
+  end
 
+  def get_tag_forms
+    @tags_form = Tag.where({:user_id => current_user[:id]}).order('name asc').load
+    @tag_form_current = Expense.get_current_tags
+  end
+
+  def get_charts_and_tags expenses
+    #clear selected tags
+    Expense.set_tags []
+
+    @used_tags = used_tags expenses
     @chart_data = expenses_chart1 @used_tags
-    @chart_data2 = expenses_chart2 @expenses
+    @chart_data2 = expenses_chart2 expenses
   end
 
   # GET /expenses/1
