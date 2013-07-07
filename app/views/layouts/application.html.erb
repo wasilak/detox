@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "locales/bootstrap-datepicker.#{I18n.locale}.js" %>
+  <%= javascript_include_tag "locales/jquery.validationEngine-#{I18n.locale}.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -84,6 +85,8 @@
         'todayHighlight': true,
         'language': '<%= I18n.locale %>'
       });
+
+      jQuery('.validate').validationEngine();
   	});
   </script>
 </body>

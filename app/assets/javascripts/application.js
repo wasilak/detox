@@ -19,6 +19,7 @@
 //= require jquery.dataTables.min.js
 //= require jqueryui.globalize.js
 //= require globalize.culture.pl.js
+//= require jquery.validationEngine.js
 //
 // disabled require tree to prevent active admin JS loading on every page - brakes some jQuery :/
 //= #require_tree .
