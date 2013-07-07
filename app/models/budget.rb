@@ -13,7 +13,7 @@ class Budget < ActiveRecord::Base
     #end
 
     def self.get_all_budgets user_id
-        self.where(:userId => user_id)
+        self.where(:userId => user_id).order("dateStart desc")
     end
 
     def self.get_all_user_budgets user_id
