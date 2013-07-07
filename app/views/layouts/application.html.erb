@@ -4,70 +4,63 @@
   <title><%= APP_CONFIG['app_name'] %> : <%= yield :title %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "locales/bootstrap-datepicker.#{I18n.locale}.js" %>
   <%= csrf_meta_tags %>
-  <script type="text/javascript">
-  	jQuery(document).ready(function(){
-  		jQuery('table i').tooltip();
-  		jQuery('table a').tooltip();
-  		jQuery('p a').tooltip();
-  		jQuery('.ttip').tooltip({'placement': 'bottom'});
-  	});
-  </script>
 </head>
 <body>
-	<% if ERRBIT_CONFIG['js_notifier'] %>
+  <% if ERRBIT_CONFIG['js_notifier'] %>
       <%= airbrake_javascript_notifier %>
     <% end %>
-	<div class="container">
-		<div class="row">
-		    <div class="span2">
-  				<% if user_signed_in? %>
+  <div class="container">
+    <div class="row">
+        <div class="span2">
+          <% if user_signed_in? %>
             <h4><%= APP_CONFIG['app_name'] %></h4>
-  				  <ul class="unstyled">
-  				    <li> <i class="icon-home"></i> <%= link_to (I18n.t 'home'), '/' %></li>
-  					  <li> <i class="icon-shopping-cart"></i> <%= link_to (I18n.t 'expenses'), expenses_path %></li>
-  					  <li> <i class="icon-list-alt"></i> <%= link_to (I18n.t 'budgets'), budgets_path %></li>
-  					  <li> <i class="icon-tags"></i> <%= link_to (I18n.t 'tags'), tags_path %></li>
-    					<% if session && current_user[:type_id] == 2 %>
-    						<li> <i class="icon-user"></i> <%= link_to  (I18n.t 'users'), users_path %></li>
-    					<% end %>
-  					  <li> <i class="icon-off"></i> <%= link_to  (I18n.t'log out'), destroy_user_session_path, :method => :delete %></li>
+            <ul class="unstyled">
+              <li> <i class="icon-home"></i> <%= link_to (I18n.t 'home'), '/' %></li>
+              <li> <i class="icon-shopping-cart"></i> <%= link_to (I18n.t 'expenses'), expenses_path %></li>
+              <li> <i class="icon-list-alt"></i> <%= link_to (I18n.t 'budgets'), budgets_path %></li>
+              <li> <i class="icon-tags"></i> <%= link_to (I18n.t 'tags'), tags_path %></li>
+              <% if session && current_user[:type_id] == 2 %>
+                <li> <i class="icon-user"></i> <%= link_to  (I18n.t 'users'), users_path %></li>
+              <% end %>
+              <li> <i class="icon-off"></i> <%= link_to  (I18n.t'log out'), destroy_user_session_path, :method => :delete %></li>
             </ul>
-  				<% end %>
-		    </div>
-		    <% if user_signed_in? %>
-				<div class="span10">
-					<div id="moneyLeft">
-						<% if @remaining_budget and session[:budget][:id] != 0 %>
-						 		<%= I18n.t 'remaining in budget' %> <b>"<%= session[:budget][:description] %>"</b>: <span class="
-						 		<% if @remaining_budget_percentage < 10 %>
-						 		belowBudget
-						 		<% else %>
-						 		overBudget
-						 		<% end %>
-						 		"><%= number_to_currency @remaining_budget %>
-						 	</span> (<%= number_to_currency @budget_left_per_day %>/<%= I18n.t 'day' %><span class="ttip" title="<%= @days_left_in_budget %> <%= I18n.t 'days' %> x <%= number_to_currency @budget_left_per_day %> = <%= number_to_currency (@budget_left_per_day * @days_left_in_budget) %>"><i class="icon-question-sign"></i></span>)
-					 	<% end %>
-					</div>
+          <% end %>
+        </div>
+        <% if user_signed_in? %>
+        <div class="span10">
+          <div id="moneyLeft">
+            <% if @remaining_budget and session[:budget][:id] != 0 %>
+                <%= I18n.t 'remaining in budget' %> <b>"<%= session[:budget][:description] %>"</b>: <span class="
+                <% if @remaining_budget_percentage < 10 %>
+                belowBudget
+                <% else %>
+                overBudget
+                <% end %>
+                "><%= number_to_currency @remaining_budget %>
+              </span> (<%= number_to_currency @budget_left_per_day %>/<%= I18n.t 'day' %><span class="ttip" title="<%= @days_left_in_budget %> <%= I18n.t 'days' %> x <%= number_to_currency @budget_left_per_day %> = <%= number_to_currency (@budget_left_per_day * @days_left_in_budget) %>"><i class="icon-question-sign"></i></span>)
+            <% end %>
+          </div>
         <div class="buttonNew">
           <%= link_to '<i class="icon-pencil"></i> '.html_safe+(I18n.t 'new expense'), new_expense_path, :class => 'btn btn-small' %>
         </div>
         </div>
-			<% end %>
-		    <div class="span10">
-  				<div class="row">
-  					<div class="span10">
-  						<% flash.each do |severity, message| %>
-  							<div class="alert">
-  								<button type="button" class="close" data-dismiss="alert">×</button>
-  								<%= content_tag(:div, message) %>
-  							</div>
-  						<% end %>
-  					</div>
-  				</div>
-				  <%= yield %>
-		    </div>
-	    </div>
+      <% end %>
+        <div class="span10">
+          <div class="row">
+            <div class="span10">
+              <% flash.each do |severity, message| %>
+                <div class="alert">
+                  <button type="button" class="close" data-dismiss="alert">×</button>
+                  <%= content_tag(:div, message) %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <%= yield %>
+        </div>
+      </div>
       <% if user_signed_in? && current_user[:type_id] == 2 %>
       <hr />
         <div class="row">
@@ -78,5 +71,20 @@
         </div>
       <% end %>
   </div>
+  <script type="text/javascript">
+  	jQuery(document).ready(function(){
+  		jQuery('table i').tooltip();
+  		jQuery('table a').tooltip();
+  		jQuery('p a').tooltip();
+  		jQuery('.ttip').tooltip({'placement': 'bottom'});
+      jQuery('.datepicker').datepicker({
+        'format'  : 'yyyy-mm-dd',
+        'weekStart' : 1,
+        'autoclose' : true,
+        'todayHighlight': true,
+        'language': '<%= I18n.locale %>'
+      });
+  	});
+  </script>
 </body>
 </html>

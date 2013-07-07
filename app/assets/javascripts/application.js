@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap.min.js
 //= require bootstrap-datepicker.js
-//= require bootstrap-datepicker-activation.js
 //= require chosen.jquery.min.js
 //= require highcharts.js
 //= require jquery.dataTables.min.js
