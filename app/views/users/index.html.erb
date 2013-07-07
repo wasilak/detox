@@ -5,16 +5,16 @@
 <br />
 <br />
 
-<table class="table table-striped table-hover table-condensed">
-  <tr>
-    <thead>
+<table class="table table-striped table-hover table-condensed" id="users_table">
+  <thead>
+    <tr>
       <th><%= I18n.t 'id' %></th>
       <th><%= I18n.t 'username' %></th>
       <th><%= I18n.t 'name' %></th>
       <th><%= I18n.t 'type' %></th>
       <th></th>
-    </thead>
-  </tr>
+    </tr>
+  </thead>
 <%
 n = 0
 @users.each do |user|
@@ -33,3 +33,8 @@ n = 0
 <% end %>
 </table>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    jQuery('#users_table').dataTable();
+  });  
+</script>
