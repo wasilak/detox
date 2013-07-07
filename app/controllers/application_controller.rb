@@ -73,16 +73,19 @@ class ApplicationController < ActionController::Base
     unless budget.nil?
       @remaining_budget = budget[:amount] - calculate_expenses_sum(expenses)
 
-      @remaining_budget_percentage = (100*@remaining_budget)/budget[:amount]
+      @remaining_budget_percentage = (100 * @remaining_budget) / budget[:amount]
 
-      if (Date.today < session[:budget][:dateEnd])
-        @days_left_in_budget = (session[:budget][:dateEnd] - Date.today).to_i
-        @budget_left_per_day = @remaining_budget / @days_left_in_budget
-      else
-        @days_left_in_budget = 0
-        @budget_left_per_day = 0
-      end
+      get_day_related_budget_details
+    end
+  end
 
+  def get_day_related_budget_details
+    if (Date.today < session[:budget][:dateEnd])
+      @days_left_in_budget = (session[:budget][:dateEnd] - Date.today).to_i
+      @budget_left_per_day = @remaining_budget / @days_left_in_budget
+    else
+      @days_left_in_budget = 0
+      @budget_left_per_day = 0
     end
   end
 
