@@ -79,4 +79,6 @@ Detox::Application.configure do
   config.i18n.default_locale = APP_CONFIG['locale']
 
   config.eager_load = true
+
+  config.exceptions_app = self.routes
 end
