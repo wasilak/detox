@@ -43,8 +43,8 @@ class ExpensesController < ApplicationController
     Expense.set_tags []
 
     @used_tags = used_tags expenses
-    @chart_data = expenses_chart1 @used_tags
-    @chart_data2 = expenses_chart2 expenses
+    @chart_data = expenses_chart expenses
+    @chart_data2 = expenses_chart expenses, true
   end
 
   # GET /expenses/1
@@ -164,17 +164,8 @@ class ExpensesController < ApplicationController
 
   private
 
-  def expenses_chart1 (used_tags)
-    chart_data = []
-    used_tags.each do |tag, sum|
-      chart_data.push([tag, sum])
-    end
-    chart_data
-  end
-
-  def expenses_chart2 expenses
-
-    used_tags = chart2_prepare_used_tags expenses
+  def expenses_chart expenses, budget = false
+    used_tags = expenses_chart_prepare_used_tags expenses, budget
 
     chart_data = []
     used_tags.each do |tag, sum|
@@ -183,20 +174,12 @@ class ExpensesController < ApplicationController
     chart_data
   end
 
-  def chart2_prepare_used_tags expenses
+  def expenses_chart_prepare_used_tags expenses, budget = false
     used_tags = {}
     expenses.each do |expense|
       expense.tags.each do |tag|
-        expenses_chart2_tags tag, used_tags, expense
+        calculate_used_tags tag, used_tags, expense, budget
       end
-    end
-    used_tags
-  end
-
-  def expenses_chart2_tags tag, used_tags, expense
-    if !tag.nil? and tag.budget
-      used_tags[tag.name] = 0 if used_tags[tag.name].nil?
-      used_tags[tag.name] += expense.half == 1 ? expense.amount / 2 : expense.amount
     end
     used_tags
   end
@@ -205,17 +188,17 @@ class ExpensesController < ApplicationController
     tags = {}
     expenses.each do |expense|
       expense.expenses_tags_association.each do |assoc|
-        calculate_used_tags assoc, tags, expense
+        calculate_used_tags assoc.tag, tags, expense
       end
     end
     tags
   end
 
-  def calculate_used_tags assoc, tags, expense
-    unless assoc.tag.nil?
-      tags[assoc.tag.name] = 0 if tags[assoc.tag.name].nil?
+  def calculate_used_tags tag, tags, expense, budget = false
+    if !tag.nil? and (budget ? tag.budget : true )
+      tags[tag.name] = 0 if tags[tag.name].nil?
 
-      tags[assoc.tag.name] += expense.half == 1 ? expense.amount / 2 : expense.amount
+      tags[tag.name] += expense.half == 1 ? expense.amount / 2 : expense.amount
     end
   end
 
