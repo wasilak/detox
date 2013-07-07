@@ -1,13 +1,13 @@
 <% title "Log in" %>
 <h4 class="center"><%= APP_CONFIG['app_name'] %></h4>
 
-<%= form_for(resource, :as => resource_name, :html => { :class => 'form-horizontal'}, :url => session_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :html => { :class => 'form-horizontal validate'}, :url => session_path(resource_name)) do |f| %>
   <div class="control-group">
-    <%= f.email_field :email, :placeholder => (I18n.t 'e-mail'), :class => 'input-block-level' %>
+    <%= f.email_field :email, :placeholder => (I18n.t 'e-mail'), :class => 'input-block-level validate[required, custom[email]]' %>
   </div>
 
   <div class="control-group">
-    <%= f.password_field :password, :placeholder => (I18n.t 'password'), :class => 'input-block-level' %>
+    <%= f.password_field :password, :placeholder => (I18n.t 'password'), :class => 'input-block-level validate[required]' %>
   </div>
 
   <div class="control-group">

@@ -1,0 +1,16 @@
+<div class="hero-unit" style="margin-top: 40px;">
+  <h1>error 500</h1>
+  <p>This means, that something had really gone wrong, sorry :/</p>
+  <% if user_signed_in? && current_user[:type_id] == 2 %>
+    Exception:
+    <p class="text-center text-error"><%= @exception %></p>
+    Backtrace:
+    <p class="text-center text-info">
+      <pre>
+        <% @exception.backtrace.each do |line| %>
+          <%= line %><br />
+        <% end %>
+      </pre>
+    </p>
+  <% end %>
+</div>

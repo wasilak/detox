@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::Base
 
+  rescue_from Exception, with: :render_500_page
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404_page_exception
+
   protect_from_forgery
 
   before_filter :authenticate_user!
@@ -100,4 +103,20 @@ class ApplicationController < ActionController::Base
   def log variable, info = ""
     logger.debug "\033[31m#{info} #{variable.inspect}\033[0m"
   end
+
+  def render_404_page_exception exception
+    @exception = exception
+    render "error_pages/404.html.erb", status: 404
+  end
+
+  def render_404_page 
+    @exception = 'Page not found.'
+    render "error_pages/404.html.erb", status: 404
+  end
+
+  def render_500_page exception
+    @exception = exception
+    render "error_pages/500.html.erb", status: 500
+  end
+
 end

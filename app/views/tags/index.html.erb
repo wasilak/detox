@@ -3,7 +3,7 @@
   <%= link_to '<i class="icon-pencil"></i> '.html_safe+(I18n.t 'new tag'), new_tag_path, :class => 'btn btn-small' %>
 </div>
 
-<table class="table table-striped table-hover table-condensed">
+<table class="table table-striped table-hover table-condensed" id="tags_table">
   <thead>
     <tr>
       <th><%= I18n.t 'id' %></th>
@@ -46,3 +46,8 @@ n = 0
 <% end %>
 </table>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    jQuery('#tags_table').dataTable();
+  });  
+</script>
