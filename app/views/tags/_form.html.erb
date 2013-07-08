@@ -1,4 +1,4 @@
-<%= form_for @tag, :html => {:class => 'validate'} do |f| %>
+<%= form_for @tag, :html => {:class => 'form-horizontal validate'} do |f| %>
   <% if @tag.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
@@ -10,23 +10,33 @@
       </ul>
     </div>
   <% end %>
+  
+  <%= f.hidden_field :user_id, :value => current_user[:id] %>
 
-  <div class="field">
-    <%= f.label :name, (I18n.t "name") %>
-    <%= f.text_field :name, :placeholder => (I18n.t "name"), :class => 'validate[required]' %>
+  <div class="control-group">
+    <%= f.label :name, (I18n.t "name"), {:class => 'control-label'} %>
+    <div class="controls">
+      <%= f.text_field :name, :placeholder => (I18n.t "name"), :class => 'validate[required]' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.hidden_field :user_id, :value => current_user[:id] %>
+
+  <div class="control-group">
+    <%= f.label :description, (I18n.t "description"), {:class => 'control-label'} %>
+    <div class="controls">
+      <%= f.text_area :description, :size => '30x4', :placeholder => (I18n.t "optional tag description goes here") %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description, (I18n.t "description") %>
-    <%= f.text_area :description, :size => '30x4', :placeholder => (I18n.t "optional tag description goes here") %>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= f.label :budget, (I18n.t 'budget'), 'class' => "checkbox inline" %>
+      <%= f.check_box :budget %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :budget, (I18n.t 'budget'), 'class' => "checkbox inline" %>
-    <%= f.check_box :budget %>
-  </div>
-  <div class="actions">
-    <%= f.submit :class => 'btn btn-small'%>
+
+  <div class="control-group">
+    <div class="controls">
+      <%= f.submit :class => 'btn btn-small'%>
+    </div>
   </div>
 <% end %>

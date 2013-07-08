@@ -1,18 +1,6 @@
 body
 {
-  background: image-url("stressed_linen.png") repeat 0 0;
-}
-
-.container
-{
-	-webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-	background: #fff;
-	margin-top: 20px;
-  min-width: 960px;
-  padding: 10px;
-  min-height: 520px;
+  // background: image-url("stressed_linen.png") repeat 0 0;
 }
 
 @mixin error {
@@ -29,17 +17,6 @@ body
 td.amount, th.amount
 {
 	text-align: right;
-}
-
-.buttonNew
-{
-	float:right;
-}
-
-#moneyLeft
-{
-    margin-bottom: 20px;
-    float:left;
 }
 
 .belowBudget
