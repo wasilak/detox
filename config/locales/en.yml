@@ -75,6 +75,7 @@ en:
     admin: 'admin'
     select: 'select'
     Sign in with Google: 'Sign in with Google'
+    Google: 'Google'
     day: 'day'
     half: 'half'
     half of amount: 'half of amount'
@@ -92,3 +93,4 @@ en:
     Budget was successfully deleted: "Budget was successfully deleted"
     show options: "show options"
     filter: "filter"
+    devise.failure.user.not_found_in_database: "Incorretc user or password."

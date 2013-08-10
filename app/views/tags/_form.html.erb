@@ -13,30 +13,34 @@
   
   <%= f.hidden_field :user_id, :value => current_user[:id] %>
 
-  <div class="control-group">
-    <%= f.label :name, (I18n.t "name"), {:class => 'control-label'} %>
-    <div class="controls">
-      <%= f.text_field :name, :placeholder => (I18n.t "name"), :class => 'validate[required]' %>
+  <div class="form-group">
+    <%= f.label :name, (I18n.t "name"), {:class => 'col-lg-2 control-label'} %>
+    <div class="col-lg-4">
+      <%= f.text_field :name, :placeholder => (I18n.t "name"), :class => 'form-control validate[required]' %>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :description, (I18n.t "description"), {:class => 'control-label'} %>
-    <div class="controls">
-      <%= f.text_area :description, :size => '30x4', :placeholder => (I18n.t "optional tag description goes here") %>
+  <div class="form-group">
+    <%= f.label :description, (I18n.t "description"), {:class => 'col-lg-2 control-label'} %>
+    <div class="col-lg-4">
+      <%= f.text_area :description, :size => '30x4', :placeholder => (I18n.t "optional tag description goes here"), :class=>"form-control" %>
     </div>
   </div>
 
-  <div class="control-group">
-    <div class="controls">
-      <%= f.label :budget, (I18n.t 'budget'), 'class' => "checkbox inline" %>
-      <%= f.check_box :budget %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-4">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :budget %> <%= f.label :budget, (I18n.t 'budget'), 'class' => "checkbox" %>
+        </label>
+      </div>
     </div>
   </div>
 
-  <div class="control-group">
-    <div class="controls">
-      <%= f.submit :class => 'btn btn-small'%>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-4">
+      <%= f.submit :class => 'btn btn-primary btn-small' %>
     </div>
   </div>
+
 <% end %>

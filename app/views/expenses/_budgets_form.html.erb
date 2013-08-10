@@ -1,4 +1,4 @@
-<div class="span6">
+<div class="col-lg-6">
     <% if session[:budget]
     defaultBudget = session[:budget][:id]
   else
@@ -13,7 +13,7 @@
           end,
           defaultBudget
           ) %>
-      <%= select_tag :budget, options, :class => 'input-xxlarge' %>
+      <%= select_tag :budget, options, :class => 'form-control' %>
     <% end %>
   <% end %>
 </div>

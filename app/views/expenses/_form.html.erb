@@ -16,40 +16,41 @@
 
   <%= f.hidden_field :userId, {:value => current_user[:id]} %>
   
-  <div class="control-group">
-    <%= f.label :description, (I18n.t 'description'), {:class => 'control-label'} %>
-    <div class="controls">
-      <%= f.text_field :description, :placeholder => (I18n.t "description"), :class => 'input-xxlarge validate[required]' %>
+  <div class="form-group">
+    <%= f.label :description, (I18n.t 'description'), {:class => 'col-lg-2 control-label'} %>
+    <div class="col-lg-4">
+      <%= f.text_field :description, :placeholder => (I18n.t "description"), :class => 'form-control validate[required]' %>
     </div>
   </div>
   
-  <div class="control-group">
-    <%= f.label :amount, (I18n.t 'value'), {:class => 'control-label'} %>
-    <div class="controls">
-      <div class="field input-append">
-        <%= f.text_field :amount, :placeholder => (I18n.t "value"), :class => 'input-large validate[required]' %>
-        <span class="add-on">zł</span>
+  <div class="form-group">
+    <%= f.label :amount, (I18n.t 'value'), {:class => 'col-lg-2 control-label'} %>
+    <div class="col-lg-2 input-group">
+      <%= f.text_field :amount, :placeholder => (I18n.t "value"), :class => 'form-control validate[required]' %>
+      <span class="input-group-addon">zł</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :date, (I18n.t 'expense date'), {:class => 'col-lg-2 control-label'} %>
+    <div class="col-lg-2">
+      <%= f.text_field :date, :placeholder => (I18n.t "expense date"), :class => "form-control datepicker validate[required]" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-4">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :half %> <%= f.label :half, (I18n.t 'half'), 'class' => "checkbox inline" %>
+        </label>
       </div>
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :date, (I18n.t 'expense date'), {:class => 'control-label'} %>
-    <div class="controls">
-      <%= f.text_field :date, :placeholder => (I18n.t "expense date"), :class => "input-small datepicker validate[required]" %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <div class="controls">
-      <%= f.label :half, (I18n.t 'half'), 'class' => "checkbox inline" %>
-      <%= f.check_box :half %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <div class="controls">
-      <%= f.submit :class => 'btn btn-small btn-info' %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-4">
+      <%= f.submit :class => 'btn btn-primary btn-small' %>
     </div>
   </div>
 <% end %>

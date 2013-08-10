@@ -2,17 +2,32 @@
 <h4 class="center"><%= APP_CONFIG['app_name'] %></h4>
 
 <%= form_for(resource, :as => resource_name, :html => { :class => 'form-horizontal validate'}, :url => session_path(resource_name)) do |f| %>
-  <div class="control-group">
-    <%= f.email_field :email, :placeholder => (I18n.t 'e-mail'), :class => 'input-block-level validate[required, custom[email]]' %>
+
+  <div class="form-group">
+    <div class="col-lg-12">
+      <%= f.email_field :email, :placeholder => (I18n.t 'e-mail'), :class => 'form-control validate[required, custom[email]]' %>
+    </div>
   </div>
 
-  <div class="control-group">
-    <%= f.password_field :password, :placeholder => (I18n.t 'password'), :class => 'input-block-level validate[required]' %>
+  <div class="form-group">
+    <div class="col-lg-12">
+      <%= f.password_field :password, :placeholder => (I18n.t 'password'), :class => 'form-control validate[required]' %>
+    </div>
   </div>
 
-  <div class="control-group">
-    <div class="control">
-      <%= f.submit (I18n.t "log in"), :class => 'btn btn-block' %>
+  <div class="form-group">
+    <div class="col-lg-6">
+      <%- if devise_mapping.omniauthable? %>
+        <%- resource_class.omniauth_providers.each do |provider| %>
+          <% provider.to_s.titleize == 'Google' ? button_class = 'zocial google login_button' : '' %>
+          <%= link_to (I18n.t "#{provider.to_s.titleize}"), omniauth_authorize_path(resource_name, provider), :class => button_class %><br />
+        <% end -%>
+      <% end -%>
+    </div>
+    <div class="col-lg-6">
+      <%= button_tag(type: 'submit', :class => 'btn btn-block btn-primary') do %>
+        <i class="icon-lock"></i> <%= (I18n.t "log in") %>
+      <% end %>
     </div>
   </div>
   <% if devise_mapping.rememberable? -%>

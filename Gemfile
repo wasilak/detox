@@ -60,3 +60,5 @@ gem 'binding_of_caller'
 gem 'newrelic_rpm'
 
 gem "select2-rails"
+
+gem "font-awesome-rails"
