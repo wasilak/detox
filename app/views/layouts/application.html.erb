@@ -121,9 +121,9 @@
   <script type="text/javascript">
   	jQuery(document).ready(function(){
   		jQuery('table i').tooltip();
-  		jQuery('table a').tooltip();
-  		jQuery('p a').tooltip();
-  		jQuery('.ttip').tooltip({'placement': 'bottom'});
+      jQuery('table a').tooltip();
+      jQuery('p a').tooltip();
+      jQuery('.ttip').tooltip({'placement': 'bottom'});
       jQuery('.datepicker').datepicker({
         'format'  : 'yyyy-mm-dd',
         'weekStart' : 1,
@@ -131,6 +131,13 @@
         'todayHighlight': true,
         'language': '<%= I18n.locale %>'
       });
+
+  		jQuery('select').select2({
+    placeholder: '',
+    containerCssClass: 'span12',
+    allowClear: true,
+    minimumResultsForSearch: 10
+});
 
       jQuery('.validate').validationEngine();
   	});
