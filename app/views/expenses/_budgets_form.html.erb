@@ -1,18 +1,19 @@
-<%
-if session[:budget]
-  defaultBudget = session[:budget][:id]
-else
-  defaultBudget = ''
-end
-if @budgets.count > 0 %>
-  <%= form_tag set_budget_path, :method => 'POST', :class => 'form-inline', :id => 'formBudget' do %>
-    <% options = options_for_select(
-      [["all expenses","all"]] +
-        @budgets.collect do |budget|
-          ["#{budget.description} (#{budget.dateStart} - #{budget.dateEnd}) - #{number_to_currency budget.amount}", budget.id]
-        end,
-        defaultBudget
-        ) %>
-    <%= select_tag :budget, options, :class => 'input-xxlarge' %>
+<div class="span6">
+    <% if session[:budget]
+    defaultBudget = session[:budget][:id]
+  else
+    defaultBudget = ''
+  end
+  if @budgets.count > 0 %>
+    <%= form_tag set_budget_path, :method => 'POST', :class => 'form-inline', :id => 'formBudget' do %>
+      <% options = options_for_select(
+        [["all expenses","all"]] +
+          @budgets.collect do |budget|
+            ["#{budget.description} (#{budget.dateStart} - #{budget.dateEnd}) - #{number_to_currency budget.amount}", budget.id]
+          end,
+          defaultBudget
+          ) %>
+      <%= select_tag :budget, options, :class => 'input-xxlarge' %>
+    <% end %>
   <% end %>
-<% end %>
+</div>

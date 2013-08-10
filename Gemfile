@@ -49,7 +49,7 @@ gem 'airbrake'
 
 gem 'rails-i18n'
 
-gem 'devise', :github => 'plataformatec/devise', :branch => 'rails4'
+gem 'devise'
 
 gem 'omniauth-google-apps'
 
@@ -58,3 +58,5 @@ gem 'yaml_db'
 gem 'binding_of_caller'
 
 gem 'newrelic_rpm'
+
+gem "select2-rails"

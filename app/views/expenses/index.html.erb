@@ -1,14 +1,12 @@
 <% title "Expenses" %>
-<span id="show_options"><%= I18n.t 'show options' %></span>
-<div id="options">
-  <%= render 'budgets_form' %>
-  <%= render 'tags_form' %>
-</div>
+<span id="show_options"></span>
+
 <div id="tabs">
   <ul class="nav nav-tabs">
     <li><a href="#tabular" data-toggle="tab"><%= I18n.t 'table' %></a></li>
     <li><a href="#charts1" data-toggle="tab"><%= I18n.t 'budget expenses categories' %></a></li>
     <li><a href="#charts2" data-toggle="tab"><%= I18n.t 'all expenses categories' %></a></li>
+    <li><a href="#charts3" data-toggle="tab"><%= I18n.t 'show options' %></a></li>
   </ul>
 </div>
 
@@ -89,6 +87,12 @@
   <div class="tab-pane" id="charts2">
     <div id="pieChart" class="chart"></div>
   </div>
+    <div class="tab-pane" id="charts3">
+      <div class="row-fluid">
+        <%= render 'budgets_form' %>
+        <%= render 'tags_form' %>
+      </div>
+    </div>
 </div>
 <script type="text/javascript">
   jQuery('#tabs a').click(function (e) {
@@ -99,12 +103,6 @@
   jQuery(document).ready(function(){
     jQuery('#budget').change(function(){
       jQuery('#formBudget').submit();
-    })
-
-    jQuery('#options').hide();
-
-    jQuery('#show_options').click(function(){
-      jQuery('#options').toggle('slow');
     })
 
     jQuery('#expensesTable').dataTable({
