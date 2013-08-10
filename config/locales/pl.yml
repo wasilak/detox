@@ -82,6 +82,7 @@ pl:
     admin: 'admin'
     select: 'wybierz'
     Sign in with Google: 'Zaloguj się przez Google'
+    Google: 'Google'
     day: 'dzień'
     half: 'połowa'
     half of amount: 'połowa kwoty'
@@ -99,3 +100,5 @@ pl:
     Budget was successfully deleted: "Budżet został usunięty"
     show options: "pokaż opcje"
     filter: "filtruj"
+    devise.failure.user.not_found_in_database: "Niepoprawny adres e-mail lub hasło."
+    

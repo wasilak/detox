@@ -1,4 +1,4 @@
-<div class="span5">
+<div class="col-lg-5">
   <%= form_tag set_tag_filter_url, :method => 'POST', :class => 'form-inline', :id => 'formTags' do %>
     <% options = options_for_select(
       [["select tag",""]] +
@@ -7,9 +7,9 @@
         end,
           @tag_form_current
         ) %>
-    <%= select_tag :tag, options, :class => 'input-xxlarge', :multiple => true %><br />
+    <%= select_tag :tag, options, :class => 'form-control', :multiple => true %><br />
   <% end %>
 </div>
-<div class="span1">
-    <%= submit_tag (I18n.t 'filter'), :class => 'btn btn-small span12' %>
+<div class="col-lg-1">
+    <%= submit_tag (I18n.t 'filter'), :class => 'btn btn-primary btn-small col-lg-12' %>
 </div>
