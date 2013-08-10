@@ -9,7 +9,7 @@ class Detox < Thor
     puts "* performing \033[36mDB migrations\033[0m"
     system('bundle exec rake db:migrate')
     puts "* cleaning \033[36massets\033[0m"
-    system('bundle exec rake assets:clean')
+    system('bundle exec rake assets:clobber')
     puts "* precompiling \033[36massets\033[0m"
     system('bundle exec rake assets:precompile')
     if restart
