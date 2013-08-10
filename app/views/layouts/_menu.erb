@@ -81,9 +81,22 @@
                   <% end %>
                 </li>
               </ul>
-              <%= link_to '<i class="icon-pencil icon-white"></i> '.html_safe+(I18n.t 'new expense'), new_expense_path, :class => 'btn btn-primary btn-small navbar-btn pull-right' %>
+              <%= link_to '<i class="icon-pencil icon-white"></i> '.html_safe+(I18n.t 'new expense'), '#new_expense_modal', :class => 'btn btn-primary btn-small navbar-btn pull-right', :id=>"new_expense_modal_button", "data-toggle"=>"modal", "data-remote"=> new_expense_path %>
             </div>
           </div>
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="new_expense_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><%= I18n.t 'new expense' %></h4>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
