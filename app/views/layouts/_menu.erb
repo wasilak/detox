@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-lg-12">
+      <div class="navbar">
+          <div class="container">
+
+          <!-- .navbar-toggle is used as the toggle for collapsed navbar content -->
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+           
+
+            <a class="navbar-brand" href="/"><%= APP_CONFIG['app_name'] %></a>
+             
+            <!-- Place everything within .nav-collapse to hide it until above 768px -->
+            <div class="nav-collapse collapse navbar-responsive-collapse nav-collapse-scrollable">
+              <ul class="nav navbar-nav">
+
+                <li class="dropdown <%= controller.controller_name == 'expenses' ? 'active' : '' %>">
+                  <%= link_to expenses_path, {:class=>"dropdown-toggle", "data-toggle"=>"dropdown"} do %>
+                    <i class="icon-shopping-cart"></i> <%= (I18n.t 'expenses') %> <b class="caret"></b>
+                  <% end %> 
+                  <ul class="dropdown-menu">
+                    <li class="dropdown <%= controller.controller_name == 'expenses' && controller.action_name == 'index' ? 'active' : '' %>">
+                      <%= link_to (I18n.t 'expenses'), expenses_path %>
+                    </li>
+                    <li class="dropdown <%= controller.controller_name == 'expenses' && controller.action_name == 'new' ? 'active' : '' %>">
+                      <%= link_to (I18n.t 'new expense'), new_expense_path %>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="dropdown <%= controller.controller_name == 'budgets' ? 'active' : '' %>">
+                  <%= link_to budgets_path, {:class=>"dropdown-toggle", "data-toggle"=>"dropdown"} do %>
+                    <i class="icon-list-alt"></i> <%= (I18n.t 'budgets') %> <b class="caret"></b>
+                  <% end %>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown <%= controller.controller_name == 'budgets' && controller.action_name == 'index' ? 'active' : '' %>">
+                      <%= link_to (I18n.t 'budgets'), budgets_path %>
+                    </li>
+                    <li class="dropdown <%= controller.controller_name == 'budgets' && controller.action_name == 'new' ? 'active' : '' %>">
+                      <%= link_to (I18n.t 'new budget'), new_budget_path %>
+                    </li>
+                  </ul>
+                </li>
+
+                <li class="dropdown <%= controller.controller_name == 'tags' ? 'active' : '' %>">
+                  <%= link_to tags_path, {:class=>"dropdown-toggle", "data-toggle"=>"dropdown"}  do %>
+                    <i class="icon-tags"></i> <%= (I18n.t 'tags') %> <b class="caret"></b>
+                  <% end %> 
+                  <ul class="dropdown-menu">
+                    <li class="dropdown <%= controller.controller_name == 'tags' && controller.action_name == 'index' ? 'active' : '' %>">
+                      <%= link_to (I18n.t 'tags'), tags_path %>
+                    </li>
+                    <li class="dropdown <%= controller.controller_name == 'tags' && controller.action_name == 'new' ? 'active' : '' %>">
+                      <%= link_to (I18n.t 'new tag'), new_tag_path %>
+                    </li>
+                  </ul>
+                </li>
+
+                <% if session && current_user[:type_id] == 2 %>
+                  <li class="dropdown <%= controller.controller_name == 'users' ? 'active' : '' %> ">
+                    <%= link_to users_path, {:class=>"dropdown-toggle", "data-toggle"=>"dropdown"}  do %>
+                      <i class="icon-user"></i> <%= (I18n.t 'users') %> <b class="caret"></b>
+                    <% end %>
+                    <ul class="dropdown-menu">
+                      <li class="dropdown <%= controller.controller_name == 'users' && controller.action_name == 'index' ? 'active' : '' %>">
+                        <%= link_to (I18n.t 'users'), users_path %>
+                      </li>
+                      <li class="dropdown <%= controller.controller_name == 'users' && controller.action_name == 'new' ? 'active' : '' %>">
+                        <%= link_to (I18n.t 'new user'), new_user_path %>
+                      </li>
+                    </ul>
+                  </li>
+                <% end %>
+                
+                <li class="<%= controller.controller_name == '' ? 'active' : '' %>">
+                  <%= link_to destroy_user_session_path, :method => :delete do %>
+                    <i class="icon-off"></i> <%= (I18n.t'log out') %>
+                  <% end %>
+                </li>
+              </ul>
+              <%= link_to '<i class="icon-pencil icon-white"></i> '.html_safe+(I18n.t 'new expense'), new_expense_path, :class => 'btn btn-primary btn-small navbar-btn pull-right' %>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>

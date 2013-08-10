@@ -59,8 +59,12 @@ module Detox
     # end
 
     config.to_prepare do
-      Devise::SessionsController.layout proc{ |controller| action_name == 'new' ? "login"   : "application" }
-    end
+      Devise::SessionsController.layout "login"
+      Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application"   : "login" }
+      Devise::ConfirmationsController.layout "login"
+      Devise::UnlocksController.layout "login"            
+      Devise::PasswordsController.layout "login"        
+  end
 
     config.assets.initialize_on_precompile = false
   end

@@ -6,6 +6,17 @@
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "locales/jquery.validationEngine-#{I18n.locale}.js" %>
   <%= csrf_meta_tags %>
+
+  <style type="text/css">
+    div.container {
+      margin-top: 40px;
+    }
+    div.centered {
+      margin-left: auto;
+      margin-right: auto;
+      float: none;
+    }
+  </style>
 </head>
 <body>
     <% if ERRBIT_CONFIG['js_notifier'] %>
@@ -13,7 +24,7 @@
     <% end %>
     <div class="container" style="background:none;">
         <div class="row">
-            <div class="span8 offset2">
+            <div class="col-lg-6 centered">
                 <% flash.each do |severity, message| %>
                     <div class="alert">
                         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -23,7 +34,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="span4 offset4">
+            <div class="col-lg-4 centered">
                 <div class="well" style="background:#fff">
                     <%= yield %>
                 </div>
