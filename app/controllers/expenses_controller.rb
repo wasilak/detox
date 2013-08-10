@@ -1,5 +1,7 @@
 class ExpensesController < ApplicationController
 
+  layout Proc.new { |controller| controller.request.xhr? ? "modal" : "application" }
+
   # include ActionView::Helpers::NumberHelper
 
   def expense_params
