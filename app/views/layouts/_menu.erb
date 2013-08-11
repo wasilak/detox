@@ -17,18 +17,10 @@
             <div class="nav-collapse collapse navbar-responsive-collapse nav-collapse-scrollable">
               <ul class="nav navbar-nav">
 
-                <li class="dropdown <%= controller.controller_name == 'expenses' ? 'active' : '' %>">
-                  <%= link_to expenses_path, {:class=>"dropdown-toggle", "data-toggle"=>"dropdown"} do %>
-                    <i class="icon-shopping-cart"></i> <%= (I18n.t 'expenses') %> <b class="caret"></b>
-                  <% end %> 
-                  <ul class="dropdown-menu">
-                    <li class="dropdown <%= controller.controller_name == 'expenses' && controller.action_name == 'index' ? 'active' : '' %>">
-                      <%= link_to (I18n.t 'expenses'), expenses_path %>
-                    </li>
-                    <li class="dropdown <%= controller.controller_name == 'expenses' && controller.action_name == 'new' ? 'active' : '' %>">
-                      <%= link_to (I18n.t 'new expense'), new_expense_path %>
-                    </li>
-                  </ul>
+                <li class="<%= controller.controller_name == 'expenses' ? 'active' : '' %>">
+                  <%= link_to expenses_path do %>
+                    <i class="icon-shopping-cart"></i> <%= (I18n.t 'expenses') %>
+                  <% end %>
                 </li>
 
                 <li class="dropdown <%= controller.controller_name == 'budgets' ? 'active' : '' %>">
