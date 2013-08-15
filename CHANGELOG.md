@@ -1,3 +1,7 @@
+## v2.3.5 15.08.2013
+
+* fixed redirect after creating new expense
+
 ## v2.3.4 15.08.2013
 
 * fixed modal window clearing body issue
