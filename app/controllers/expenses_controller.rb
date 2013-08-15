@@ -93,7 +93,7 @@ class ExpensesController < ApplicationController
       expense_tag_association = ExpensesTagsAssociation.new(association)
       expense_tag_association.save
 
-      redirect_to edit_expense_path(@expense), notice: (I18n.t 'Expense was successfully created.')
+      redirect_to expenses_path, notice: (I18n.t 'Expense was successfully created.')
     else
       render action: "new"
     end
