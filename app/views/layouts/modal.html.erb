@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%# stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
   <%# javascript_include_tag "application" %>
-  <%# javascript_include_tag "locales/jquery.validationEngine-#{I18n.locale}.js" %>
-  <%# csrf_meta_tags %>
+  <%= csrf_meta_tags %>
+  <%= javascript_include_tag "locales/bootstrap-datepicker.#{I18n.locale}.js" %>
+  <%= javascript_include_tag "locales/jquery.validationEngine-#{I18n.locale}.js" %>
 
 </head>
 <body>
@@ -16,9 +17,24 @@
         </div>
   </div>
   <script type="text/javascript">
-    jQuery(document).ready(function(){
-      jQuery('.validate').validationEngine();
-    });
+      $(document).ready( function(){
+          $('.datepicker').datepicker({
+              'format'  : 'yyyy-mm-dd',
+              'weekStart' : 1,
+              'autoclose' : true,
+              'todayHighlight': true,
+              'language': '<%= I18n.locale %>'
+            });
+
+          $('.validate').validationEngine();
+
+          $('select').select2({
+              placeholder: '',
+              containerCssClass: 'col-lg-12',
+              allowClear: true,
+              minimumResultsForSearch: 10
+          });
+      });
   </script>
 </body>
 </html>

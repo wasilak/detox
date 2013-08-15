@@ -9,7 +9,7 @@ class ExpensesController < ApplicationController
   end
 
   def tag_params
-    params.require(:tag).permit(:name, :description, :user_id, :budget)
+    params.require(:tag).permit(:id, :name, :description, :user_id, :budget)
   end
 
   def expenses_tags_association_params
@@ -65,15 +65,15 @@ class ExpensesController < ApplicationController
     # domyslnie dzisiejsza data
     time = Time.new
     @expense.date = "#{time.year}-#{time.month}-#{time.day}"
+
+    getTags
   end
 
   # GET /expenses/1/edit
   def edit
     @expense = Expense.find(params[:id])
 
-    @expenseTags = @expense.get_tags
-
-    @tags = Tag.where(:user_id => current_user[:id]).order('name asc').load
+    getTags
   end
 
   # POST /expenses
@@ -84,6 +84,15 @@ class ExpensesController < ApplicationController
     @expense = Expense.new(expense_params)
 
     if @expense.save
+      
+      association = {
+        :expense_id =>  @expense[:id],
+        :tag_id =>  tag_params[:id],
+      }
+
+      expense_tag_association = ExpensesTagsAssociation.new(association)
+      expense_tag_association.save
+
       redirect_to edit_expense_path(@expense), notice: (I18n.t 'Expense was successfully created.')
     else
       render action: "new"
@@ -97,9 +106,20 @@ class ExpensesController < ApplicationController
 
     @expense = Expense.find(params[:id])
 
-    update_prepare_tags
+    ExpensesTagsAssociation.clear_for_expense(@expense.id)
+
+    unless tag_params[:id].nil?
+      association = {
+          :expense_id =>  @expense[:id],
+          :tag_id =>  tag_params[:id],
+        }
+
+      expense_tag_association = ExpensesTagsAssociation.new(association)
+      expense_tag_association.save
+    end
 
     if @expense.update_attributes(expense_params)
+
       redirect_to expenses_path, notice: (I18n.t 'Expense was successfully updated.')
     else
       render action: "edit"
@@ -139,8 +159,6 @@ class ExpensesController < ApplicationController
   end
 
   def del_tag
-    # @expense = Expense.find(expense_params[:id])
-
     @expense_tag_association = ExpensesTagsAssociation.find(params[:tag][:id])
 
     if @expense_tag_association.destroy
@@ -165,6 +183,10 @@ class ExpensesController < ApplicationController
   end
 
   private
+
+  def getTags
+    @tags = Tag.where(:user_id => current_user[:id]).order('name asc').load
+  end
 
   def expenses_chart expenses, budget = false
     used_tags = expenses_chart_prepare_used_tags expenses, budget

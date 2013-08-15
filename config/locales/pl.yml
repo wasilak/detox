@@ -101,4 +101,5 @@ pl:
     show options: "pokaż opcje"
     filter: "filtruj"
     devise.failure.user.not_found_in_database: "Niepoprawny adres e-mail lub hasło."
+    Close: "Zamknij"
     

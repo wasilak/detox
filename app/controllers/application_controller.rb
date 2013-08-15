@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
-  rescue_from Exception, with: :render_500_page
-  rescue_from ActiveRecord::RecordNotFound, with: :render_404_page_exception
+  # rescue_from Exception, with: :render_500_page
+  Rails.env.development? rescue_from ActiveRecord::RecordNotFound, with: :render_404_page_exception
 
   protect_from_forgery
 
