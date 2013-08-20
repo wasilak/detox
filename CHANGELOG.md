@@ -1,3 +1,8 @@
+## v2.3.6 20.08.2013
+
+* upgraded Bootstrap3 RC1 to stable
+* Expenses list: changed default row count to 50
+
 ## v2.3.5 15.08.2013
 
 * fixed redirect after creating new expense
