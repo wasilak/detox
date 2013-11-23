@@ -1,3 +1,9 @@
+## v2.3.7 20.08.2013
+
+* upgraded Rails to 4.0.1
+* fixed datepicker z-index issue
+* fixed alerts css classes
+
 ## v2.3.6 20.08.2013
 
 * upgraded Bootstrap3 RC1 to stable
