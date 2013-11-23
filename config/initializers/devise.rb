@@ -214,6 +214,8 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
 
+  config.secret_key = '54c9744fb7911464a2880ec67d5d0fb1c9e88016524989b5143184e50048b8c81336a0f847c43102ac59e41e9d9dcade4f06e5ebf8cf2b2409fd634afa28bd4b'
+
   require 'openid/store/filesystem'
   # Devise.setup do |config|
     # ==> Mailer Configuration
