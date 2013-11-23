@@ -1,7 +1,7 @@
 <% title "Log in" %>
 <h4 class="center"><%= APP_CONFIG['app_name'] %></h4>
 
-<%= form_for(resource, :as => resource_name, :html => { :class => 'form-horizontal validate'}, :url => session_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :html => { :class => 'form-horizontal validate', :autocomplete => "off"}, :url => session_path(resource_name)) do |f| %>
 
   <div class="form-group">
     <div class="col-lg-12">
