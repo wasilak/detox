@@ -20,7 +20,7 @@
             <td><%= n %></td>
             <td>
                 <% if session[:budget][:id] == b.id %>
-                    <i class="icon-asterisk" title="<%= I18n.t 'active budget' %>"></i>
+                    <i class="fa fa-asterisk" title="<%= I18n.t 'active budget' %>"></i>
                 <% end %>
             </td>
             <td><%= link_to b.description, edit_budget_path(b) %></td>
@@ -28,8 +28,8 @@
             <td class="amount"><%= number_to_percentage (b.get_budget_expenses*100/b.amount), :precision => 0 %></td>
             <td><%= b.dateStart %></td>
             <td><%= b.dateEnd %></td>
-            <td><%= link_to '<i class="icon-edit"></i>'.html_safe, edit_budget_path(b), :title => (I18n.t 'edit') %>
-                <%= link_to '<i class="icon-trash"></i>'.html_safe, b, method: :delete, data: { confirm: (I18n.t 'Are you sure?') }, :title => (I18n.t 'delete') %>
+            <td><%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_budget_path(b), :title => (I18n.t 'edit') %>
+                <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, b, method: :delete, data: { confirm: (I18n.t 'Are you sure?') }, :title => (I18n.t 'delete') %>
             </td>
         </tr>
     <% end %>

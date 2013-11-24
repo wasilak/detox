@@ -22,7 +22,7 @@ n = 0
     <td><%= n %></td>
     <td>
     <% if tag.budget %>
-      <i class="icon-asterisk" title="<%= I18n.t 'included in budget' %>"></i>
+      <i class="fa fa-asterisk" title="<%= I18n.t 'included in budget' %>"></i>
     <% end %>
     </td>
     <td><%= link_to tag.name, edit_tag_path(tag) %></td>
@@ -31,12 +31,12 @@ n = 0
         <td><%= tag.user.username %></td>
       <% end %>
     <td>
-      <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_tag_path(tag), :title => (I18n.t 'edit') %>
+      <%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_tag_path(tag), :title => (I18n.t 'edit') %>
       <% times_used = tag.expenses_tags_association.count %>
       <% if times_used == 0 %>
-        <%= link_to '<i class="icon-trash"></i>'.html_safe, tag, method: :delete, data: { confirm: (I18n.t 'Are you sure?') }, :title => (I18n.t 'delete') %>
+        <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, tag, method: :delete, data: { confirm: (I18n.t 'Are you sure?') }, :title => (I18n.t 'delete') %>
       <% else %>
-        <i class="icon-lock" title="<%= I18n.t 'cannot be deleted' %> (<%= I18n.t 'used' %> <%= times_used %> <%= I18n.t 'times' %>)"></i>
+        <i class="fa fa-lock" title="<%= I18n.t 'cannot be deleted' %> (<%= I18n.t 'used' %> <%= times_used %> <%= I18n.t 'times' %>)"></i>
       <% end %>
     </td>
   </tr>

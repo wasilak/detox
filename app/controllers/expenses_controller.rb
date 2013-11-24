@@ -254,7 +254,7 @@ class ExpensesController < ApplicationController
       sort = "#{order} #{@direction}"
     end
 
-    @order_icon = (@direction == 'asc') ? "icon-chevron-up" : "icon-chevron-down"
+    @order_icon = (@direction == 'asc') ? "fa fa-chevron-up" : "fa fa-chevron-down"
 
     sort
   end
