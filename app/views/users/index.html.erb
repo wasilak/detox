@@ -21,8 +21,8 @@ n = 0
     <td><%= user.name %></td>
     <td><b><%= user.type.typeName %></b></td>
     <td>
-      <%= link_to '<i class="icon-edit"></i>'.html_safe, edit_user_path(user), :title => (I18n.t 'edit') %>
-      <%= link_to '<i class="icon-trash"></i>'.html_safe, user, method: :delete, data: { confirm: (I18n.t 'Are you sure?') }, :title => (I18n.t 'delete') %>
+      <%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_user_path(user), :title => (I18n.t 'edit') %>
+      <%= link_to '<i class="fa fa-trash"></i>'.html_safe, user, method: :delete, data: { confirm: (I18n.t 'Are you sure?') }, :title => (I18n.t 'delete') %>
     </td>
   </tr>
 <% end %>

@@ -44,10 +44,10 @@
         <td><%= id %></td>
         <td>
           <% if budgetIncluded %>
-            <i class="icon-asterisk" title="<%= I18n.t 'included in budget' %>"></i>
+            <i class="fa fa-asterisk" title="<%= I18n.t 'included in budget' %>"></i>
           <% end %>
           <% if expense.half == 1 %>
-            <i class="icon-star-empty" title="<%= I18n.t 'half of amount' %>"></i>
+            <i class="fa fa-star-half" title="<%= I18n.t 'half of amount' %>"></i>
           <% end %>
         </td>
         <td><%= link_to expense.description, '#edit_expense_modal', {"data-toggle"=>"modal", "data-remote"=> edit_expense_path(expense) } %></td>
@@ -63,8 +63,8 @@
           <%= tags.to_sentence.html_safe %>
         </td>
         <td>
-          <%= link_to '<i class="icon-edit"></i>'.html_safe, '#edit_expense_modal', {:title => (I18n.t 'edit'), "data-toggle"=>"modal", "data-remote"=> edit_expense_path(expense) }  %>
-          <%= link_to '<i class="icon-trash"></i>'.html_safe, expense, method: :delete, data: { confirm: (I18n.t 'Are you sure?') }, :title => (I18n.t 'delete') %>
+          <%= link_to '<i class="fa fa-edit"></i>'.html_safe, '#edit_expense_modal', {:title => (I18n.t 'edit'), "data-toggle"=>"modal", "data-remote"=> edit_expense_path(expense) }  %>
+          <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, expense, method: :delete, data: { confirm: (I18n.t 'Are you sure?') }, :title => (I18n.t 'delete') %>
         </td>
       </tr>
     <% end %>
