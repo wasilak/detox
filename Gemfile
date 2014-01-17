@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.1'
+gem 'rails', '4.0.2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -45,7 +45,7 @@ gem 'jquery-rails'
 
 gem 'execjs'
 
-gem 'airbrake'
+# gem 'airbrake'
 
 gem 'rails-i18n'
 
@@ -57,7 +57,7 @@ gem 'yaml_db'
 
 gem 'binding_of_caller'
 
-gem 'newrelic_rpm'
+# gem 'newrelic_rpm'
 
 gem "select2-rails"
 
