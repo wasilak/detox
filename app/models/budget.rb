@@ -2,8 +2,8 @@ class Budget < ActiveRecord::Base
     belongs_to :user
 
     validates :amount, :presence => true, :numericality => { :greater_than => 0}
-    validates :dateStart, :presence => true, :uniqueness => { :scope => :userId}
-    validates :dateEnd, :presence => true, :uniqueness => { :scope => :userId}
+    validates :dateStart, :presence => true
+    validates :dateEnd, :presence => true
     validates :description, :presence => true
 
     #def end_date_cannot_be_lower_then_start_date
