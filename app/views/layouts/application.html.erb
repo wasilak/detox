@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= APP_CONFIG['app_name'] %> : <%= yield :title %></title>
+  <title><%= APP_CONFIG['app_name'] %> : <%= yield :title %>1111</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "locales/bootstrap-datepicker.#{I18n.locale}.js" %>
+  <% if I18n.locale.to_s != 'en' %>
+    <%= javascript_include_tag "locales/bootstrap-datepicker.#{I18n.locale}.js" %>
+  <% end %>
   <%= javascript_include_tag "locales/jquery.validationEngine-#{I18n.locale}.js" %>
   <%= csrf_meta_tags %>
 </head>
