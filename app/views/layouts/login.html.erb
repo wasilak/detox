@@ -3,8 +3,6 @@
 <head>
   <title><%= APP_CONFIG['app_name'] %> : <%= yield :title %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "locales/jquery.validationEngine-#{I18n.locale}.js" %>
   <%= csrf_meta_tags %>
 
   <style type="text/css">
@@ -41,6 +39,8 @@
             </div>
         </div>
   </div>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag "locales/jquery.validationEngine-#{I18n.locale}.js" %>
   <script type="text/javascript">
     jQuery(document).ready(function(){
       jQuery('.validate').validationEngine();

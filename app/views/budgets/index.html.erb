@@ -25,7 +25,7 @@
             </td>
             <td><%= link_to b.description, edit_budget_path(b) %></td>
             <td class="amount"><%= number_to_currency b.amount %></td>
-            <td class="amount"><%= number_to_percentage (b.get_budget_expenses*100/b.amount), :precision => 0 %></td>
+            <td class="amount"><%= number_to_currency b.get_budget_expenses %> (<%= number_to_percentage (b.get_budget_expenses*100/b.amount), :precision => 0 %>)</td>
             <td><%= b.dateStart %></td>
             <td><%= b.dateEnd %></td>
             <td><%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_budget_path(b), :title => (I18n.t 'edit') %>
@@ -34,9 +34,3 @@
         </tr>
     <% end %>
 </table>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    jQuery('#budgets_table').dataTable();
-  });  
-</script>

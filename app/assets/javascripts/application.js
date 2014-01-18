@@ -21,5 +21,5 @@
 //= require jquery.validationEngine.js
 //= require select2
 //
-// disabled require tree to prevent active admin JS loading on every page - brakes some jQuery :/
 //= #require_tree .
+//= #require_directory .

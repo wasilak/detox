@@ -12,9 +12,6 @@
             </button>
             <a class="navbar-brand" href="/"><%= APP_CONFIG['app_name'] %></a>
           </div>
-           
-
-             
             <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav">
 
@@ -41,7 +38,7 @@
                 <li class="dropdown <%= controller.controller_name == 'tags' ? 'active' : '' %>">
                   <%= link_to tags_path, {:class=>"dropdown-toggle", "data-toggle"=>"dropdown"}  do %>
                     <i class="fa fa-tags"></i> <%= (I18n.t 'tags') %> <b class="caret"></b>
-                  <% end %> 
+                  <% end %>
                   <ul class="dropdown-menu">
                     <li class="dropdown <%= controller.controller_name == 'tags' && controller.action_name == 'index' ? 'active' : '' %>">
                       <%= link_to (I18n.t 'tags'), tags_path %>
@@ -67,7 +64,7 @@
                     </ul>
                   </li>
                 <% end %>
-                
+
                 <li class="<%= controller.controller_name == '' ? 'active' : '' %>">
                   <%= link_to destroy_user_session_path, :method => :delete do %>
                     <i class="fa fa-off"></i> <%= (I18n.t'log out') %>
@@ -82,5 +79,5 @@
   </div>
 
 <div class="modal fade" id="new_expense_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  
+
 </div><!-- /.modal -->
