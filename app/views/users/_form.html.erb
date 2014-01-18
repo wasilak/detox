@@ -17,21 +17,21 @@
       <%= f.text_field :email, :class => 'form-control validate[required,custom[email]]' %>
     </div>
   </div>
-  
+
   <div class="form-group">
     <%= f.label :username, (I18n.t 'username'), {:class => 'col-lg-2 control-label'} %>
     <div class="col-lg-4">
       <%= f.text_field :username, :class => 'form-control validate[required]' %>
     </div>
   </div>
-  
+
   <div class="form-group" id="pass">
     <%= f.label :password, (I18n.t 'password'), {:class => 'col-lg-2 control-label'} %>
     <div class="col-lg-4">
       <%= f.password_field :password, :disabled => 'disabled', :class => "form-control" %>
     </div>
   </div>
-  
+
   <div class="form-group">
     <%= f.label :name, (I18n.t 'name'), {:class => 'col-lg-2 control-label'} %>
     <div class="col-lg-4">
@@ -49,7 +49,7 @@
             ) %>
     </div>
   </div>
-  
+
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-4">
       <%= f.submit :class => 'btn btn-primary btn-small' %>

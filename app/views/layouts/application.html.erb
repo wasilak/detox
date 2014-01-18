@@ -1,23 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= APP_CONFIG['app_name'] %> : <%= yield :title %>1111</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <% if I18n.locale.to_s != 'en' %>
-    <%= javascript_include_tag "locales/bootstrap-datepicker.#{I18n.locale}.js" %>
-  <% end %>
-  <%= javascript_include_tag "locales/jquery.validationEngine-#{I18n.locale}.js" %>
+  <title><%= APP_CONFIG['app_name'] %> : <%= yield :title %></title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-  <% if ERRBIT_CONFIG['js_notifier'] %>
-    <%= airbrake_javascript_notifier %>
-  <% end %>
-
   <div class="container">
-    
     <% if user_signed_in? %>
       <%= render 'layouts/menu' %>
     <% end %>
@@ -73,9 +62,14 @@
         </div>
       <% end %>
   </div>
+  <%= javascript_include_tag "application", controller_name %>
+  <% if I18n.locale.to_s != 'en' %>
+    <%= javascript_include_tag "locales/bootstrap-datepicker.#{I18n.locale}.js" %>
+  <% end %>
+  <%= javascript_include_tag "locales/jquery.validationEngine-#{I18n.locale}.js" %>
   <script type="text/javascript">
-  	jQuery(document).ready(function(){
-  		jQuery('table i').tooltip();
+    jQuery(document).ready(function(){
+      jQuery('table i').tooltip();
       jQuery('table a').tooltip();
       jQuery('p a').tooltip();
       jQuery('.ttip').tooltip({'placement': 'bottom'});
@@ -101,7 +95,10 @@
         $(this).data('bs.modal', null);
       })
 
-  	});
+    });
   </script>
+  <% if ERRBIT_CONFIG['js_notifier'] %>
+    <%= airbrake_javascript_notifier %>
+  <% end %>
 </body>
 </html>
