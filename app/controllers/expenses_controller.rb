@@ -35,19 +35,6 @@ class ExpensesController < ApplicationController
     get_charts_and_tags @expenses
   end
 
-  def get_tag_forms
-    @tags_form = Tag.where({:user_id => current_user[:id]}).order('name asc').load
-    @tag_form_current = Expense.get_current_tags
-  end
-
-  def get_charts_and_tags expenses
-    #clear selected tags
-    Expense.set_tags []
-
-    @used_tags = used_tags expenses
-    @chart_data = expenses_chart expenses
-    @chart_data2 = expenses_chart expenses, true
-  end
 
   # GET /expenses/1
   # GET /expenses/1.json
@@ -79,12 +66,14 @@ class ExpensesController < ApplicationController
   # POST /expenses
   # POST /expenses.json
   def create
-    expense_params[:amount] = correct_value(expense_params[:amount])
+    expense_details = expense_params
 
-    @expense = Expense.new(expense_params)
+    expense_details[:amount] = correct_value(expense_details[:amount])
+
+    @expense = Expense.new(expense_details)
 
     if @expense.save
-      
+
       association = {
         :expense_id =>  @expense[:id],
         :tag_id =>  tag_params[:id],
@@ -102,7 +91,9 @@ class ExpensesController < ApplicationController
   # PUT /expenses/1
   # PUT /expenses/1.json
   def update
-    expense_params[:amount] = correct_value(expense_params[:amount])
+    expense_details = expense_params
+
+    expense_details[:amount] = correct_value(expense_details[:amount])
 
     @expense = Expense.find(params[:id])
 
@@ -118,7 +109,7 @@ class ExpensesController < ApplicationController
       expense_tag_association.save
     end
 
-    if @expense.update_attributes(expense_params)
+    if @expense.update_attributes(expense_details)
 
       redirect_to expenses_path, notice: (I18n.t 'Expense was successfully updated.')
     else
@@ -183,6 +174,20 @@ class ExpensesController < ApplicationController
   end
 
   private
+
+  def get_tag_forms
+    @tags_form = Tag.where({:user_id => current_user[:id]}).order('name asc').load
+    @tag_form_current = Expense.get_current_tags
+  end
+
+  def get_charts_and_tags expenses
+    #clear selected tags
+    Expense.set_tags []
+
+    @used_tags = used_tags expenses
+    @chart_data = expenses_chart expenses
+    @chart_data2 = expenses_chart expenses, true
+  end
 
   def getTags
     @tags = Tag.where(:user_id => current_user[:id]).order('name asc').load
