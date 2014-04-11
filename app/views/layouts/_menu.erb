@@ -71,13 +71,9 @@
                   <% end %>
                 </li>
               </ul>
-              <%= link_to '<i class="fa fa-pencil fa fa-white"></i> '.html_safe+(I18n.t 'new expense'), '#new_expense_modal', :class => 'btn btn-primary btn-small navbar-btn pull-right', :id=>"new_expense_modal_button", "data-toggle"=>"modal", "data-remote"=> new_expense_path %>
+              <%= link_to '<i class="fa fa-pencil fa fa-white"></i> '.html_safe+(I18n.t 'new expense'), new_expense_path, :class => 'btn btn-small navbar-btn pull-right ajax-popup-link', :id=>"new_expense_modal_button" %>
             </div>
           </div>
       </nav>
     </div>
   </div>
-
-<div class="modal fade" id="new_expense_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-</div><!-- /.modal -->

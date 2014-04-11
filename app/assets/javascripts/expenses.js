@@ -5,12 +5,14 @@
   jQuery('#tabs a').click(function (e) {
     e.preventDefault();
     jQuery(this).tab('show');
-  })
+  });
 
   jQuery(document).ready(function(){
     jQuery('#budget').change(function(){
       jQuery('#formBudget').submit();
-    })
+
+    });
+
 
     jQuery('#expensesTable').dataTable({
       "aLengthMenu": [[10, 25, 50, 100, 200, -1], [10, 25, 50, 100, 200, "All"]],

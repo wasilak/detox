@@ -1,3 +1,7 @@
+## 2.4.0 11.04.2014
+
+* upgraded Rails to 4.1.0
+
 ## v2.3.7 20.08.2013
 
 * upgraded Rails to 4.0.1

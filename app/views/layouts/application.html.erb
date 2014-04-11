@@ -90,11 +90,6 @@
 
       jQuery('.validate').validationEngine();
 
-      $('.modal').on('hidden.bs.modal', function () {
-        $(".modal-body").html("");
-        $(this).data('bs.modal', null);
-      })
-
     });
   </script>
   <% if ERRBIT_CONFIG['js_notifier'] %>
