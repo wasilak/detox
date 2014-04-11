@@ -65,12 +65,7 @@
   </div>
 
   <div class="form-group">
-    <% if controller.request.xhr? %>
-      <label class="col-lg-4">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><%= I18n.t 'Close' %></button>
-      </label>
-    <% end %>
-    <div class="col-lg-offset-<%= controller.request.xhr? ? '' : label_width %> col-lg-<%= control_width %>">
+    <div class="col-lg-offset-<%= controller.request.xhr? ? '' : label_width %> col-lg-<%= control_width %> pull-right">
       <%= f.submit :class => 'btn btn-primary btn-small' %>
     </div>
   </div>

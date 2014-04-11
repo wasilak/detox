@@ -19,7 +19,9 @@
 //= require jqueryui.globalize.js
 //= require globalize.culture.pl.js
 //= require jquery.validationEngine.js
+//= require jquery.magnific-popup.min.js
 //= require select2
+//= require global
 //
 //= #require_tree .
 //= #require_directory .
