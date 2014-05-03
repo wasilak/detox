@@ -16,7 +16,7 @@
     }
   </style>
 </head>
-<body class="bg-black">
+<body class="bg-black" style="background: url('<%= asset_path "bg/" + (rand(1..5).to_s + ".jpg") %>') center no-repeat">
 
     <% if ERRBIT_CONFIG['js_notifier'] %>
       <%= airbrake_javascript_notifier %>
