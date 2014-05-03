@@ -1,3 +1,8 @@
+## 2.4.5 03.05.2014
+
+* added random backgrounds
+* moved budget select to popup
+
 ## 2.4.4 03.05.2014
 
 * switched from plain Bootstrap3 template to AdminLTE
