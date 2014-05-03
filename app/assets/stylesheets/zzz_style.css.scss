@@ -142,3 +142,24 @@ form div.select2
       max-width: 500px;
       margin: 20px auto;
     }
+
+#formBudget .form-control
+{
+  border: none;
+}
+
+.content table, .content form
+{
+  background: #fff;
+  padding: 10px 0 10px 0 !important;
+}
+
+.budget_wait
+{
+  text-align: center;
+}
+
+body > .header .logo
+{
+  // font-family: "Arial";
+}

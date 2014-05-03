@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_filter :check_budget
   before_filter :remaining_budget
+  before_filter :budget_select
 
   # fix for i18n after adding Active Admin
   before_filter :set_locale
@@ -35,13 +36,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def budget_select
+    @budgets = Budget.get_all_user_budgets(current_user[:id])
+  end
+
   def remaining_budget
     if current_user and session[:budget]
 
       if session[:budget][:id] != 0
-      
+
         calculate_budget
-     
+
       else
         @remaining_budget = 0
         @remaining_budget_percentage = 0
@@ -55,7 +60,7 @@ class ApplicationController < ActionController::Base
           session[:budget][:dateStart],
           session[:budget][:dateEnd]
           )
-    calculate_budget_details expenses        
+    calculate_budget_details expenses
   end
 
   def calculate_expenses_sum expenses
@@ -109,7 +114,7 @@ class ApplicationController < ActionController::Base
     render "error_pages/404.html.erb", status: 404
   end
 
-  def render_404_page 
+  def render_404_page
     @exception = 'Page not found.'
     render "error_pages/404.html.erb", status: 404
   end
