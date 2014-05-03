@@ -28,8 +28,6 @@ class ExpensesController < ApplicationController
 
     get_tag_forms
 
-    @budgets = Budget.get_all_user_budgets(current_user[:id])
-
     @expenses_sum = calculate_expenses_sum @expenses
 
     get_charts_and_tags @expenses
