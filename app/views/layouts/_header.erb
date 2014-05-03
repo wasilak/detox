@@ -1,0 +1,62 @@
+<a class="logo" href="/"><%= APP_CONFIG['app_name'] %></a>
+<!-- Header Navbar: style can be found in header.less -->
+<nav class="navbar navbar-static-top" role="navigation">
+    <!-- Sidebar toggle button-->
+    <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </a>
+    <div class="navbar-right">
+        <ul class="nav navbar-nav">
+            <!-- Messages: style can be found in dropdown.less-->
+            <li class=" messages-menu">
+                <%= link_to new_expense_path, :class => 'ajax-popup-link', :id=>"new_expense_modal_button" do %>
+                  <i class="fa fa-pencil"></i>
+                  <span class="label1 label-success1"><%= I18n.t 'new expense' %></span>
+                <% end %>
+            </li>
+
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span><%= current_user[:email] %><i class="caret"></i></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- User image -->
+                    <li class="user-header bg-light-blue">
+                        <img src="<%= Gravatar.new(current_user[:email]).image_url :default=>:identicon %>" class="img-circle" alt="User Image">
+                        <p>
+                            <%= current_user[:name] %>
+                            <small>Member since <%= Time.at(current_user[:created_at]).to_formatted_s(:long_ordinal) %></small>
+                        </p>
+                    </li>
+                    <!-- Menu Body -->
+                    <!-- <li class="user-body">
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Followers</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Sales</a>
+                        </div>
+                        <div class="col-xs-4 text-center">
+                            <a href="#">Friends</a>
+                        </div>
+                    </li> -->
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+                        <div class="pull-left">
+                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                        </div>
+                        <div class="pull-right">
+                            <%= link_to destroy_user_session_path, :method => :delete, :class => "btn btn-default btn-flat" do %>
+                              <i class="fa fa-off"></i> <%= (I18n.t'log out') %>
+                            <% end %>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

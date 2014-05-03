@@ -16,29 +16,48 @@
     }
   </style>
 </head>
-<body>
+<body class="bg-black">
+
     <% if ERRBIT_CONFIG['js_notifier'] %>
       <%= airbrake_javascript_notifier %>
     <% end %>
-    <div class="container" style="background:none;">
-        <div class="row">
-            <div class="col-lg-6 centered">
-                <% flash.each do |severity, message| %>
-                    <div class="alert alert-warning">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <%= content_tag(:div, message) %>
-                    </div>
-                <% end %>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 centered">
-                <div class="well" style="background:#fff">
-                    <%= yield %>
+
+    <div class="row">
+        <div class="col-lg-6 centered">
+            <% flash.each do |severity, message| %>
+                <div class="alert alert-warning">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <%= content_tag(:div, message) %>
                 </div>
-            </div>
+            <% end %>
         </div>
-  </div>
+    </div>
+
+    <div class="form-box" id="login-box">
+        <div class="header">Sign In</div>
+        <div class="body bg-gray">
+          <%= yield %>
+        </div>
+
+        <div class="margin text-center">
+            <span>Sign in using social networks</span>
+            <br/>
+            <div class="col-lg-6">
+              <%- if devise_mapping.omniauthable? %>
+                <%- resource_class.omniauth_providers.each do |provider| %>
+                  <%# provider.to_s.titleize == 'Google' ? button_class = 'zocial google login_button' : '' %>
+                  <!-- <button class="btn bg-light-blue btn-circle"><i class="fa fa-facebook"></i></button> -->
+                  <!-- <button class="btn bg-aqua btn-circle"><i class="fa fa-twitter"></i></button> -->
+                  <%= link_to omniauth_authorize_path(resource_name, provider) do %>
+                    <button class="btn bg-red btn-circle"><i class="fa fa-google-plus"></i></button>
+                  <% end %>
+                <% end -%>
+              <% end -%>
+            </div>
+
+        </div>
+    </div>
+
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "locales/jquery.validationEngine-#{I18n.locale}.js" %>
   <script type="text/javascript">
