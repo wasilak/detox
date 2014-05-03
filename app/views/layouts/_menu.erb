@@ -1,79 +1,55 @@
-<div class="row">
-    <div class="col-lg-12">
-      <nav class="navbar navbar-default" role="navigation">
-          <div class="container">
+<ul class="sidebar-menu">
+    <li class="<%= controller.controller_name == 'expenses' ? 'active' : '' %>">
+      <%= link_to expenses_path do %>
+        <i class="fa fa-shopping-cart"></i> <%= (I18n.t 'expenses') %>
+      <% end %>
+    </li>
 
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="fa fa-bar"></span>
-              <span class="fa fa-bar"></span>
-              <span class="fa fa-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"><%= APP_CONFIG['app_name'] %></a>
-          </div>
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-              <ul class="nav navbar-nav">
+    <li class="treeview <%= controller.controller_name == 'budgets' ? 'active' : '' %>">
+      <%= link_to budgets_path do %>
+        <i class="fa fa-list-alt"></i> <%= (I18n.t 'budgets') %>
+        <i class="fa fa-angle-left pull-right"></i>
+      <% end %>
+      <ul class="treeview-menu">
+        <li class="<%= controller.controller_name == 'budgets' && controller.action_name == 'index' ? 'active' : '' %>">
+          <%= link_to (I18n.t 'budgets'), budgets_path %>
+        </li>
+        <li class="<%= controller.controller_name == 'budgets' && controller.action_name == 'new' ? 'active' : '' %>">
+          <%= link_to (I18n.t 'new budget'), new_budget_path %>
+        </li>
+      </ul>
+    </li>
 
-                <li class="<%= controller.controller_name == 'expenses' ? 'active' : '' %>">
-                  <%= link_to expenses_path do %>
-                    <i class="fa fa-shopping-cart"></i> <%= (I18n.t 'expenses') %>
-                  <% end %>
-                </li>
+    <li class="treeview <%= controller.controller_name == 'tags' ? 'active' : '' %>">
+      <%= link_to tags_path do %>
+        <i class="fa fa-tags"></i> <%= (I18n.t 'tags') %>
+        <i class="fa fa-angle-left pull-right"></i>
+      <% end %>
+      <ul class="treeview-menu">
+        <li class="<%= controller.controller_name == 'tags' && controller.action_name == 'index' ? 'active' : '' %>">
+          <%= link_to (I18n.t 'tags'), tags_path %>
+        </li>
+        <li class="<%= controller.controller_name == 'tags' && controller.action_name == 'new' ? 'active' : '' %>">
+          <%= link_to (I18n.t 'new tag'), new_tag_path %>
+        </li>
+      </ul>
+    </li>
 
-                <li class="dropdown <%= controller.controller_name == 'budgets' ? 'active' : '' %>">
-                  <%= link_to budgets_path, {:class=>"dropdown-toggle", "data-toggle"=>"dropdown"} do %>
-                    <i class="fa fa-list-alt"></i> <%= (I18n.t 'budgets') %> <b class="caret"></b>
-                  <% end %>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown <%= controller.controller_name == 'budgets' && controller.action_name == 'index' ? 'active' : '' %>">
-                      <%= link_to (I18n.t 'budgets'), budgets_path %>
-                    </li>
-                    <li class="dropdown <%= controller.controller_name == 'budgets' && controller.action_name == 'new' ? 'active' : '' %>">
-                      <%= link_to (I18n.t 'new budget'), new_budget_path %>
-                    </li>
-                  </ul>
-                </li>
+    <% if session && current_user[:type_id] == 2 %>
+      <li class="treeview <%= controller.controller_name == 'users' ? 'active' : '' %> ">
+        <%= link_to users_path do %>
+          <i class="fa fa-user"></i> <%= (I18n.t 'users') %>
+          <i class="fa fa-angle-left pull-right"></i>
+        <% end %>
+        <ul class="treeview-menu">
+          <li class="<%= controller.controller_name == 'users' && controller.action_name == 'index' ? 'active' : '' %>">
+            <%= link_to (I18n.t 'users'), users_path %>
+          </li>
+          <li class="<%= controller.controller_name == 'users' && controller.action_name == 'new' ? 'active' : '' %>">
+            <%= link_to (I18n.t 'new user'), new_user_path %>
+          </li>
+        </ul>
+      </li>
+    <% end %>
+</ul>
 
-                <li class="dropdown <%= controller.controller_name == 'tags' ? 'active' : '' %>">
-                  <%= link_to tags_path, {:class=>"dropdown-toggle", "data-toggle"=>"dropdown"}  do %>
-                    <i class="fa fa-tags"></i> <%= (I18n.t 'tags') %> <b class="caret"></b>
-                  <% end %>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown <%= controller.controller_name == 'tags' && controller.action_name == 'index' ? 'active' : '' %>">
-                      <%= link_to (I18n.t 'tags'), tags_path %>
-                    </li>
-                    <li class="dropdown <%= controller.controller_name == 'tags' && controller.action_name == 'new' ? 'active' : '' %>">
-                      <%= link_to (I18n.t 'new tag'), new_tag_path %>
-                    </li>
-                  </ul>
-                </li>
-
-                <% if session && current_user[:type_id] == 2 %>
-                  <li class="dropdown <%= controller.controller_name == 'users' ? 'active' : '' %> ">
-                    <%= link_to users_path, {:class=>"dropdown-toggle", "data-toggle"=>"dropdown"}  do %>
-                      <i class="fa fa-user"></i> <%= (I18n.t 'users') %> <b class="caret"></b>
-                    <% end %>
-                    <ul class="dropdown-menu">
-                      <li class="dropdown <%= controller.controller_name == 'users' && controller.action_name == 'index' ? 'active' : '' %>">
-                        <%= link_to (I18n.t 'users'), users_path %>
-                      </li>
-                      <li class="dropdown <%= controller.controller_name == 'users' && controller.action_name == 'new' ? 'active' : '' %>">
-                        <%= link_to (I18n.t 'new user'), new_user_path %>
-                      </li>
-                    </ul>
-                  </li>
-                <% end %>
-
-                <li class="<%= controller.controller_name == '' ? 'active' : '' %>">
-                  <%= link_to destroy_user_session_path, :method => :delete do %>
-                    <i class="fa fa-off"></i> <%= (I18n.t'log out') %>
-                  <% end %>
-                </li>
-              </ul>
-              <%= link_to '<i class="fa fa-pencil fa fa-white"></i> '.html_safe+(I18n.t 'new expense'), new_expense_path, :class => 'btn btn-small navbar-btn pull-right ajax-popup-link', :id=>"new_expense_modal_button" %>
-            </div>
-          </div>
-      </nav>
-    </div>
-  </div>

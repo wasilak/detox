@@ -22,6 +22,9 @@
 //= require jquery.magnific-popup.min.js
 //= require select2
 //= require global
+//= #require_directory ./AdminLTE
+//= require ./AdminLTE/app.js
+//= require dataTables.bootstrap
 //
 //= #require_tree .
 //= #require_directory .

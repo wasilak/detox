@@ -1,3 +1,8 @@
+## 2.4.4 03.05.2014
+
+* switched from plain Bootstrap3 template to AdminLTE
+* added Gravatar support
+
 ## 2.4.0 11.04.2014
 
 * upgraded Rails to 4.1.0

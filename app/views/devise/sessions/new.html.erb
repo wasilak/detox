@@ -17,14 +17,6 @@
 
   <div class="form-group">
     <div class="col-lg-6">
-      <%- if devise_mapping.omniauthable? %>
-        <%- resource_class.omniauth_providers.each do |provider| %>
-          <% provider.to_s.titleize == 'Google' ? button_class = 'zocial google login_button' : '' %>
-          <%= link_to (I18n.t "#{provider.to_s.titleize}"), omniauth_authorize_path(resource_name, provider), :class => button_class %><br />
-        <% end -%>
-      <% end -%>
-    </div>
-    <div class="col-lg-6">
       <%= button_tag(type: 'submit', :class => 'btn btn-block btn-primary') do %>
         <i class="fa fa-lock"></i> <%= (I18n.t "log in") %>
       <% end %>

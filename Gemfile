@@ -67,3 +67,6 @@ gem "font-awesome-rails"
 
 gem "sass", :require => 'sass'
 gem "uglifier", '>= 1.3.0', :require => 'uglifier'
+
+gem 'gravatar-ultimate'
+

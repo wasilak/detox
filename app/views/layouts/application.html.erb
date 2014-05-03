@@ -5,62 +5,77 @@
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-  <div class="container">
-    <% if user_signed_in? %>
-      <%= render 'layouts/menu' %>
-    <% end %>
-
-    <% if user_signed_in? %>
-    <div class="row">
-              <% if @remaining_budget and session[:budget][:id] != 0 %>
-        <div class="col-lg-12">
-          <div class="alert alert-info">
-            <div id="moneyLeft">
-                  <%= I18n.t 'remaining in budget' %> <b>"<%= session[:budget][:description] %>"</b>: <span class="
-                  <% if @remaining_budget_percentage < 10 %>
-                  belowBudget
-                  <% else %>
-                  overBudget
-                  <% end %>
-                  "><%= number_to_currency @remaining_budget %>
-                </span> (<%= number_to_currency @budget_left_per_day %>/<%= I18n.t 'day' %><span class="ttip" title="<%= @days_left_in_budget %> <%= I18n.t 'days' %> x <%= number_to_currency @budget_left_per_day %> = <%= number_to_currency (@budget_left_per_day * @days_left_in_budget) %>"><i class="fa fa-question"></i></span>)
+<body class="skin-black wysihtml5-supported">
+  <header class="header">
+    <%= render 'layouts/header' %>
+  </header>
+  <div class="wrapper row-offcanvas row-offcanvas-left">
+    <aside class="left-side sidebar-offcanvas">
+      <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left info">
+              <p>Hello, <%= current_user[:name] %></p>
+              <% if user_signed_in? %>
+                <% if @remaining_budget and session[:budget][:id] != 0 %>
+                  <p><i class="fa fa-circle <%= @remaining_budget_percentage < 10 ? 'text-warning' : 'text-success' %>"></i> "<%= session[:budget][:description] %>"</p>
+                  <p>
+                    <%= number_to_currency @remaining_budget %> / <%= number_to_currency session[:budget][:amount] %>
+                  </p>
+                <% end %>
+              <% end %>
+            </div>
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <% if user_signed_in? %>
+          <%= render 'layouts/menu' %>
+        <% end %>
+    </section>
+    </aside>
+    <aside class="right-side">
+      <!-- <section class="content-header">
+          <h1>
+              Dashboard
+              <small>Control panel</small>
+          </h1>
+          <ol class="breadcrumb">
+              <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+              <li class="active">Dashboard</li>
+          </ol>
+      </section> -->
+      <section class="content">
+          <div class="row">
+            <div class="col-lg-12">
+              <% if flash.count > 0 %>
+                <div class="row">
+                  <div class="col-lg-12">
+                    <% flash.each do |severity, message| %>
+                      <div class="alert alert-info">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <%= content_tag(:div, message) %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+              <div class="row">
+                <div class="col-lg-12">
+                  <%= yield %>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-              <% end %>
-      </div>
-      <% end %>
-      <div class="row">
-        <div class="col-lg-12">
-          <% if flash.count > 0 %>
+          <% if user_signed_in? && current_user[:type_id] == 2 %>
+          <hr />
             <div class="row">
-              <div class="col-lg-12">
-                <% flash.each do |severity, message| %>
-                  <div class="alert alert-info">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <%= content_tag(:div, message) %>
-                  </div>
-                <% end %>
+              <div class="col-lg-10">
+                Rails version: <%= Rails::VERSION::STRING %><br />
+                Ruby version: <%= RUBY_VERSION %>
               </div>
             </div>
           <% end %>
-          <div class="row">
-            <div class="col-lg-12">
-              <%= yield %>
-            </div>
-          </div>
-        </div>
-      </div>
-      <% if user_signed_in? && current_user[:type_id] == 2 %>
-      <hr />
-        <div class="row">
-          <div class="col-lg-10">
-            Rails version: <%= Rails::VERSION::STRING %><br />
-            Ruby version: <%= RUBY_VERSION %>
-          </div>
-        </div>
-      <% end %>
+      </section>
+    </aside>
   </div>
   <%= javascript_include_tag "application", controller_name %>
   <% if I18n.locale.to_s != 'en' %>
