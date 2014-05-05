@@ -37,7 +37,9 @@ class ApplicationController < ActionController::Base
   end
 
   def budget_select
-    @budgets = Budget.get_all_user_budgets(current_user[:id])
+    if user_signed_in?
+      @budgets = Budget.get_all_user_budgets(current_user[:id])
+    end
   end
 
   def remaining_budget
