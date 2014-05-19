@@ -13,15 +13,16 @@
             <!-- Messages: style can be found in dropdown.less-->
             <li class=" messages-menu">
                 <%= link_to new_expense_path, :class => 'ajax-popup-link', :id=>"new_expense_modal_button" do %>
-                  <i class="fa fa-pencil"></i>
-                  <span class="label1 label-success1"><%= I18n.t 'new expense' %></span>
+                  <i class="fa fa-pencil hidden-md hidden-lg"></i>
+                  <span class="hidden-xs hidden-sm"><%= I18n.t 'new expense' %></span>
                 <% end %>
             </li>
 
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <span><%= current_user[:email] %><i class="caret"></i></span>
+                    <span class="hidden-xs hidden-sm"><%= current_user[:email] %><i class="caret"></i></span>
+                    <i class="fa fa-user hidden-md hidden-lg"></i>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
