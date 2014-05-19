@@ -1,3 +1,7 @@
+## 2.4.7 19.05.2014
+
+* added meta tag for mobile devices scaling
+
 ## 2.4.5 03.05.2014
 
 * added random backgrounds
