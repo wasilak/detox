@@ -1,15 +1,15 @@
-<div class="col-lg-5">
-  <%= form_tag set_tag_filter_url, :method => 'POST', :class => 'form-inline', :id => 'formTags' do %>
-    <% options = options_for_select(
-      [["select tag",""]] +
-        @tags_form.collect do |tag|
-          [tag.name, tag.name]
-        end,
-          @tag_form_current
-        ) %>
-    <%= select_tag :tag, options, :class => 'form-control', :multiple => true %><br />
-  <% end %>
+<%= form_tag set_tag_filter_url, :method => 'POST', :class => 'form-inline', :id => 'formTags' do %>
+  <div class="col-lg-9 col-sm-9 col-xs-9 col-md-9">
+      <% options = options_for_select(
+        [["select tag",""]] +
+          @tags_form.collect do |tag|
+            [tag.name, tag.name]
+          end,
+            @tag_form_current
+          ) %>
+      <%= select_tag :tag, options, :class => '', :multiple => true %><br />
+  </div>
+  <div class="col-lg-1 col-sm-1 col-xs-1 col-md-1">
+      <%= submit_tag (I18n.t 'filter'), :class => 'btn btn-primary btn-small col-lg-12' %>
 </div>
-<div class="col-lg-1">
-    <%= submit_tag (I18n.t 'filter'), :class => 'btn btn-primary btn-small col-lg-12' %>
-</div>
+<% end %>
