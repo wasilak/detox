@@ -18,14 +18,14 @@
 
   <% label_width = controller.request.xhr? ? '4' : '2' %>
   <% control_width = controller.request.xhr? ? '6' : '4' %>
-  
+
   <div class="form-group">
     <%= f.label :description, (I18n.t 'description'), {:class => "col-lg-#{label_width} control-label"} %>
     <div class="col-lg-<%= control_width %>">
       <%= f.text_field :description, :placeholder => (I18n.t "description"), :class => 'form-control validate[required]' %>
     </div>
   </div>
-  
+
   <div class="form-group">
     <%= f.label :amount, (I18n.t 'value'), {:class => "col-lg-#{label_width} control-label"} %>
     <div class="col-lg-<%= control_width %> input-group">
@@ -42,15 +42,15 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :tag, (I18n.t 'tag name'), {:class => "col-lg-#{label_width} control-label"} %>
-    <div class="col-lg-<%= control_width %>">
+    <%= f.label :tag, (I18n.t 'tag name'), {:class => "col-lg-4 col-md-4 control-label"} %>
+    <div class="col-lg-6 col-md-12">
       <% options = options_for_select(
         [["",""]] +
           @tags.collect {
             |t| [t.name+(t.budget ? " ("+(I18n.t 'budget')+")" : ''), t.id]
           },  @expense.tags.count > 0 ? @expense.tags.first.id : ''
           ) %>
-      <%= select_tag('tag[id]', options, :class => "select2") %>
+      <%= select_tag('tag[id]', options, :class => "select2 col-xs-12 col-sm-12") %>
     </div>
   </div>
 

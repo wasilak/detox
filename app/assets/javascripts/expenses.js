@@ -2,12 +2,15 @@
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-  jQuery('#tabs a').click(function (e) {
-    e.preventDefault();
-    jQuery(this).tab('show');
-  });
-
   jQuery(document).ready(function(){
+
+    jQuery('#tabs a').click(function (e) {
+      e.preventDefault();
+      jQuery(this).tab('show');
+    });
+
+    jQuery('#tabs a:first').tab('show');
+
     jQuery('#expensesTable').dataTable({
       "aLengthMenu": [[10, 25, 50, 100, 200, -1], [10, 25, 50, 100, 200, "All"]],
       "iDisplayLength": 50,
@@ -22,6 +25,9 @@
             }
 
             jQuery("#sum").html(Globalize.format(expenses_sum, "c"));
+        },
+        "oLanguage": {
+          "sLengthMenu": "_MENU_"
         }
     });
 
