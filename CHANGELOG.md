@@ -1,3 +1,7 @@
+## 2.4.8 19.05.2014
+
+* fixed responsivness of header icons
+
 ## 2.4.7 19.05.2014
 
 * added meta tag for mobile devices scaling
