@@ -1,3 +1,7 @@
+## 2.4.9 19.05.2014
+
+* few fixes for responsive behaviour
+
 ## 2.4.8 19.05.2014
 
 * fixed responsivness of header icons
