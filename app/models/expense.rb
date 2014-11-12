@@ -60,6 +60,67 @@ class Expense < ActiveRecord::Base
       output
     end
 
+    def self.get_predefined_budget user_id, budget_string
+
+      split_budget = budget_string.split '-'
+
+      output = {}
+
+      if 'month' == split_budget[0]
+
+        output[:dateStart] = self
+        .order("date desc")
+        .where('month(date) = ? and year(date) = ?', split_budget[1], split_budget[2])
+        .where({
+                   :userId => user_id,
+                   :tags => {:budget => 1}
+               })
+        .joins(:tags)
+        .minimum(:date)
+
+        output[:dateEnd] = self
+        .order("date desc")
+        .where('month(date) = ? and year(date) = ?', split_budget[1], split_budget[2])
+        .where({
+                   :userId => user_id,
+                   :tags => {:budget => 1}
+               })
+        .joins(:tags)
+        .maximum(:date)
+
+        output[:description] = split_budget[1] + "-" + split_budget[2]
+      else
+
+        output[:dateStart] = self
+        .order("date desc")
+        .where('year(date) = ?', split_budget[2])
+        .where({
+                   :userId => user_id,
+                   :tags => {:budget => 1}
+               })
+        .joins(:tags)
+        .minimum(:date)
+
+        output[:dateEnd] = self
+        .order("date desc")
+        .where('year(date) = ?', split_budget[2])
+        .where({
+                   :userId => user_id,
+                   :tags => {:budget => 1}
+               })
+        .joins(:tags)
+        .maximum(:date)
+
+        output[:description] = split_budget[2]
+      end
+
+      output[:id] = budget_string
+
+      output[:userId] = user_id
+
+      output
+    end
+
     def self.get_all_sum
       self.where(:userId).sum(:amount)
     end

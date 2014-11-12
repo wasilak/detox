@@ -7,7 +7,9 @@
             <th></th>
             <th><%= I18n.t 'description' %></th>
             <th class="amount"><%= I18n.t 'amount' %></th>
-            <th class="amount"><%= I18n.t 'percentage' %></th>
+            <th class="amount"><%= I18n.t 'all expenses' %></th>
+            <th class="amount"><%= I18n.t 'budget' %></th>
+            <th></th>
             <th><%= I18n.t 'start' %></th>
             <th><%= I18n.t 'end' %></th>
             <th></th>
@@ -16,6 +18,11 @@
     <% n=0
     @budgets.each do |b| %>
     <% n +=1 %>
+    <%
+      amount_all = b.get_budget_expenses 'all'
+      amount_budget = b.get_budget_expenses 1
+      amount_non_budget = b.get_budget_expenses 0
+    %>
         <tr>
             <td><%= n %></td>
             <td>
@@ -25,7 +32,11 @@
             </td>
             <td><%= link_to b.description, edit_budget_path(b) %></td>
             <td class="amount"><%= number_to_currency b.amount %></td>
-            <td class="amount"><%= number_to_currency b.get_budget_expenses %> (<%= number_to_percentage (b.get_budget_expenses*100/b.amount), :precision => 0 %>)</td>
+            <td class="amount"><%= number_to_currency amount_all %></td>
+            <td class="amount"><%= number_to_currency amount_budget %> (<%= number_to_percentage (amount_budget*100/b.amount), :precision => 0 %>)</td>
+            <td>
+              <span class="inlinesparkline" data-values="[<%= amount_all %>,<%= amount_budget %>,<%= amount_non_budget %>]" id="sparline_<%= b.id.to_s %>"></span>
+            </td>
             <td><%= b.dateStart %></td>
             <td><%= b.dateEnd %></td>
             <td><%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_budget_path(b), :title => (I18n.t 'edit') %>
@@ -34,3 +45,9 @@
         </tr>
     <% end %>
 </table>
+
+<script>
+  var chart1_data = <%= @chart_data.html_safe %>;
+</script>
+
+<div id="chart_1"></div>
