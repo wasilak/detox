@@ -1,3 +1,8 @@
+## 2.4.10 12.11.2014
+
+# new graphs for budgets
+# new virtual budgets (month/years filters)
+
 ## 2.4.9 19.05.2014
 
 * few fixes for responsive behaviour

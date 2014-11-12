@@ -103,7 +103,15 @@ class ApplicationController < ActionController::Base
     if params[:budget] == 'all' or all == 1
      session[:budget] = Expense.get_all(current_user[:id])
     else
-      session[:budget] = Budget.get_budget_by_id(params[:budget])
+
+      param = params[:budget].split('-')
+
+      # budget ID
+      if 1 == param.count
+        session[:budget] = Budget.get_budget_by_id(params[:budget])
+      else
+        session[:budget] = Expense.get_predefined_budget current_user[:id], params[:budget]
+      end
     end
   end
 

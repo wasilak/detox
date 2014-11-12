@@ -23,6 +23,26 @@ class Budget < ActiveRecord::Base
         .load
     end
 
+    def self.get_virtual_budgets
+      monthsRaw = Expense.uniq.pluck("DATE_FORMAT(date,'%m-%Y')")
+      yearsRaw = Expense.uniq.pluck("DATE_FORMAT(date,'%Y')")
+
+      logger.debug yearsRaw
+
+      items = [["all expenses","all"]]
+      monthsRaw.each do |item|
+        elements = item.split '-'
+        items.push(["#{elements[0]}-#{elements[1]}", "month-#{item}"])
+      end
+
+      yearsRaw.each do |item|
+        items.push([item, "year-00-#{item}"])
+      end
+
+      # logger.debug months.inspect
+      items
+    end
+
     def self.get_budget date, user_id
         date = "#{date.year}-#{date.month}-#{date.day}"
         self.where('dateStart <= ? and dateEnd >= ? and userId = ?', date, date, user_id).first
@@ -32,15 +52,22 @@ class Budget < ActiveRecord::Base
       self.where(:id => budget_id).first
     end
 
-    def get_budget_expenses
-      Expense
+    def get_budget_expenses is_budget = 1
+      sql = Expense
         .order("date desc")
         .where('date >= ? and date <= ?', dateStart, dateEnd)
         .where({
-                   :userId => userId,
-                   :tags => {:budget => 1}
+                   :userId => userId
                })
-        .joins(:tags)
+
+      if 1 == is_budget or 0 == is_budget
+        sql = sql.where({
+                 :tags => {:budget => is_budget}
+             })
+      end
+
+      sql = sql.joins(:tags)
         .sum(:amount)
     end
+
 end

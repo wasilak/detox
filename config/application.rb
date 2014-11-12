@@ -67,5 +67,7 @@ module Detox
   end
 
     config.assets.initialize_on_precompile = false
+
+    ActiveSupport::JSON::Encoding.encode_big_decimal_as_string = false
   end
 end

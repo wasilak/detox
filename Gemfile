@@ -70,3 +70,6 @@ gem "uglifier", '>= 1.3.0', :require => 'uglifier'
 
 gem 'gravatar-ultimate'
 
+gem 'activesupport-json_encoder'
+
+gem 'rmagick', require: false
