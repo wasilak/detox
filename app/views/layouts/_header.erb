@@ -27,7 +27,7 @@
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header bg-light-blue">
-                        <img src="<%= Gravatar.new(current_user[:email]).image_url :default=>:identicon %>" class="img-circle" alt="User Image">
+                        <img src="<%= Gravatar.new(current_user[:email]).image_url :ssl => true, :default=>:identicon %>" class="img-circle" alt="User Image">
                         <p>
                             <%= current_user[:name] %>
                             <small>Member since <%= Time.at(current_user[:created_at]).to_formatted_s(:long_ordinal) %></small>

@@ -21,6 +21,7 @@
 //= require jquery.validationEngine.js
 //= require jquery.magnific-popup.min.js
 //= require select2
+//= require jquery.sparkline.min.js
 //= require global
 //= #require_directory ./AdminLTE
 //= require ./AdminLTE/app.js
