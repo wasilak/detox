@@ -27,8 +27,6 @@ class Budget < ActiveRecord::Base
       monthsRaw = Expense.uniq.pluck("DATE_FORMAT(date,'%m-%Y')")
       yearsRaw = Expense.uniq.pluck("DATE_FORMAT(date,'%Y')")
 
-      logger.debug yearsRaw
-
       items = [["all expenses","all"]]
       monthsRaw.each do |item|
         elements = item.split '-'
@@ -39,7 +37,6 @@ class Budget < ActiveRecord::Base
         items.push([item, "year-00-#{item}"])
       end
 
-      # logger.debug months.inspect
       items
     end
 

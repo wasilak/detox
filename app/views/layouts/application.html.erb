@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 <body class="skin-black wysihtml5-supported">
+  <div id="bg">
+    <img src="<%= asset_path "bg/trianglify.svg" %>" alt="">
+  </div>
   <header class="header">
     <%= render 'layouts/header' %>
   </header>
@@ -19,12 +22,12 @@
               <p>Hello, <%= current_user[:name] %></p>
               <% if user_signed_in? %>
                   <p>
-                  <% if @remaining_budget and session[:budget][:id] != 0 %>
+                  <% if @remaining_budget %>
                     <i class="fa fa-circle <%= @remaining_budget_percentage < 10 ? 'text-warning' : 'text-success' %>"></i> "<%= session[:budget][:description] %>"
                   <% end %>
                     <a href="#budgets-popup" class="open-popup-link pull-right"><i class="fa fa-calendar"></i></a>
                   </p>
-                  <% if @remaining_budget and session[:budget][:id] != 0 %>
+                  <% if @remaining_budget %>
                     <p>
                       <%= number_to_currency @remaining_budget %> / <%= number_to_currency session[:budget][:amount] %>
                     </p>
@@ -49,7 +52,7 @@
               <li class="active">Dashboard</li>
           </ol>
       </section> -->
-      <section class="content" style="background: url('<%= asset_path "bg/" + (rand(1..5).to_s + ".jpg") %>') top no-repeat;min-height: 663px;">
+      <section class="content">
           <div class="row">
             <div class="col-lg-12">
               <% if flash.count > 0 %>

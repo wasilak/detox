@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
   end
 
   def calculate_budget_details expenses
-    budget = Budget.find(session[:budget][:id]) rescue nil # so we can delete active budget
+    budget = session[:budget]
 
     unless budget.nil?
       @remaining_budget = budget[:amount] - calculate_expenses_sum(expenses)

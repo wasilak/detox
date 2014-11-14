@@ -5,8 +5,7 @@ else
   defaultBudget = ''
 end
 %>
-<%
-if @budgets.count > 0 %>
+<% if !@budgets.nil? && @budgets.count > 0 %>
   <%= form_tag set_budget_path, :method => 'POST', :class => 'form-inline', :id => 'formBudget' do %>
     <% options =  {
       "pre-defined" => Budget.get_virtual_budgets,
