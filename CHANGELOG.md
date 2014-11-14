@@ -1,3 +1,7 @@
+## 2.4.12 15.11.2014
+
+# improved dashboard
+
 ## 2.4.10 12.11.2014
 
 # new graphs for budgets

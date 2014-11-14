@@ -17,14 +17,17 @@
     }
   </style>
 </head>
-<body class="bg-black" style="background: url('<%= asset_path "bg/" + (rand(1..5).to_s + ".jpg") %>') center no-repeat">
+<body class="bg-black">
+    <div id="bg">
+      <img src="<%= asset_path "bg/trianglify.svg" %>" alt="">
+    </div>
 
     <% if ERRBIT_CONFIG['js_notifier'] %>
       <%= airbrake_javascript_notifier %>
     <% end %>
 
     <div class="row">
-        <div class="col-lg-6 centered">
+        <div class="col-lg-6 col-lg-offset-3">
             <% flash.each do |severity, message| %>
                 <div class="alert alert-warning">
                     <button type="button" class="close" data-dismiss="alert">×</button>
@@ -34,29 +37,33 @@
         </div>
     </div>
 
-    <div class="form-box" id="login-box">
-        <div class="header">Sign In</div>
-        <div class="body bg-gray">
-          <%= yield %>
-        </div>
-
-        <div class="margin text-center">
-            <span>Sign in using social networks</span>
-            <br/>
-            <div class="col-lg-6">
-              <%- if devise_mapping.omniauthable? %>
-                <%- resource_class.omniauth_providers.each do |provider| %>
-                  <%# provider.to_s.titleize == 'Google' ? button_class = 'zocial google login_button' : '' %>
-                  <!-- <button class="btn bg-light-blue btn-circle"><i class="fa fa-facebook"></i></button> -->
-                  <!-- <button class="btn bg-aqua btn-circle"><i class="fa fa-twitter"></i></button> -->
-                  <%= link_to omniauth_authorize_path(resource_name, provider) do %>
-                    <button class="btn bg-red btn-circle"><i class="fa fa-google-plus"></i></button>
-                  <% end %>
-                <% end -%>
-              <% end -%>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+        <div class="form-box" id="login-box">
+            <div class="header">Sign In</div>
+            <div class="body bg-gray">
+              <%= yield %>
             </div>
 
+            <div class="margin text-center">
+                <span>Sign in using social networks</span>
+                <br/>
+                <div class="col-lg-6">
+                  <%- if devise_mapping.omniauthable? %>
+                    <%- resource_class.omniauth_providers.each do |provider| %>
+                      <%# provider.to_s.titleize == 'Google' ? button_class = 'zocial google login_button' : '' %>
+                      <!-- <button class="btn bg-light-blue btn-circle"><i class="fa fa-facebook"></i></button> -->
+                      <!-- <button class="btn bg-aqua btn-circle"><i class="fa fa-twitter"></i></button> -->
+                      <%= link_to omniauth_authorize_path(resource_name, provider) do %>
+                        <button class="btn bg-red btn-circle"><i class="fa fa-google-plus"></i></button>
+                      <% end %>
+                    <% end -%>
+                  <% end -%>
+                </div>
+
+            </div>
         </div>
+      </div>
     </div>
 
   <%= javascript_include_tag "application" %>

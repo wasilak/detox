@@ -10,4 +10,8 @@ class Tag < ActiveRecord::Base
   	def count_expenses
   		expenses.all
   	end
+
+    def self.get_all user_id
+      self.where({:user_id => user_id}).order('name asc').count
+    end
 end

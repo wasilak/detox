@@ -1,6 +1,175 @@
 <% title "Home" %>
-<% unless @present_budget.nil? %>
-    <p><%= I18n.t 'present budget' %>: <b><%= @present_budget[:description] %></b> (<%= @present_budget[:dateStart] %> <%= I18n.t 'to' %> <%= @present_budget[:dateEnd] %>)</p>
-<% else %>
-    <p><%= I18n.t 'no budget set' %> :(</p>
-<% end %>
+
+<section class="content-header">
+  <h1>
+    Dashboard
+  </h1>
+</section>
+
+<div class="row">
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-yellow">
+      <div class="inner">
+        <h3>
+          <% unless @present_budget.nil? %>
+            <%= @present_budget[:description] %>
+          <% else %>
+            <%= I18n.t 'no budget set' %>
+          <% end %>
+        </h3>
+        <p>
+          <%= I18n.t 'present budget' %>
+        </p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-cash"></i>
+      </div>
+      <a href="/" class="small-box-footer">
+        More info <i class="fa fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-red">
+      <div class="inner">
+        <h3>
+          &nbsp;
+        </h3>
+        <p>
+          <%= @present_budget[:dateStart] %> <%= I18n.t 'to' %> <%= @present_budget[:dateEnd] %>
+        </p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-pie-graph"></i>
+      </div>
+      <a href="/" class="small-box-footer">
+        More info <i class="fa fa-arrow-circle-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-blue">
+      <div class="inner">
+        <h3>
+          <%= @budgets_count %>
+        </h3>
+        <p>
+          Budgets
+        </p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-ios7-briefcase-outline"></i>
+      </div>
+      <%= link_to budgets_path, {'class' => 'small-box-footer'} do %>
+        More info <i class="fa fa-arrow-circle-right"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-purple">
+      <div class="inner">
+        <h3>
+          <%= @tags_count %>
+        </h3>
+        <p>
+          Tags
+        </p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-ios7-pricetag-outline"></i>
+      </div>
+      <%= link_to tags_path, {'class' => 'small-box-footer'} do %>
+        More info <i class="fa fa-arrow-circle-right"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-aqua">
+      <div class="inner">
+        <h3>
+          <%= @expenses_all %>
+        </h3>
+        <p>
+          All expenses
+        </p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-card"></i>
+      </div>
+      <%= link_to expenses_path, {'class' => 'small-box-footer'} do %>
+        More info <i class="fa fa-arrow-circle-right"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-green">
+      <div class="inner">
+        <h3>
+          <%= @expenses_count_budget %>
+        </h3>
+        <p>
+          All budget expenses
+        </p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-ios7-cart-outline"></i>
+      </div>
+      <%= link_to expenses_path, {'class' => 'small-box-footer'} do %>
+        More info <i class="fa fa-arrow-circle-right"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-teal">
+      <div class="inner">
+        <h3>
+          <%= @expenses_count %>
+        </h3>
+        <p>
+          All non-budget expenses
+        </p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-beer"></i>
+      </div>
+      <%= link_to expenses_path, {'class' => 'small-box-footer'} do %>
+        More info <i class="fa fa-arrow-circle-right"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-xs-6">
+    <div class="small-box bg-maroon">
+      <div class="inner">
+        <h3>
+          <%= @expenses_percentage %><sup style="font-size: 20px">%</sup>
+        </h3>
+        <p>
+          Budget Expenses percentage
+        </p>
+      </div>
+      <div class="icon">
+        <i class="ion ion-stats-bars"></i>
+      </div>
+      <%= link_to expenses_path, {'class' => 'small-box-footer'} do %>
+        More info <i class="fa fa-arrow-circle-right"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="callout callout-danger">
+  <p><%= session[:budget].inspect %></p>
+  <p><%= @remaining_budget.inspect %></p>
+</div>
+ -->
