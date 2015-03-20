@@ -52,17 +52,13 @@
                   <% if budgetIncluded %>
                     <i class="fa fa-asterisk" title="<%= I18n.t 'included in budget' %>"></i>
                   <% end %>
-                  <% if expense.half == 1 %>
-                    <i class="fa fa-star-half" title="<%= I18n.t 'half of amount' %>"></i>
+                  <% if expense.share_percentage != 0 %>
+                     <%= expense.share_percentage * 100 %>%
                   <% end %>
                 </td>
                 <td><%= link_to expense.description, edit_expense_path(expense), {"class"=>"ajax-popup-link"} %></td>
                 <td class="amount">
-                  <% if expense.half == 1 %>
-                    <%= number_to_currency expense.amount / 2 %>
-                  <% else %>
-                    <%= number_to_currency expense.amount %>
-                  <% end %>
+                  <%= number_to_currency (expense.amount * (1 - expense.share_percentage)) %>
                 </td>
                 <td><%= expense.date %></td>
                 <td>
