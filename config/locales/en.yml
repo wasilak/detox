@@ -96,3 +96,4 @@ en:
     devise.failure.user.not_found_in_database: "Incorretc user or password."
     Close: Close
     edit expense: Edit expense
+    share_percentage: Share percentage

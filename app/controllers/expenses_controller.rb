@@ -5,7 +5,7 @@ class ExpensesController < ApplicationController
   # include ActionView::Helpers::NumberHelper
 
   def expense_params
-    params.require(:expense).permit(:amount, :date, :description, :userId, :half)
+    params.require(:expense).permit(:amount, :date, :description, :userId, :share_percentage)
   end
 
   def tag_params
@@ -90,7 +90,6 @@ class ExpensesController < ApplicationController
   # PUT /expenses/1.json
   def update
     expense_details = expense_params
-
     expense_details[:amount] = correct_value(expense_details[:amount])
 
     @expense = Expense.find(params[:id])
@@ -106,7 +105,6 @@ class ExpensesController < ApplicationController
       expense_tag_association = ExpensesTagsAssociation.new(association)
       expense_tag_association.save
     end
-
     if @expense.update_attributes(expense_details)
 
       redirect_to expenses_path, notice: (I18n.t 'Expense was successfully updated.')
@@ -225,18 +223,14 @@ class ExpensesController < ApplicationController
     if !tag.nil? and (budget ? tag.budget : true )
       tags[tag.name] = 0 if tags[tag.name].nil?
 
-      tags[tag.name] += expense.half == 1 ? expense.amount / 2 : expense.amount
+      tags[tag.name] += expense.amount * (1 - expense.share_percentage)
     end
   end
 
   def calculate_expenses_sum expenses
     sum = 0
     expenses.each do |expense|
-      if expense.half == 1
-        sum += expense.amount / 2
-      else
-        sum += expense.amount
-      end
+      sum += expense.amount * (1 - expense.share_percentage);
     end
     sum
   end

@@ -68,11 +68,7 @@ class ApplicationController < ActionController::Base
   def calculate_expenses_sum expenses
     expenses_sum = 0
     expenses.each do |expense|
-      if expense[:half] == 1
-        expenses_sum += expense[:amount] / 2
-      else
-        expenses_sum += expense[:amount]
-      end
+      expenses_sum += expense.amount * (1 - expense.share_percentage)
     end
     expenses_sum
   end
