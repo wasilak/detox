@@ -1,3 +1,7 @@
+## 2.5.0 20.03.2015
+
+* Transition from 'half' to percentage in expenses
+
 ## 2.4.12 15.11.2014
 
 # improved dashboard
