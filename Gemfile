@@ -11,7 +11,6 @@ gem 'sqlite3'
 group :development do
     gem 'bullet'
     gem 'better_errors'
-    gem 'rack-bug', :require => 'rack/bug', :git => 'git://github.com/brynary/rack-bug.git', :branch => 'rails3'
 end
 
 # gem 'sprockets-rails', '2.0.1'
@@ -73,3 +72,5 @@ gem 'gravatar-ultimate'
 gem 'activesupport-json_encoder'
 
 gem 'rmagick', require: false
+
+gem 'thin'
