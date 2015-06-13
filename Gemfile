@@ -14,6 +14,10 @@ group :development do
     gem 'better_errors'
 end
 
+group :development, :test do
+  gem 'sqlite3-ruby', :require => 'sqlite3'
+end
+
 # gem 'sprockets-rails', '2.0.1'
 
 # Gems used only for assets and not required
