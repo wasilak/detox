@@ -18,6 +18,10 @@ group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
 end
 
+group :production do
+    gem 'pg'
+end
+
 # gem 'sprockets-rails', '2.0.1'
 
 # Gems used only for assets and not required
