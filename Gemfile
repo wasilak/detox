@@ -8,6 +8,7 @@ gem 'rails', '4.1.0'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
+gem 'pg'
 
 group :development do
     gem 'bullet'
