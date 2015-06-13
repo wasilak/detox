@@ -1,12 +1,13 @@
 source 'https://rubygems.org'
 
+ruby '2.2.0'
+
 gem 'rails', '4.1.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
-gem 'sqlite3'
 
 group :development do
     gem 'bullet'
@@ -74,3 +75,7 @@ gem 'activesupport-json_encoder'
 gem 'rmagick', require: false
 
 gem 'thin'
+
+gem 'rails_12factor', group: :production
+
+gem 'puma'
