@@ -29,14 +29,9 @@ class ApplicationController < ActionController::Base
   end
 
   def check_budget
-    # TODO: fix this odd workaround to set correct budget on log in
     if user_signed_in?
       if session[:budget].nil?
-        begin
           session[:budget] = Budget.get_budget(Time.new,current_user[:id])
-        rescue
-          set_session_budget 1
-        end
       end
     end
   end
@@ -102,9 +97,8 @@ class ApplicationController < ActionController::Base
 
   def set_session_budget (all = 0)
     if params[:budget] == 'all' or all == 1
-     session[:budget] = Expense.get_all(current_user[:id])
+      session[:budget] = Expense.get_all(current_user[:id])
     else
-
       param = params[:budget].split('-')
 
       # budget ID
