@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::Base
 
-  rescue_from Exception, with: :render_500_page
-  rescue_from ActiveRecord::RecordNotFound, with: :render_404_page_exception
+  unless Rails.env.development?
+    rescue_from Exception, with: :render_500_page
+    rescue_from ActiveRecord::RecordNotFound, with: :render_404_page_exception
+  end
 
   protect_from_forgery
 
@@ -28,11 +30,14 @@ class ApplicationController < ActionController::Base
 
   def check_budget
     # TODO: fix this odd workaround to set correct budget on log in
-    if user_signed_in? and session[:budget].nil?
-      session[:budget] = Budget.get_budget(Time.new,current_user[:id])
-    end
-    if user_signed_in? and session[:budget].nil?
-      set_session_budget 1
+    if user_signed_in?
+      if session[:budget].nil?
+        begin
+          session[:budget] = Budget.get_budget(Time.new,current_user[:id])
+        rescue
+          set_session_budget 1
+        end
+      end
     end
   end
 

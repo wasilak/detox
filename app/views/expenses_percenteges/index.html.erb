@@ -1,0 +1,73 @@
+<% title "Expenses Percenteges" %>
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title"></h3>
+    </div><!-- /.box-header -->
+
+    <span id="show_options"></span>
+
+    <div class="box-body table-responsive">
+          <table id="expensesTable" class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th><%= I18n.t 'id' %></th>
+                <th></th>
+                <th><%= I18n.t 'description' %></th>
+                <th class="amount"><%= I18n.t 'value' %></th>
+                <th><%= I18n.t 'expense date' %></th>
+                <th><%= I18n.t 'tags' %></th>
+              </tr>
+            </thead>
+            <tbody>
+            <%
+            sum = 0;
+            id = 0;
+            @expenses.each do |expense|
+              # sum += expense.amount
+              id += 1
+              %>
+              <%
+              tags = []
+              budgetIncluded = false
+              expense.expenses_tags_association.each do |tag_id|
+                if tag_id.tag.budget
+                  budgetIncluded = true
+                end
+                tags.push(tag_id.tag.name) %>
+              <% end %>
+              <tr>
+                <td><%= id %></td>
+                <td>
+                  <% if budgetIncluded %>
+                    <i class="fa fa-asterisk" title="<%= I18n.t 'included in budget' %>"></i>
+                  <% end %>
+                  <%# if expense.share_percentage != 0 %>
+                     <%= expense.share_percentage * 100 %>%
+                  <%# end %>
+                </td>
+                <td><%= expense.description %></td>
+                <td class="amount">
+                  <%= number_to_currency (expense.amount * expense.share_percentage) %>
+                  <%# number_to_currency (expense.amount) %>
+                </td>
+                <td><%= expense.date %></td>
+                <td>
+                  <%= tags.to_sentence.html_safe %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td></td>
+                <td><%= I18n.t 'sum' %>:</td>
+                <td id="sum"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+    </div><!-- /.box-body -->
+</div><!-- /.box -->

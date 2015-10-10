@@ -1,3 +1,8 @@
+## 2.5.2 10.10.2015
+
+* new percenteges calculations view
+* fixed few bugs
+
 ## 2.5.0 20.03.2015
 
 * Transition from 'half' to percentage in expenses

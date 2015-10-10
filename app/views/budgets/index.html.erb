@@ -19,7 +19,7 @@
     @budgets.each do |b| %>
     <% n +=1 %>
     <%
-      amount_all = b.get_budget_expenses 'all'
+      amount_all = b.get_budget_expenses 'all', true
       amount_budget = b.get_budget_expenses 1
       amount_non_budget = b.get_budget_expenses 0
     %>

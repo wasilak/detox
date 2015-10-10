@@ -1,7 +1,13 @@
 <ul class="sidebar-menu">
     <li class="<%= controller.controller_name == 'expenses' ? 'active' : '' %>">
       <%= link_to expenses_path do %>
-        <i class="fa fa-shopping-cart"></i> <%= (I18n.t 'expenses') %>
+        <i class="fa fa-money"></i> <%= (I18n.t 'expenses') %>
+      <% end %>
+    </li>
+
+    <li class="<%= controller.controller_name == 'expenses_percenteges' ? 'active' : '' %>">
+      <%= link_to expenses_percenteges_path do %>
+        <i class="fa fa-shopping-cart"></i> <%= (I18n.t 'expenses_percenteges') %>
       <% end %>
     </li>
 

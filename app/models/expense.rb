@@ -30,6 +30,22 @@ class Expense < ActiveRecord::Base
       sql.load
     end
 
+    def self.get_expenses_percenteges user_id, date_start, date_end, share_percentage = 0, order = 'date desc'
+      sql = self
+          .where('date >= ? and date <= ?', date_start, date_end)
+          .where(:userId => user_id)
+          .where('share_percentage > ?', share_percentage)
+          .order(order)
+
+      if !@tags.nil? and @tags.size > 0
+        sql = sql.includes(:tags, :expenses_tags_association).where(:tags => {:name => @tags})
+      else
+        sql = sql.includes(:tags)
+      end
+
+      sql.load
+    end
+
     def self.get_all_count user_id, is_budget
       self
       .where({
