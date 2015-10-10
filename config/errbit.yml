@@ -1,0 +1,17 @@
+development:
+  enabled: false
+  api_key: your_api_key
+  host: your_errbit_host
+  port: 80
+  secure: 443
+  js_notifier: false
+  development_environments: true
+
+production:
+  enabled: false
+  api_key: your_api_key
+  host: your_errbit_host
+  port: 80
+  secure: 443
+  js_notifier: false
+  development_environments: false
