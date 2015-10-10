@@ -22,10 +22,6 @@
       <img src="<%= asset_path "bg/trianglify.svg" %>" alt="">
     </div>
 
-    <% if ERRBIT_CONFIG['js_notifier'] %>
-      <%= airbrake_javascript_notifier %>
-    <% end %>
-
     <div class="row">
         <div class="col-lg-6 col-lg-offset-3">
             <% flash.each do |severity, message| %>

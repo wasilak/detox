@@ -22,6 +22,8 @@ Detox::Application.routes.draw do
   post 'expenses/:id/add_tag' => 'expenses#add_tag', :as => :add_tag
   post 'expenses/:id/del_tag' => 'expenses#del_tag', :as => :del_tag
 
+  get 'expenses_percenteges/' => 'expenses_percenteges#index', :as => :expenses_percenteges
+
   post 'expenses/set_budget' => 'expenses#set_budget', :as => :set_budget
   post 'expenses/set_tag_filter' => 'expenses#set_tag_filter', :as => :set_tag_filter
 

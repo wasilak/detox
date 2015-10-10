@@ -51,8 +51,6 @@ gem 'jquery-rails'
 
 gem 'execjs'
 
-# gem 'airbrake'
-
 gem 'rails-i18n'
 
 gem 'devise'

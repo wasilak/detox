@@ -47,7 +47,6 @@ Detox::Application.configure do
     Bullet.console = true
     Bullet.growl = false
     Bullet.rails_logger = true
-    Bullet.airbrake = true
   end
 
   config.i18n.default_locale = APP_CONFIG['locale']
