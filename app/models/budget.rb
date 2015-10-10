@@ -42,11 +42,18 @@ class Budget < ActiveRecord::Base
 
     def self.get_budget date, user_id
         date = "#{date.year}-#{date.month}-#{date.day}"
-        budget = self.where('dateStart <= ? and dateEnd >= ? and userId = ?', date, date, user_id).first
+
+        budget = self
+          .where("dateStart <= ?", date)
+          .where("dateEnd >= ?", date)
+          .where("userId = ?", user_id)
+          .first
 
         if budget.nil?
-          raise "Budget is NIL - cannot be found."
+          budget = Expense.get_all(user_id)
         end
+
+        budget
     end
 
     def self.get_budget_by_id budget_id
@@ -75,7 +82,7 @@ class Budget < ActiveRecord::Base
           expenses += expense.amount * (1 - expense.share_percentage);
         end
         return expenses;
-      end 
+      end
       sql = sql.joins(:tags)
         .sum(:amount)
     end
