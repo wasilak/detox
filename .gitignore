@@ -33,3 +33,5 @@ detox.sublime-project
 detox.sublime-workspace
 
 public/images/
+
+.tags
