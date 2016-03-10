@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.2.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
@@ -49,6 +50,7 @@ end
 
 gem 'devise'
 gem 'omniauth-google-apps'
+gem 'rails_12factor'
 
 gem 'mysql2', '~> 0.3.20'
 
