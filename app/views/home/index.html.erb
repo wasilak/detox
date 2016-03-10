@@ -12,7 +12,7 @@
       <div class="inner">
         <h3>
           <% unless @present_budget.nil? %>
-            <%= @present_budget[:description] %>
+            <%= @present_budget['description'] %>
           <% else %>
             <%= I18n.t 'no budget set' %>
           <% end %>
@@ -37,7 +37,7 @@
           &nbsp;
         </h3>
         <p>
-          <%= @present_budget[:dateStart] %> <%= I18n.t 'to' %> <%= @present_budget[:dateEnd] %>
+          <%= @present_budget['dateStart'] %> <%= I18n.t 'to' %> <%= @present_budget['dateEnd'] %>
         </p>
       </div>
       <div class="icon">
