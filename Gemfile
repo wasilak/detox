@@ -57,3 +57,5 @@ gem 'mysql2', '~> 0.3.20'
 gem "select2-rails", '3.5.9.3'
 gem "font-awesome-rails"
 gem 'gravatar-ultimate'
+
+gem 'puma'
