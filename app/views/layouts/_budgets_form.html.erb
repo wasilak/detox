@@ -1,6 +1,6 @@
 <%
 if session[:budget]
-  defaultBudget = session[:budget][:id]
+  defaultBudget = session[:budget]['id']
 else
   defaultBudget = ''
 end

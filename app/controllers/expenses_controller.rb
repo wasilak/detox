@@ -21,8 +21,8 @@ class ExpensesController < ApplicationController
   def index
     @expenses = Expense.get_expenses(
       current_user[:id],
-      session[:budget][:dateStart],
-      session[:budget][:dateEnd],
+      session[:budget]['dateStart'],
+      session[:budget]['dateEnd'],
       sort
     )
 

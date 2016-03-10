@@ -23,13 +23,13 @@
               <% if user_signed_in? %>
                   <p>
                   <% if @remaining_budget %>
-                    <i class="fa fa-circle <%= @remaining_budget_percentage < 10 ? 'text-warning' : 'text-success' %>"></i> "<%= session[:budget][:description] %>"
+                    <i class="fa fa-circle <%= @remaining_budget_percentage < 10 ? 'text-warning' : 'text-success' %>"></i> "<%= session[:budget]['description'] %>"
                   <% end %>
                     <a href="#budgets-popup" class="open-popup-link pull-right"><i class="fa fa-calendar"></i></a>
                   </p>
                   <% if @remaining_budget %>
                     <p>
-                      <%= number_to_currency @remaining_budget %> / <%= number_to_currency session[:budget][:amount] %>
+                      <%= number_to_currency @remaining_budget %> / <%= number_to_currency session[:budget]['amount'] %>
                     </p>
                   <% end %>
               <% end %>

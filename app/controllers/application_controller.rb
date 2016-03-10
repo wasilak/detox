@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_filter :check_budget
   before_filter :remaining_budget
-  before_filter :budget_select
+  before_filter 'budget_select'
 
   # fix for i18n after adding Active Admin
   before_filter :set_locale
@@ -30,8 +30,8 @@ class ApplicationController < ActionController::Base
 
   def check_budget
     if user_signed_in?
-      if session[:budget].nil?
-          session[:budget] = Budget.get_budget(Time.new,current_user[:id])
+      if session['budget'].nil?
+          session['budget'] = Budget.get_budget(Time.new,current_user[:id])
       end
     end
   end
@@ -43,9 +43,9 @@ class ApplicationController < ActionController::Base
   end
 
   def remaining_budget
-    if current_user and session[:budget]
+    if current_user and session['budget']
 
-      if session[:budget][:id] != 0
+      if session['budget']['id'] != 0
 
         calculate_budget
 
@@ -59,8 +59,8 @@ class ApplicationController < ActionController::Base
   def calculate_budget
     expenses = Expense.get_expenses_budget(
           current_user[:id],
-          session[:budget][:dateStart],
-          session[:budget][:dateEnd]
+          session['budget']['dateStart'],
+          session['budget']['dateEnd']
           )
     calculate_budget_details expenses
   end
@@ -74,20 +74,21 @@ class ApplicationController < ActionController::Base
   end
 
   def calculate_budget_details expenses
-    budget = session[:budget]
+    budget = session['budget']
 
     unless budget.nil?
-      @remaining_budget = budget[:amount] - calculate_expenses_sum(expenses)
+      @remaining_budget = budget['amount'] - calculate_expenses_sum(expenses)
 
-      @remaining_budget_percentage = (100 * @remaining_budget) / budget[:amount]
+      @remaining_budget_percentage = (100 * @remaining_budget) / budget['amount']
 
       get_day_related_budget_details
     end
   end
 
   def get_day_related_budget_details
-    if (Date.today < session[:budget][:dateEnd])
-      @days_left_in_budget = (session[:budget][:dateEnd] - Date.today).to_i
+    date_end = session['budget']['dateEnd'].to_date
+    if (Date.today < date_end)
+      @days_left_in_budget = (date_end - Date.today).to_i
       @budget_left_per_day = @remaining_budget / @days_left_in_budget
     else
       @days_left_in_budget = 0
@@ -96,16 +97,16 @@ class ApplicationController < ActionController::Base
   end
 
   def set_session_budget (all = 0)
-    if params[:budget] == 'all' or all == 1
-      session[:budget] = Expense.get_all(current_user[:id])
+    if params['budget'] == 'all' or all == 1
+      session['budget'] = Expense.get_all(current_user[:id])
     else
-      param = params[:budget].split('-')
+      param = params['budget'].split('-')
 
       # budget ID
       if 1 == param.count
-        session[:budget] = Budget.get_budget_by_id(params[:budget])
+        session['budget'] = Budget.get_budget_by_id(params['budget'])
       else
-        session[:budget] = Expense.get_predefined_budget current_user[:id], params[:budget]
+        session['budget'] = Expense.get_predefined_budget current_user[:id], params['budget']
       end
     end
   end

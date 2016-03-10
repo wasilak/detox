@@ -26,7 +26,7 @@
         <tr>
             <td><%= n %></td>
             <td>
-                <% if session[:budget][:id] == b.id %>
+                <% if session[:budget]['id'] == b.id %>
                     <i class="fa fa-asterisk" title="<%= I18n.t 'active budget' %>"></i>
                 <% end %>
             </td>

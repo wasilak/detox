@@ -5,8 +5,8 @@ class ExpensesPercentegesController < ApplicationController
   def index
     @expenses = Expense.get_expenses_percenteges(
       current_user[:id],
-      session[:budget][:dateStart],
-      session[:budget][:dateEnd],
+      session[:budget]['dateStart'],
+      session[:budget]['dateEnd'],
     )
   end
 
